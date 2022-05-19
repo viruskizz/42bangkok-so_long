@@ -1,23 +1,29 @@
-NAME				= so_long
-CC					= gcc
-CFLAGS			= -Wall -Wextra -Werror
-RM 					= /bin/rm -f
+NAME		= so_long
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= /bin/rm -f
 
-INCLUDE_DIR = ./includes
-INCLUDES 		= -I $(INCLUDE_DIR) \
-							-I $(LIBFT_DIR) \
-							-I $(MLX_DIR)
+LIBFT_DIR	= libft
 
-MLX_DIR			= mlx
-LIBFT_DIR		= libft
-LIBS 				=	-L$(LIBFT_DIR) -lft \
-							-L$(MLX_DIR) -lmlx \
-							-framework OpenGL \
-							-framework AppKit
+INCLUDE_DIR	= ./includes
+INCLUDES 	= -I $(INCLUDE_DIR) \
+			  -I $(LIBFT_DIR) \
+			  -I/usr/include
 
-BUILD_DIR		= build
-SRC_DIR			= ./srcs
-SRCS				= main.c
+LIBS 		= -L$(LIBFT_DIR) -lft
+
+UNAME = $(shell uname -s)
+ifeq ($(UNAME), Linux)
+	MLX_DIR		= mlx_linux
+	MLX_FLAGS	= -Lmlx_linux -lmlx_linux -lXext -lX11 -lm -lz -L/usr/local/lib
+else # for MACOS(Darwin or Other)
+	MLX_DIR		= mlx
+	MLX_FLAGS	= -Lmlx -lmlx -framework OpenGL -framework AppKit
+endif
+
+BUILD_DIR	= build
+SRC_DIR		= ./srcs
+SRCS		= main.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
@@ -26,11 +32,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 		@make -C $(LIBFT_DIR)
 		@make -C $(MLX_DIR)
-		$(CC) $(CFLAGS) $(LIBS) $(INCLUDES) $(OBJS) -o $(NAME)
+		$(CC) $(CFLAGS) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -I$(MLX_DIR)-c $< -o $@
 
 bonus: all
 

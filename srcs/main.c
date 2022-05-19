@@ -9,8 +9,8 @@ int	main(void)
 
 	// mlx = mlx_init();
 	// img = mlx_new_image(mlx, 1920, 1080);
-	printf("Hello MLX\n");
-	ft_putstr_fd("TEST Libft\n", 1);
+	// printf("Hello MLX\n");
+	// ft_putstr_fd("TEST Libft\n", 1);
 
 	// Minilibx Example
 	t_mlx	mlx; //Here I first create my struct that will contains all the "MLX stuff"
