@@ -25,24 +25,33 @@ endif
 
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
-SRCS		= main.c
+SRCS		= main.c \
+			  utils/img_util.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-		@make -C $(LIBFT_DIR)
-		@make -C $(MLX_DIR)
+refast: cleanbuild $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
+
+$(NAME): libs $(OBJS)
 		$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+libs:
+	@make -C $(LIBFT_DIR)
+	@make -C $(MLX_DIR)	
+
 bonus: all
 
 re: fclean all
+
+cleanbuild:
+	-$(RM) -r $(BUILD_DIR)
 
 clean:
 	make clean -C $(LIBFT_DIR)

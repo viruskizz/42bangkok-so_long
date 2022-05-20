@@ -1,7 +1,6 @@
 #include "so_long.h"
 #include "libft.h"
 #include <stdio.h>
-#include <mlx.h>
 /*
 int	handle_keypress(int keysym, t_data *data)
 {
@@ -13,10 +12,33 @@ int	handle_keypress(int keysym, t_data *data)
 	return (0);
 }
 */
+
+// int	render_rect(t_data *data, t_rect rect)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	if (!data->win_ptr)
+// 		return (1);
+// 	i = rect.y;
+// 	while (i < rect.y + rect.height)
+// 	{
+// 		j = rect.x;
+// 		while (j < rect.x + rect.width)
+// 			mlx_pixel_put(data->mlx_ptr, data->win_ptr, j++, i, rect.color);
+// 		++i;
+// 	}
+// 	return (0);
+// }
+
 int	render(t_data *data)
 {
-	if (data->win_ptr != NULL)
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, 0xFF0000);
+	if (!data->win_ptr)
+		return (1);
+	mlx_pixel_put(data->mlx_ptr, data->win_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, 0xFF0000);
+	render_background(data, WHITE_PIXEL);
+	render_rect(data, (t_rect){0, 0, 100, 100, RED_PIXEL});
+	render_rect(data, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
 	return (0);
 }
 

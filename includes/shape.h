@@ -10,5 +10,4 @@ typedef struct s_rect
     int color;
 }   t_rect;
 
-
 #endif
