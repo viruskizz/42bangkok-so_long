@@ -8,8 +8,8 @@ LIBFT_DIR	= libft
 INCLUDE_DIR	= ./includes
 INCLUDES 	= -I $(INCLUDE_DIR) \
 			  -I $(LIBFT_DIR) \
-			  -I/usr/include
-
+			  -I $(MLX_DIR)
+ 
 LIBS 		= -L$(LIBFT_DIR) -lft
 
 UNAME = $(shell uname -s)
@@ -18,7 +18,9 @@ ifeq ($(UNAME), Linux)
 	MLX_FLAGS	= -Lmlx_linux -lmlx_linux -lXext -lX11 -lm -lz -L/usr/local/lib
 else # for MACOS(Darwin or Other)
 	MLX_DIR		= mlx
-	MLX_FLAGS	= -Lmlx -lmlx -framework OpenGL -framework AppKit
+	MLX_FLAGS	= -L$(MLX_DIR) -lmlx \
+				  -framework OpenGL \
+				  -framework AppKit
 endif
 
 BUILD_DIR	= build
@@ -32,11 +34,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 		@make -C $(LIBFT_DIR)
 		@make -C $(MLX_DIR)
-		$(CC) $(CFLAGS) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
+		$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INCLUDES) -I$(MLX_DIR)-c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 bonus: all
 
