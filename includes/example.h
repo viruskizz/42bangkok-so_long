@@ -2,7 +2,6 @@
 # define EXAMPLE_H
 
 # include <math.h>
-# include "mlx.h"
 
 /*
  Defines for the width and height of your window. I suggest you to do the same so
