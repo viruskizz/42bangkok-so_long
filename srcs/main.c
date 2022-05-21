@@ -29,18 +29,19 @@ int	render(t_data *data)
 	printf("render %d\n", data->redraw); fflush(stdout);
 	initial(data);
 	t_img	img = data->sprite;
-	img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "images/sprites/squall.xpm", &img.width, &img.height);
+	// img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, "images/sprites/squall.xpm", &img.width, &img.height);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.mlx_img, img.x, img.y);
-	if (data->redraw)
-	{
+	// if (data->redraw)
+	// {
 
-		data->redraw = 0;
-	}
+	// 	data->redraw = 0;
+	// }
 	return (0);
 }
 
 int	main(void)
 {
+	printf("main"); fflush(stdout);
 	t_data	data;
 
 	data.mlx_ptr = mlx_init();
@@ -56,7 +57,7 @@ int	main(void)
 	data.sprite.x = 50;
 	data.sprite.y = 50;
 	data.redraw = 1;
-	// img.mlx_img = mlx_xpm_file_to_image(data.mlx_ptr, "images/sprites/squall.xpm", &img.width, &img.height);
+	data.sprite.mlx_img = mlx_xpm_file_to_image(data.mlx_ptr, "images/sprites/squall.xpm", &data.sprite.width, &data.sprite.height);
 	// img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
 	/* Setup hooks */
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
