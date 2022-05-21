@@ -26,8 +26,8 @@ endif
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= main.c \
-					key_handler.c \
-			  	utils/img_util.c
+			keyhandler.c \
+			utils/img_util.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
