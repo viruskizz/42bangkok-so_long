@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <mlx.h>
 #include "shape.h"
+#include "key.h"
 
 typedef struct s_img
 {
@@ -32,9 +33,8 @@ typedef struct s_data
 }	t_data;
 
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-// int		render_rect(t_data *data, t_rect rect);
-// void	render_background(t_data *data, int color);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_img *img, t_rect rect);
 void	render_background(t_img *img, int color);
+int 	key_handler(int keycode, t_data *data);
 #endif

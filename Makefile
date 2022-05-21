@@ -8,7 +8,7 @@ LIBFT_DIR	= libft
 INCLUDE_DIR	= ./includes
 INCLUDES 	= -I $(INCLUDE_DIR) \
 			  -I $(LIBFT_DIR) \
-			  -I $(MLX_DIR)
+			  -I $(MLX_DIR) 
  
 LIBS 		= -L$(LIBFT_DIR) -lft
 
@@ -19,14 +19,15 @@ ifeq ($(UNAME), Linux)
 else # for MACOS(Darwin or Other)
 	MLX_DIR		= mlx
 	MLX_FLAGS	= -L$(MLX_DIR) -lmlx \
-				  -framework OpenGL \
-				  -framework AppKit
+					  	-framework OpenGL \
+				  		-framework AppKit
 endif
 
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= main.c \
-			  utils/img_util.c
+					key_handler.c \
+			  	utils/img_util.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
