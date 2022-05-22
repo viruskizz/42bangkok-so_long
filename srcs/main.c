@@ -50,7 +50,6 @@ int	main(void)
 
 	data.sprite.x = 50;
 	data.sprite.y = 50;
-	data.redraw = 1;
 	data.background.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data.background.addr = mlx_get_data_addr(data.background.mlx_img, &data.background.bpp, &data.background.line_len, &data.background.endian);
 	render_background(&data.background, WHITE_PIXEL);
