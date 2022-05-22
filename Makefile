@@ -27,24 +27,27 @@ BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= main.c \
 			  game.c \
+			  map.c \
 			  object.c \
 			  sprite.c \
-			keyhandler.c \
-			utils/img_util.c
+			  keyhandler.c \
+			  utils/img_util.c \
+			  gnl/get_next_line.c \
+			  gnl/get_next_line_utils.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 all: $(NAME)
 
 refast: cleanbuild $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
+	$(CC) -g $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
 $(NAME): libs $(OBJS)
 		$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) -g $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 libs:
 	@make -C $(LIBFT_DIR)

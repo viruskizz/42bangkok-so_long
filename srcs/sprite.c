@@ -5,8 +5,8 @@ void	load_sprites(t_data *data)
 	int		size;
 
 	size = SPIRIT_SIZE / 2;
-	data->sprite.x = 50;
-	data->sprite.y = 50;
+	data->sprite.x = 0;
+	data->sprite.y = 0;
 	data->sprite.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, SPRITE_SQUALL_PATH, &size, &size);
 }
 
