@@ -12,13 +12,13 @@ int	main(void)
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (MLX_ERROR);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "SO LONG");
+	load_map(&data);
+	data.win_ptr = mlx_new_window(data.mlx_ptr, data.map.width, data.map.height, "SO LONG");
 	if (!data.win_ptr)
 	{
 		free(data.win_ptr);
 		return (MLX_ERROR);
 	}
-	load_map(&data);
 	render_map(&data);
 	load_sprites(&data);
 	load_objects(&data);

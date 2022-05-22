@@ -1,6 +1,6 @@
 NAME		= so_long
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+# CFLAGS		= -Wall -Wextra -Werror
 RM			= /bin/rm -f
 
 LIBFT_DIR	= libft

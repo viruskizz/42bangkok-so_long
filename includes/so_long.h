@@ -68,30 +68,40 @@ typedef struct s_img
 	int		y;
 }	t_img;
 
-typedef struct s_obj
-{
-	t_img	wall;
-	t_img	item;
-}	t_obj;
-
 typedef struct s_tile
 {
 	char			type;
+	int				x;
+	int				y;
 	t_img			img;
 	struct s_tile	*previous;
 	struct s_tile	*next;
 }	t_tile;
 
+
+typedef struct s_obj
+{
+	t_tile	walls;
+	t_tile	items;
+}	t_obj;
+
+typedef struct s_map
+{
+	int		width;
+	int		height;
+	t_tile	*tiles;
+}	t_map;
+
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		redraw;
-	t_img	img;
+	int		width;
+	int		height;
 	t_img	background;
 	t_img	sprite;
 	t_obj	objects;
-	t_tile	*tiles;
+	t_map	map;
 }	t_data;
 
 int		render(t_data *data);

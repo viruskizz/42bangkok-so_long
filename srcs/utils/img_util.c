@@ -13,15 +13,15 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-t_img	render_img(t_data *data, char *filename, int x, int y)
-{
-	t_img	img;
+// t_img	render_img(t_data *data, char *filename, int x, int y)
+// {
+// 	t_img	img;
 	
-	data->img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, filename, &img.width, &img.height);
-	data->img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.mlx_img, x, y);
-	return (img);
-}
+// 	data->img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, filename, &img.width, &img.height);
+// 	data->img.addr = mlx_get_data_addr(img.mlx_img, &img.bpp, &img.line_len, &img.endian);
+// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.mlx_img, x, y);
+// 	return (img);
+// }
 
 int	render_rect(t_img *img, t_rect rect)
 {
