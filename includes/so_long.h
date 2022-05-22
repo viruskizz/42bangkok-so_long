@@ -1,19 +1,20 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-#define SPIRIT_SIZE     64
+#define WINDOW_WIDTH		800
+#define WINDOW_HEIGHT		600
+#define SPIRIT_SIZE			32
 
-#define GREEN_PIXEL 0x00FF00
-#define RED_PIXEL 0xFF0000
-#define WHITE_PIXEL 0xFFFFFF
+#define GREEN_PIXEL			0x00FF00
+#define RED_PIXEL			0xFF0000
+#define WHITE_PIXEL			0xFFFFFF
 
 #define MLX_ERROR 1
 
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
 
+#define KEY_ESC				53
 #define KEY_LEFT			123
 #define KEY_RIGHT			124
 #define KEY_UP				126
@@ -26,9 +27,19 @@
 #define OBJECT_WALL_PATH	"images/objects/wall.xpm"
 #define SPRITE_SQUALL_PATH	"images/sprites/squall.xpm"
 
+# ifdef __linux__
+#  define IS_LINUX 1
+#  define OS "LINUX"
+# else
+#  define IS_LINUX 0
+#  define OS "MAC"
+# endif
+
+#include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <mlx.h>
+#include "libft.h"
 
 typedef struct s_rect
 {
@@ -80,4 +91,5 @@ void 	load_objects(t_data *data);
 void	render_object(t_data *data);
 void	load_sprites(t_data *data);
 void	render_sprite(t_data *data);
+void	exit_game(t_data *data);
 #endif

@@ -1,6 +1,4 @@
 #include "so_long.h"
-#include "libft.h"
-#include <stdio.h>
 
 int	render(t_data *data);
 int keyhandler(int keycode, t_data *data);
@@ -31,8 +29,9 @@ int	main(void)
 
 	/* we will exit the loop if there's no window left, and execute this code */
 	// free(data.mlx_ptr);
-	mlx_clear_window(data.mlx_ptr, data.win_ptr);
-	mlx_destroy_window(data.mlx_ptr, data.win_ptr);
+	// exit_game(&data);
+	// mlx_clear_window(data.mlx_ptr, data.win_ptr);
+	// mlx_destroy_window(data.mlx_ptr, data.win_ptr);
 	return (0);
 }
 
@@ -40,14 +39,11 @@ int	mlx_close (int keycode, t_data *data)
 {
 	printf("CLOSE: %d\n", keycode);
 	(void) data;
-	// mlx_destroy_image(data->mlx_ptr, data->background.mlx_img);
-	// mlx_destroy_image(data->mlx_ptr, data->objects.wall.mlx_img);
-	// mlx_destroy_image(data->mlx_ptr, data->sprite.mlx_img);
 	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	// mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	// mlx_destroy_display(data->mlx_ptr); // ONLY Linux
-	// free(data->mlx_ptr); // Free ONLY Linux
 	exit(0);
+	// free(data->win_ptr);
+	// free(data->mlx_ptr);
 	return (0);
 }
 
@@ -76,6 +72,12 @@ int keyhandler(int keycode, t_data *data)
 		data->sprite.y += move_size;
 	if (keycode == KEY_W)
 		data->sprite.y -= move_size;
+	if (keycode == KEY_ESC)
+	{
+		exit_game(data);
+		exit(0);
+		return (0);
+	}
 	fflush(stdout);
 	return (0);
 }

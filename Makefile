@@ -19,13 +19,14 @@ ifeq ($(UNAME), Linux)
 else # for MACOS(Darwin or Other)
 	MLX_DIR		= mlx
 	MLX_FLAGS	= -L$(MLX_DIR) -lmlx \
-					  	-framework OpenGL \
-				  		-framework AppKit
+				  -framework OpenGL \
+				  -framework AppKit
 endif
 
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= main.c \
+			  game.c \
 			  object.c \
 			  sprite.c \
 			keyhandler.c \
