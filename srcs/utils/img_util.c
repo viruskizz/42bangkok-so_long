@@ -25,6 +25,7 @@ t_img	render_img(t_data *data, char *filename, int x, int y)
 
 int	render_rect(t_img *img, t_rect rect)
 {
+	
 	int	i;
 	int	j;
 
@@ -39,17 +40,20 @@ int	render_rect(t_img *img, t_rect rect)
 	return (0);
 }
 
-void	render_background(t_img *img, int color)
+void	render_background(t_data *data) 
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	data->background.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data->background.addr = mlx_get_data_addr(data->background.mlx_img, &data->background.bpp, &data->background.line_len, &data->background.endian);
 	while (i < WINDOW_HEIGHT)
 	{
 		j = 0;
 		while (j < WINDOW_WIDTH)
-			img_pix_put(img, j++, i, color);
+			img_pix_put(&data->background, j++, i, GREEN_PIXEL);
 		++i;
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->background.mlx_img, 0, 0);
 }

@@ -26,6 +26,8 @@ endif
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= main.c \
+			  object.c \
+			  sprite.c \
 			keyhandler.c \
 			utils/img_util.c
 
