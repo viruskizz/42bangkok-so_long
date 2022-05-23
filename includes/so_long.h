@@ -77,13 +77,6 @@ typedef struct s_tile
 	struct s_tile	*next;
 }	t_tile;
 
-
-typedef struct s_obj
-{
-	t_tile	walls;
-	t_tile	items;
-}	t_obj;
-
 typedef struct s_sprt
 {
 	int		x;
@@ -107,7 +100,7 @@ typedef struct s_data
 	void	*win;
 	t_tile	*bg;
 	t_sprt	sprt;
-	t_obj	objs;
+	t_tile	*objs;
 	t_map	map;
 }	t_data;
 

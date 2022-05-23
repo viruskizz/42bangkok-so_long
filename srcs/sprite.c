@@ -15,17 +15,20 @@ void	load_sprites(t_data *data)
 			{
 				data->sprt.x = j * TILE_SIZE;
 				data->sprt.y = i * TILE_SIZE;
-				data->sprt.img.mlx = mlx_xpm_file_to_image(data->mlx, SPRITE_SQUALL_PATH, &data->sprt.img.width, &data->sprt.img.height);
+				// data->sprt.img.addr = mlx_get_data_addr(data->sprt.img.mlx, &data->sprt.img.bpp, &data->sprt.img.line_len, &data->sprt.img.endian);
+				// data->sprt.img.mlx = mlx_xpm_file_to_image(data->mlx, SPRITE_SQUALL_PATH, &data->sprt.img.width, &data->sprt.img.height);
 				return ;
 			}
 			j++;
 		}	
 		i++;
 	}
+	printf("LOADED"); fflush(stdout);
 }
 
 void	render_sprite(t_data *data)
 {
 	// printf("RENDER\n"); fflush(stdout);
+	data->sprt.img.mlx = mlx_xpm_file_to_image(data->mlx, SPRITE_SQUALL_PATH, &data->sprt.img.width, &data->sprt.img.height);
 	mlx_put_image_to_window(data->mlx, data->win, data->sprt.img.mlx, data->sprt.x, data->sprt.y);
 }

@@ -2,12 +2,49 @@
 
 void load_objects(t_data *data)
 {
-	// data->objects.wall.x = 150;
-	// data->objects.wall.y = 150;
-	// data->objects.wall.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, OBJECT_WALL_PATH, &data->objects.wall.width, &data->objects.wall.height);
+	int		i;
+	int		j;
+	t_tile	*obj;
+	t_tile	*tmp;
+
+	
+	i = 0;
+	// printf("%p\n", data->objs);
+	while (i < data->map.tile_y)
+	{
+		j = 0;
+		while (j < data->map.tile_x)
+		{
+			if (data->map.tiles[i][j].type == 'C')
+			{
+				obj = malloc(sizeof(t_tile));
+				obj->type = 'C';
+				obj->x = j * TILE_SIZE;
+				obj->y = i * TILE_SIZE;
+				obj->img.mlx = mlx_xpm_file_to_image(data->mlx, OBJECT_ITEM_PATH, &obj->img.width, &obj->img.height); 
+				obj->next = NULL;
+				printf("%p\n", data->objs);
+				if (data->objs)
+					tmp->next = obj;
+				else
+					data->objs = obj;
+				tmp = obj;
+			}
+			j++;
+		}	
+		i++;
+	}
 }
 
 void	render_object(t_data *data)
 {
-	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->objects.wall.mlx_img, data->objects.wall.x, data->objects.wall.y);
+	t_tile *obj;
+
+	obj = data->objs;
+	while (obj)
+	{
+		// printf("C = %c = %d,%d\n", obj->type, obj->x, obj->y); fflush(stdout);
+		mlx_put_image_to_window(data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
+		obj = obj->next;
+	}
 }

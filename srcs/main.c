@@ -25,6 +25,7 @@ int	main(void)
 	render_background(&data);
 	render_map(&data);
 	load_sprites(&data);
+	load_objects(&data);
 	// load_objects(&data);
 	/* Setup hooks */
 	mlx_loop_hook(data.mlx, &render, &data);
@@ -52,8 +53,8 @@ int	render(t_data *data)
 		return (1);
 	// render_background(data);
 	// render_map(data);
+	render_object(data);
 	render_sprite(data);
-	// render_object(data);
 	return (0);
 }
 
