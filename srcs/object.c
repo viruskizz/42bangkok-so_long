@@ -9,7 +9,6 @@ void load_objects(t_data *data)
 
 	
 	i = 0;
-	// printf("%p\n", data->objs);
 	while (i < data->map.tile_y)
 	{
 		j = 0;
@@ -44,7 +43,30 @@ void	render_object(t_data *data)
 	while (obj)
 	{
 		// printf("C = %c = %d,%d\n", obj->type, obj->x, obj->y); fflush(stdout);
-		mlx_put_image_to_window(data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
+		if (obj->img.mlx)
+			mlx_put_image_to_window(data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
 		obj = obj->next;
+	}
+}
+
+void	collect_object(t_data *data)
+{
+	t_tile	t;
+	t_tile	*obj;
+
+	t = get_tile(data, data->sprt.x, data->sprt.y);
+	if (t.type == 'C')
+	{
+		obj = data->objs;
+		while (obj)
+		{
+			if (obj->x == t.x && obj->y == t.y)
+			{
+				data->sprt.items++;
+				obj->img.mlx = NULL;
+				return ;
+			}
+			obj = obj->next;
+		}
 	}
 }

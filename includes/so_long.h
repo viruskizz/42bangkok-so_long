@@ -15,6 +15,7 @@
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
 
+#define KEY_SPACE			49
 #define KEY_ESC				53
 #define KEY_LEFT			123
 #define KEY_RIGHT			124
@@ -81,6 +82,8 @@ typedef struct s_sprt
 {
 	int		x;
 	int		y;
+	int		items;
+	int		moved;
 	t_img	img;
 }	t_sprt;
 
@@ -91,6 +94,7 @@ typedef struct s_map
 	int		height;
 	int		tile_x;
 	int		tile_y;
+	int		items;
 	t_tile	**tiles;
 }	t_map;
 
@@ -115,9 +119,14 @@ void	set_background(t_data *data);
 void	render_background(t_data *data);
 void 	load_objects(t_data *data);
 void	render_object(t_data *data);
+void	collect_object(t_data *data);
 void	load_sprites(t_data *data);
 void	render_sprite(t_data *data);
+void	move_sprite(t_data *data, int nx, int ny);
+void	chk_pos_sprite(t_data *data);
 void	exit_game(t_data *data);
 void	load_map(t_data *data);
 void	render_map(t_data *data);
+t_tile	get_tile(t_data *data, int x, int y);
+
 #endif

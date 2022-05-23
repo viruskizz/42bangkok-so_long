@@ -13,7 +13,6 @@ int	main(void)
 	if (!data.mlx)
 		return (MLX_ERROR);
 	read_file(&data, "maps/simple.ber");
-	printf("%s\n", data.map.filedata);
 	load_map(&data);
 	data.win = mlx_new_window(data.mlx, data.map.width, data.map.height, "SO LONG");
 	if (!data.win)
@@ -21,13 +20,9 @@ int	main(void)
 		free(data.win);
 		return (MLX_ERROR);
 	}
-	data.redraw = 1;
 	set_background(&data);
-	render_background(&data);
-	render_map(&data);
 	load_sprites(&data);
 	load_objects(&data);
-	// load_objects(&data);
 	/* Setup hooks */
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
@@ -66,14 +61,24 @@ int keyhandler(int keycode, t_data *data)
 	int	move_size;
 
 	move_size = SPIRIT_SIZE;
+	// if (keycode == KEY_LEFT || keycode == KEY_A)
+	// 	data->sprt.x -= move_size;
+	// if (keycode ==  KEY_RIGHT || keycode == KEY_D)
+	// 	data->sprt.x += move_size;
+	// if (keycode == KEY_DOWN || keycode == KEY_S)
+	// 	data->sprt.y += move_size;
+	// if (keycode == KEY_UP || keycode == KEY_W)
+	// 	data->sprt.y -= move_size;
 	if (keycode == KEY_LEFT || keycode == KEY_A)
-		data->sprt.x -= move_size;
+		move_sprite(data, move_size * -1, 0);
 	if (keycode ==  KEY_RIGHT || keycode == KEY_D)
-		data->sprt.x += move_size;
+		move_sprite(data, move_size, 0);
 	if (keycode == KEY_DOWN || keycode == KEY_S)
-		data->sprt.y += move_size;
+		move_sprite(data, 0, move_size);
 	if (keycode == KEY_UP || keycode == KEY_W)
-		data->sprt.y -= move_size;
+		move_sprite(data, 0, move_size * -1);
+	if (keycode == KEY_SPACE)
+		collect_object(data);
 	if (keycode == KEY_ESC)
 	{
 		exit_game(data);

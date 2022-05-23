@@ -15,7 +15,8 @@ void	load_sprites(t_data *data)
 			{
 				data->sprt.x = j * TILE_SIZE;
 				data->sprt.y = i * TILE_SIZE;
-				// data->sprt.img.addr = mlx_get_data_addr(data->sprt.img.mlx, &data->sprt.img.bpp, &data->sprt.img.line_len, &data->sprt.img.endian);
+				data->sprt.items = 0;
+				data->sprt.moved = 0;
 				data->sprt.img.mlx = mlx_xpm_file_to_image(data->mlx, SPRITE_SQUALL_PATH, &data->sprt.img.width, &data->sprt.img.height);
 				return ;
 			}
@@ -28,10 +29,30 @@ void	load_sprites(t_data *data)
 void	render_sprite(t_data *data)
 {
 	mlx_put_image_to_window(data->mlx, data->win, data->sprt.img.mlx, data->sprt.x, data->sprt.y);
-	if (data->redraw)
+}
+
+void	move_sprite(t_data *data, int nx, int ny)
+{
+	t_tile		nt;
+
+	nt = get_tile(data, data->sprt.x + nx, data->sprt.y + ny);
+	if (nt.type == '1')
+		return ;
+	data->sprt.x += nx;
+	data->sprt.y += ny;
+	data->sprt.moved++;
+	printf("MOVED: %d", data->sprt.moved);
+	chk_pos_sprite(data);
+}
+
+void	chk_pos_sprite(t_data *data)
+{
+	t_tile	t;
+
+	t = get_tile(data, data->sprt.x, data->sprt.y);
+	if (t.type == 'E')
 	{
-		mlx_put_image_to_window(data->mlx, data->win, data->sprt.img.mlx, data->sprt.x, data->sprt.y);
-		data->redraw = 0;
-		printf("RENDER: %d,%d\n", data->sprt.x, data->sprt.y); fflush(stdout);
+		if (data->map.items == data->sprt.items)
+			exit_game(data);
 	}
 }
