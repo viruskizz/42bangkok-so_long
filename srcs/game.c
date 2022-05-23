@@ -6,8 +6,8 @@ void	exit_game(t_data *data)
 	// mlx_destroy_image(data->mlx_ptr, data->background.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->objects.walls.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->sprite.mlx_img);
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_window(data->mlx, data->win);
 	// if (IS_LINUX)
 	// {
 	// 	mlx_destroy_display(data->mlx_ptr); // ONLY Linux

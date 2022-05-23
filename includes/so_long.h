@@ -56,7 +56,7 @@ typedef struct s_rect
 
 typedef struct s_img
 {
-	void	*mlx_img;
+	void	*mlx;
 	char	*addr;
 	char	*name;
 	int		width;
@@ -74,7 +74,6 @@ typedef struct s_tile
 	int				x;
 	int				y;
 	t_img			img;
-	struct s_tile	*previous;
 	struct s_tile	*next;
 }	t_tile;
 
@@ -94,21 +93,25 @@ typedef struct s_sprt
 
 typedef struct s_map
 {
+	char	*filedata;
 	int		width;
 	int		height;
+	int		tile_x;
+	int		tile_y;
 	t_tile	**tiles;
 }	t_map;
 
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_tile	*background;
-	t_sprt	sprite;
-	t_obj	objects;
+	void	*mlx;
+	void	*win;
+	t_tile	*bg;
+	t_sprt	sprt;
+	t_obj	objs;
 	t_map	map;
 }	t_data;
 
+void	read_file(t_data *data, char *filename);
 int		render(t_data *data);
 int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	img_pix_put(t_img *img, int x, int y, int color);
