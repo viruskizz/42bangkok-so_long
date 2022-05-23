@@ -21,6 +21,7 @@ int	main(void)
 		free(data.win);
 		return (MLX_ERROR);
 	}
+	data.redraw = 1;
 	set_background(&data);
 	render_background(&data);
 	render_map(&data);
@@ -51,8 +52,8 @@ int	render(t_data *data)
 {
 	if (!data->win)
 		return (1);
-	// render_background(data);
-	// render_map(data);
+	render_background(data);
+	render_map(data);
 	render_object(data);
 	render_sprite(data);
 	return (0);
@@ -79,6 +80,7 @@ int keyhandler(int keycode, t_data *data)
 		exit(0);
 		return (0);
 	}
+	data->redraw = 1;
 	fflush(stdout);
 	return (0);
 }

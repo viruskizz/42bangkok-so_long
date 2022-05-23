@@ -98,6 +98,7 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
+	int		redraw;
 	t_tile	*bg;
 	t_sprt	sprt;
 	t_tile	*objs;
