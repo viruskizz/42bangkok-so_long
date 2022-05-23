@@ -40,20 +40,64 @@ int	render_rect(t_img *img, t_rect rect)
 	return (0);
 }
 
+// void	render_background(t_data *data) 
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	data->background.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+// 	data->background.addr = mlx_get_data_addr(data->background.mlx_img, &data->background.bpp, &data->background.line_len, &data->background.endian);
+// 	while (i < WINDOW_HEIGHT)
+// 	{
+// 		j = 0;
+// 		while (j < WINDOW_WIDTH)
+// 			img_pix_put(&data->background, j++, i, GREEN_PIXEL);
+// 		++i;
+// 	}
+// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->background.mlx_img, 0, 0);
+// }
+void	set_background(t_data *data) 
+{
+	int	x;
+	int	y;
+	t_tile	*bg;
+	t_tile	*t;
+
+	x = 0;
+	y = 0;
+	while (y < data->map.height)
+	{
+		x = 0;
+		while (x < data->map.width)
+		{
+			t = malloc(sizeof(t_tile));
+			t->x = x;
+			t->y = y;
+			t->type = '0';
+			// t->img.addr = mlx_get_data_addr(t->img.mlx_img, &t->img.bpp, &t->img.line_len, &t->img.endian);
+			t->img.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, OBJECT_GRASS_PATH, &t->img.width, &t->img.height);
+			t->next = NULL;
+			t->previous = NULL;
+			if (x == 0 && y == 0)
+				data->background = t;
+			else
+				bg->next = t;
+			bg = t;
+			x += TILE_SIZE;
+		}
+		y += TILE_SIZE;
+	}
+}
+
 void	render_background(t_data *data) 
 {
-	int	i;
-	int	j;
+	t_tile	*bg;
 
-	i = 0;
-	data->background.mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	data->background.addr = mlx_get_data_addr(data->background.mlx_img, &data->background.bpp, &data->background.line_len, &data->background.endian);
-	while (i < WINDOW_HEIGHT)
+	bg = data->background;
+	while (bg)
 	{
-		j = 0;
-		while (j < WINDOW_WIDTH)
-			img_pix_put(&data->background, j++, i, GREEN_PIXEL);
-		++i;
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, bg->img.mlx_img, bg->x, bg->y);
+		bg = bg->next;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->background.mlx_img, 0, 0);
 }

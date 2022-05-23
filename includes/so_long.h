@@ -85,21 +85,26 @@ typedef struct s_obj
 	t_tile	items;
 }	t_obj;
 
+typedef struct s_sprt
+{
+	int		x;
+	int		y;
+	t_img	img;
+}	t_sprt;
+
 typedef struct s_map
 {
 	int		width;
 	int		height;
-	t_tile	*tiles;
+	t_tile	**tiles;
 }	t_map;
 
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		width;
-	int		height;
-	t_img	background;
-	t_img	sprite;
+	t_tile	*background;
+	t_sprt	sprite;
 	t_obj	objects;
 	t_map	map;
 }	t_data;
@@ -109,6 +114,7 @@ int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
 void	img_pix_put(t_img *img, int x, int y, int color);
 t_img	render_img(t_data *data, char *filename, int x, int y);
 int		render_rect(t_img *img, t_rect rect);
+void	set_background(t_data *data);
 void	render_background(t_data *data);
 void 	load_objects(t_data *data);
 void	render_object(t_data *data);

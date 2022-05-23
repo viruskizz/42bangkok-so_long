@@ -38,51 +38,87 @@ void	connect_tile(t_tile *tile, t_tile *new)
 	new->previous = tmp;
 }
 
-void	render_map(t_data *data)
-{
-	t_tile	*tile;
+// void	render_map(t_data *data)
+// {
+// 	t_tile	*tile;
 
-	tile = data->map.tiles;
-	while (tile)
+// 	tile = data->map.tiles;
+// 	while (tile)
+// 	{
+// 		if (tile->img.mlx_img)
+// 			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, tile->img.mlx_img, tile->x, tile->y);
+// 		tile = tile->next;
+// 	}
+// }
+
+t_map	set_map_size(int fd)
+{
+	int		x;
+	int		y;
+	char	*line;
+
+	line = get_next_line(fd);
+	y = 0;
+	while (line && *line)
 	{
-		if (tile->img.mlx_img)
-			mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, tile->img.mlx_img, tile->x, tile->y);
-		tile = tile->next;
+		x = 0;
+		while (line[x])
+			x++;
+		y++;
+		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
+	t_map	map;
+
+	map.width = x * TILE_SIZE;
+	map.height = y * TILE_SIZE;
+	return (map);
 }
 
 void	load_map(t_data *data)
 {
-	int	fd;
-	int	i;
-	int	x;
-	int	y;
-	char *line;
-	t_tile	*tile;
+	int		fd;
+	// t_map	map;
 
 	fd = open("maps/simple.ber", O_RDONLY);
-	line = get_next_line(fd);
-	x = 0;
-	y = 0;
-	while (line && *line)
-	{
-		i = 0;
-		x = 0;
-		while (line[i] != '\n' && line[i] != '\0')
-		{
-			tile = new_tile(data, line[i++], x, y);
-			if (x == 0 && y == 0)
-				data->map.tiles = tile;
-			else
-				connect_tile(data->map.tiles, tile);
-			x += TILE_SIZE;
-		}
-		y += TILE_SIZE;
-		free(line);
-		line = get_next_line(fd);
-	}
+	data->map = set_map_size(fd);
 	close(fd);
-	data->map.width = x;
-	data->map.height = y;
-	printf("\nFIN: %d,%d\n", x, y); fflush(stdout);
+	printf("\nSET: %d,%d\n", data->map.width, data->map.height); fflush(stdout);
 }
+
+// void	load_map(t_data *data)
+// {
+// 	int	fd;
+// 	int	i;
+// 	int	x;
+// 	int	y;
+// 	char *line;
+// 	t_tile	*tile;
+
+// 	fd = open("maps/simple.ber", O_RDONLY);
+// 	line = get_next_line(fd);
+// 	x = 0;
+// 	y = 0;
+// 	while (line && *line)
+// 	{
+// 		i = 0;
+// 		x = 0;
+// 		while (line[i] != '\n' && line[i] != '\0')
+// 		{
+// 			tile = new_tile(data, line[i++], x, y);
+// 			if (x == 0 && y == 0)
+// 				data->map.tiles = tile;
+// 			else
+// 				connect_tile(data->map.tiles, tile);
+// 			x += TILE_SIZE;
+// 		}
+// 		y += TILE_SIZE;
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// 	close(fd);
+// 	data->map.width = x;
+// 	data->map.height = y;
+// 	printf("\nFIN: %d,%d\n", x, y); fflush(stdout);
+// }

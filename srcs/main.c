@@ -19,7 +19,8 @@ int	main(void)
 		free(data.win_ptr);
 		return (MLX_ERROR);
 	}
-	render_map(&data);
+	set_background(&data);
+	render_background(&data);
 	load_sprites(&data);
 	load_objects(&data);
 	/* Setup hooks */
@@ -46,8 +47,8 @@ int	render(t_data *data)
 {
 	if (!data->win_ptr)
 		return (1);
-	render_background(data);
-	render_map(data);
+	// render_background(data);
+	// render_map(data);
 	render_sprite(data);
 	// render_object(data);
 	return (0);
