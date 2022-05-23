@@ -7,7 +7,6 @@ void load_objects(t_data *data)
 	t_tile	*obj;
 	t_tile	*tmp;
 
-	
 	i = 0;
 	while (i < data->map.tile_y)
 	{
@@ -22,7 +21,6 @@ void load_objects(t_data *data)
 				obj->y = i * TILE_SIZE;
 				obj->img.mlx = mlx_xpm_file_to_image(data->mlx, OBJECT_ITEM_PATH, &obj->img.width, &obj->img.height); 
 				obj->next = NULL;
-				printf("%p\n", data->objs);
 				if (data->objs)
 					tmp->next = obj;
 				else
@@ -42,7 +40,6 @@ void	render_object(t_data *data)
 	obj = data->objs;
 	while (obj)
 	{
-		// printf("C = %c = %d,%d\n", obj->type, obj->x, obj->y); fflush(stdout);
 		if (obj->img.mlx)
 			mlx_put_image_to_window(data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
 		obj = obj->next;

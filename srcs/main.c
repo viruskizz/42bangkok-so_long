@@ -1,39 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/24 01:28:30 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/24 01:28:31 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
 
 static int	render(t_data *data);
 static int	keyhandler(int keycode, t_data *data);
-static int	mlx_close (int keycode, t_data *data);
-static int	initial(t_data *data);
+static int	mlx_close(int keycode, t_data *data);
+static int	initial(t_data *data, char *filename);
 
 int	main(void)
 {
 	t_data	data;
 
-	if (initial(&data) == MLX_ERROR)
+	if (initial(&data, "maps/simple.ber") == MLX_ERROR)
 	{
 		ft_putstr_fd("Error\n", 1);
 		exit(0);
 	}
-	/* Setup hooks */
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
 	mlx_loop(data.mlx);
-
-	/* we will exit the loop if there's no window left, and execute this code */
 	free(data.win);
 	free(data.mlx);
 	return (0);
 }
 
-static int	initial(t_data *data)
+static int	initial(t_data *data, char *filename)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (MLX_ERROR);
-	read_file(data, "maps/simple.ber");
+	read_file(data, filename);
 	load_map(data);
-	data->win = mlx_new_window(data->mlx, data->map.width, data->map.height, "SO LONG");
+	data->win = mlx_new_window(
+			data->mlx, data->map.width, data->map.height, "SO LONG");
 	if (!data->win)
 	{
 		free(data->win);
@@ -46,7 +55,7 @@ static int	initial(t_data *data)
 	return (0);
 }
 
-static int	mlx_close (int keycode, t_data *data)
+static int	mlx_close(int keycode, t_data *data)
 {
 	(void) data;
 	exit(0);
@@ -64,12 +73,11 @@ static int	render(t_data *data)
 	return (0);
 }
 
-
-static int keyhandler(int keycode, t_data *data)
+static int	keyhandler(int keycode, t_data *data)
 {
 	if (keycode == KEY_LEFT || keycode == KEY_A)
 		move_sprite(data, SPIRIT_SIZE * -1, 0);
-	if (keycode ==  KEY_RIGHT || keycode == KEY_D)
+	if (keycode == KEY_RIGHT || keycode == KEY_D)
 		move_sprite(data, SPIRIT_SIZE, 0);
 	if (keycode == KEY_DOWN || keycode == KEY_S)
 		move_sprite(data, 0, SPIRIT_SIZE);
