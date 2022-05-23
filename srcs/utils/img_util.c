@@ -1,36 +1,5 @@
 #include "so_long.h"
 
-// int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
-// {
-// 	return (red << 16 | green << 8 | blue);
-// }
-
-// void	img_pix_put(t_img *img, int x, int y, int color)
-// {
-// 	char	*pixel;
-
-// 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-// 	*(int *)pixel = color;
-// }
-
-
-// int	render_rect(t_img *img, t_rect rect)
-// {
-	
-// 	int	i;
-// 	int	j;
-
-// 	i = rect.y;
-// 	while (i < rect.y + rect.height)
-// 	{
-// 		j = rect.x;
-// 		while (j < rect.x + rect.width)
-// 			img_pix_put(img, j++, i, rect.color);
-// 		++i;
-// 	}
-// 	return (0);
-// }
-
 void	set_background(t_data *data) 
 {
 	int	x;

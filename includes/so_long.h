@@ -110,11 +110,6 @@ typedef struct s_data
 }	t_data;
 
 void	read_file(t_data *data, char *filename);
-int		render(t_data *data);
-int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-void	img_pix_put(t_img *img, int x, int y, int color);
-t_img	render_img(t_data *data, char *filename, int x, int y);
-int		render_rect(t_img *img, t_rect rect);
 void	set_background(t_data *data);
 void	render_background(t_data *data);
 void 	load_objects(t_data *data);

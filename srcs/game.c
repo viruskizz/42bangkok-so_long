@@ -3,7 +3,7 @@
 void	exit_game(t_data *data)
 {
 	printf("OS: %s\n", OS);
-	printf("MOVED: %d", data->sprt.moved);
+	free(data->map.filedata);
 	// mlx_destroy_image(data->mlx_ptr, data->background.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->objects.walls.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->sprite.mlx_img);
@@ -14,4 +14,5 @@ void	exit_game(t_data *data)
 	// 	mlx_destroy_display(data->mlx_ptr); // ONLY Linux
 	// 	free(data->mlx_ptr); // Free ONLY Linux
 	// }
+	exit(0);
 }
