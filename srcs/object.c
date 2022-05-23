@@ -1,6 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/24 01:33:15 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/24 01:33:16 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void load_objects(t_data *data)
+t_tile	*new_obj(t_data *data, int x, int y)
+{
+	t_tile	*obj;
+
+	obj = malloc(sizeof(t_tile));
+	obj->type = 'C';
+	obj->x = x;
+	obj->y = y;
+	obj->img.mlx = mlx_xpm_file_to_image(
+			data->mlx, OBJECT_ITEM_PATH, &obj->img.w, &obj->img.h);
+	obj->next = NULL;
+	return (obj);
+}
+
+void	load_objects(t_data *data)
 {
 	int		i;
 	int		j;
@@ -15,12 +41,7 @@ void load_objects(t_data *data)
 		{
 			if (data->map.tiles[i][j].type == 'C')
 			{
-				obj = malloc(sizeof(t_tile));
-				obj->type = 'C';
-				obj->x = j * TILE_SIZE;
-				obj->y = i * TILE_SIZE;
-				obj->img.mlx = mlx_xpm_file_to_image(data->mlx, OBJECT_ITEM_PATH, &obj->img.width, &obj->img.height); 
-				obj->next = NULL;
+				obj = new_obj(data, j * TILE_SIZE, i * TILE_SIZE);
 				if (data->objs)
 					tmp->next = obj;
 				else
@@ -35,13 +56,14 @@ void load_objects(t_data *data)
 
 void	render_object(t_data *data)
 {
-	t_tile *obj;
+	t_tile	*obj;
 
 	obj = data->objs;
 	while (obj)
 	{
 		if (obj->img.mlx)
-			mlx_put_image_to_window(data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
+			mlx_put_image_to_window(
+				data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
 		obj = obj->next;
 	}
 }

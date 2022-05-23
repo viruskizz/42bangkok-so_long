@@ -60,8 +60,8 @@ typedef struct s_img
 	void	*mlx;
 	char	*addr;
 	char	*name;
-	int		width;
-	int		height;
+	int		w;
+	int		h;
 	int		bpp;
 	int		line_len;
 	int		endian;

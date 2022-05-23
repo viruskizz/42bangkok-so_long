@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_util.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/24 01:57:34 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/24 01:57:36 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "get_next_line.h"
 #include <fcntl.h>
@@ -14,7 +26,7 @@ void	read_file(t_data *data, char *filename)
 	line = get_next_line(fd);
 	buf = ft_calloc(sizeof(char), 1);
 	data->map.tile_x = ft_strlen(line) - 1;
-	while(line && *line)
+	while (line && *line)
 	{
 		data->map.tile_y++;
 		tmp = buf;

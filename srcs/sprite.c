@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/24 01:51:45 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/24 01:51:46 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	load_sprites(t_data *data)
 {
 	int		i;
 	int		j;
-	
+	t_sprt	s;
+
 	i = 0;
 	while (i < data->map.tile_y)
 	{
@@ -13,11 +26,13 @@ void	load_sprites(t_data *data)
 		{
 			if (data->map.tiles[i][j].type == 'P')
 			{
-				data->sprt.x = j * TILE_SIZE;
-				data->sprt.y = i * TILE_SIZE;
-				data->sprt.items = 0;
-				data->sprt.moved = 0;
-				data->sprt.img.mlx = mlx_xpm_file_to_image(data->mlx, SPRITE_SQUALL_PATH, &data->sprt.img.width, &data->sprt.img.height);
+				s.x = j * TILE_SIZE;
+				s.y = i * TILE_SIZE;
+				s.items = 0;
+				s.moved = 0;
+				s.img.mlx = mlx_xpm_file_to_image(
+						data->mlx, SPRITE_SQUALL_PATH, &s.img.w, &s.img.h);
+				data->sprt = s;
 				return ;
 			}
 			j++;
@@ -28,7 +43,8 @@ void	load_sprites(t_data *data)
 
 void	render_sprite(t_data *data)
 {
-	mlx_put_image_to_window(data->mlx, data->win, data->sprt.img.mlx, data->sprt.x, data->sprt.y);
+	mlx_put_image_to_window(
+		data->mlx, data->win, data->sprt.img.mlx, data->sprt.x, data->sprt.y);
 }
 
 void	move_sprite(t_data *data, int nx, int ny)

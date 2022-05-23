@@ -30,7 +30,6 @@ SRCS		= main.c \
 			  map.c \
 			  object.c \
 			  sprite.c \
-			  keyhandler.c \
 			  utils/img_util.c \
 			  utils/file_util.c \
 			  gnl/get_next_line.c \
