@@ -57,7 +57,7 @@ void	move_sprite(t_data *data, int nx, int ny)
 	data->sprt.x += nx;
 	data->sprt.y += ny;
 	data->sprt.moved++;
-	printf("MOVED: %d", data->sprt.moved);
+	ft_printf("MOVED: %d\n", data->sprt.moved);
 	chk_pos_sprite(data);
 }
 
