@@ -16,7 +16,14 @@
 # define SPIRIT_SIZE		64
 # define TILE_SIZE			64
 
-# define MLX_ERROR 1
+# define EXIT_SUCCEED		1
+# define EXIT_FAILURE		1
+
+# define ERROR_MLX 			1
+# define ERROR_WIN			2
+# define ERROR_FILE_OPEN	10
+# define ERROR_FILE_TYPE	11
+# define ERROR_MAP_INVALID	20
 
 # define OBJECT_WALL_PATH	"images/objects_64x64/wall.xpm"
 # define OBJECT_ITEM_PATH	"images/objects_64x64/elixir.xpm"
@@ -40,7 +47,7 @@
 # include "key.h"
 # include "ft_printf.h"
 
-# define MAP_FILE	"maps/simple.ber"
+# define MAP_FILE	"maps/test.ber"
 
 typedef struct s_img
 {
@@ -89,7 +96,7 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	int		redraw;
+	int		render;
 	t_tile	*bg;
 	t_sprt	sprt;
 	t_tile	*objs;
@@ -106,7 +113,8 @@ void	load_sprites(t_data *data);
 void	render_sprite(t_data *data);
 void	move_sprite(t_data *data, int nx, int ny);
 void	chk_pos_sprite(t_data *data);
-void	exit_game(t_data *data);
+void	exit_game(t_data *data, int code);
+void	error_game(t_data *data, int code);
 void	load_map(t_data *data);
 void	render_map(t_data *data);
 t_tile	get_tile(t_data *data, int x, int y);

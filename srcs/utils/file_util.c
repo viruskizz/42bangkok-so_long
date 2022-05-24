@@ -23,6 +23,8 @@ void	read_file(t_data *data, char *filename)
 	char	*tmp;
 
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		error_game(data, ERROR_FILE_OPEN);
 	line = get_next_line(fd);
 	buf = ft_calloc(sizeof(char), 1);
 	data->map.tile_x = ft_strlen(line) - 1;
@@ -44,5 +46,10 @@ void	read_file(t_data *data, char *filename)
 
 int	valid_file(t_data *data)
 {
+	t_map	m;
+
+	m = data->map;
+	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y)
+		error_game(data, ERROR_MAP_INVALID);
 	return (0);
 }

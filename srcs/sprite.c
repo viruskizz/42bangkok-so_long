@@ -36,7 +36,7 @@ void	load_sprites(t_data *data)
 				return ;
 			}
 			j++;
-		}	
+		}
 		i++;
 	}
 }
@@ -69,6 +69,6 @@ void	chk_pos_sprite(t_data *data)
 	if (t.type == 'E')
 	{
 		if (data->map.items == data->sprt.items)
-			exit_game(data);
+			exit_game(data, EXIT_SUCCEED);
 	}
 }
