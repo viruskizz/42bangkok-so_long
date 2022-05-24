@@ -28,7 +28,7 @@ t_tile	*new_bg(t_data *data, int x, int y)
 	return (t);
 }
 
-void	set_background(t_data *data)
+void	load_background(t_data *data)
 {
 	int		x;
 	int		y;

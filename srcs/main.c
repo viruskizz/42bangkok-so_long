@@ -50,7 +50,7 @@ static int	initial(t_data *data, char *filename)
 		free(data->map.filedata);
 		return (MLX_ERROR);
 	}
-	set_background(data);
+	load_background(data);
 	load_sprites(data);
 	load_objects(data);
 	return (0);

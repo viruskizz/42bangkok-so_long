@@ -101,7 +101,7 @@ typedef struct s_data
 }	t_data;
 
 void	read_file(t_data *data, char *filename);
-void	set_background(t_data *data);
+void	load_background(t_data *data);
 void	render_background(t_data *data);
 void	load_objects(t_data *data);
 void	render_object(t_data *data);
