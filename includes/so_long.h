@@ -13,14 +13,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define WINDOW_WIDTH		1600
-# define WINDOW_HEIGHT		1200
-# define SPIRIT_SIZE			64
+# define SPIRIT_SIZE		64
 # define TILE_SIZE			64
-
-# define GREEN_PIXEL			0x00FF00
-# define RED_PIXEL			0xFF0000
-# define WHITE_PIXEL			0xFFFFFF
 
 # define MLX_ERROR 1
 
@@ -28,7 +22,7 @@
 # define OBJECT_ITEM_PATH	"images/objects_64x64/elixir.xpm"
 # define OBJECT_GRASS_PATH	"images/objects_64x64/grass.xpm"
 # define OBJECT_EXIT_PATH	"images/objects_64x64/door.xpm"
-# define SPRITE_SQUALL_PATH	"images/sprites_64x64/squall.xpm"
+# define SPRITE_SQUALL_PATH	"images/sprites_64x64/lightning_stand.xpm"
 
 # ifdef __linux__
 #  define IS_LINUX 1
@@ -45,6 +39,8 @@
 # include "libft.h"
 # include "key.h"
 # include "ft_printf.h"
+
+# define MAP_FILE	"maps/simple.ber"
 
 typedef struct s_img
 {

@@ -40,7 +40,7 @@ static int	initial(t_data *data, char *filename)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (MLX_ERROR);
-	read_file(data, filename);
+	read_file(data, MAP_FILE);
 	load_map(data);
 	data->win = mlx_new_window(
 			data->mlx, data->map.width, data->map.height, "SO LONG");
