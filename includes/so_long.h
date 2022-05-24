@@ -1,36 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/24 08:13:55 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/24 08:13:56 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
-#define WINDOW_WIDTH		1600
-#define WINDOW_HEIGHT		1200
-#define SPIRIT_SIZE			64
-#define TILE_SIZE			64
+# define WINDOW_WIDTH		1600
+# define WINDOW_HEIGHT		1200
+# define SPIRIT_SIZE			64
+# define TILE_SIZE			64
 
-#define GREEN_PIXEL			0x00FF00
-#define RED_PIXEL			0xFF0000
-#define WHITE_PIXEL			0xFFFFFF
+# define GREEN_PIXEL			0x00FF00
+# define RED_PIXEL			0xFF0000
+# define WHITE_PIXEL			0xFFFFFF
 
-#define MLX_ERROR 1
+# define MLX_ERROR 1
 
-#define X_EVENT_KEY_PRESS	2
-#define X_EVENT_KEY_EXIT	17
-
-#define KEY_SPACE			49
-#define KEY_ESC				53
-#define KEY_LEFT			123
-#define KEY_RIGHT			124
-#define KEY_UP				126
-#define KEY_DOWN			125
-#define KEY_A				0
-#define KEY_S				1
-#define KEY_D				2
-#define KEY_W				13
-
-#define OBJECT_WALL_PATH	"images/objects_64x64/wall.xpm"
-#define OBJECT_ITEM_PATH	"images/objects_64x64/elixir.xpm"
-#define OBJECT_GRASS_PATH	"images/objects_64x64/grass.xpm"
-#define OBJECT_EXIT_PATH	"images/objects_64x64/door.xpm"
-#define SPRITE_SQUALL_PATH	"images/sprites_64x64/squall.xpm"
+# define OBJECT_WALL_PATH	"images/objects_64x64/wall.xpm"
+# define OBJECT_ITEM_PATH	"images/objects_64x64/elixir.xpm"
+# define OBJECT_GRASS_PATH	"images/objects_64x64/grass.xpm"
+# define OBJECT_EXIT_PATH	"images/objects_64x64/door.xpm"
+# define SPRITE_SQUALL_PATH	"images/sprites_64x64/squall.xpm"
 
 # ifdef __linux__
 #  define IS_LINUX 1
@@ -40,20 +38,13 @@
 #  define OS "MAC"
 # endif
 
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <mlx.h>
-#include "libft.h"
-
-typedef struct s_rect
-{
-    int x;
-    int y;
-    int width;
-    int height;
-    int color;
-}   t_rect;
+# include <stdio.h>
+# include <stdint.h>
+# include <stdlib.h>
+# include <mlx.h>
+# include "libft.h"
+# include "key.h"
+# include "ft_printf.h"
 
 typedef struct s_img
 {
@@ -112,7 +103,7 @@ typedef struct s_data
 void	read_file(t_data *data, char *filename);
 void	set_background(t_data *data);
 void	render_background(t_data *data);
-void 	load_objects(t_data *data);
+void	load_objects(t_data *data);
 void	render_object(t_data *data);
 void	collect_object(t_data *data);
 void	load_sprites(t_data *data);

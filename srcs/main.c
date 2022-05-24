@@ -9,6 +9,7 @@
 /*   Updated: 2022/05/24 01:28:31 by tsomsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "so_long.h"
 
 static int	render(t_data *data);
@@ -22,7 +23,7 @@ int	main(void)
 
 	if (initial(&data, "maps/simple.ber") == MLX_ERROR)
 	{
-		ft_putstr_fd("Error\n", 1);
+		ft_printf("Error\n", 1);
 		exit(0);
 	}
 	mlx_loop_hook(data.mlx, &render, &data);

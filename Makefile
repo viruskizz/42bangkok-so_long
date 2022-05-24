@@ -4,13 +4,16 @@ CC			= gcc
 RM			= /bin/rm -f
 
 LIBFT_DIR	= libft
+PRINTF_DIR	= ft_printf
 
 INCLUDE_DIR	= ./includes
 INCLUDES 	= -I $(INCLUDE_DIR) \
 			  -I $(LIBFT_DIR) \
+			  -I $(PRINTF_DIR)/includes \
 			  -I $(MLX_DIR) 
  
-LIBS 		= -L$(LIBFT_DIR) -lft
+LIBS 		= -L$(LIBFT_DIR) -lft \
+			  -L$(PRINTF_DIR) -lftprintf
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
@@ -51,6 +54,7 @@ $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 libs:
 	@make -C $(LIBFT_DIR)
+	@make -C $(PRINTF_DIR)
 	@make -C $(MLX_DIR)	
 
 bonus: all
