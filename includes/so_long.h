@@ -12,7 +12,7 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
+# define BUF_SIZE			4098
 # define SPIRIT_SIZE		64
 # define TILE_SIZE			64
 
@@ -47,7 +47,7 @@
 # include "key.h"
 # include "ft_printf.h"
 
-# define MAP_FILE	"maps/test.ber"
+# define MAP_FILE	"maps/simple.ber"
 
 typedef struct s_img
 {
@@ -103,7 +103,7 @@ typedef struct s_data
 	t_map	map;
 }	t_data;
 
-void	read_file(t_data *data, char *filename);
+void	load_file(t_data *data, char *filename);
 void	load_background(t_data *data);
 void	render_background(t_data *data);
 void	load_objects(t_data *data);

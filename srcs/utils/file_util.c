@@ -15,33 +15,72 @@
 #include <fcntl.h>
 #include "so_long.h"
 
-void	read_file(t_data *data, char *filename)
+char	*ft_str_concat(char *dest, char *src)
+{
+	int	i;
+
+	i = 0;
+	while (*(dest + i))
+		i++;
+	while (*src)
+	{
+		*(dest + i) = *src;
+		i++;
+		src++;
+	}
+	*(dest + i) = '\0';
+	return (dest);
+}
+
+static char	*read_file(t_data *data, char *filename)
 {
 	int		fd;
-	char	*line;
+	int		ret;
 	char	*buf;
-	char	*tmp;
+	char	*file;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		error_game(data, ERROR_FILE_OPEN);
-	line = get_next_line(fd);
-	buf = ft_calloc(sizeof(char), 1);
-	data->map.tile_x = ft_strlen(line) - 1;
-	while (line && *line)
+	buf = malloc((BUF_SIZE + 1) * sizeof(char));
+	file = malloc(sizeof(char) * 10000);
+	ret = read(fd, buf, BUF_SIZE);
+	while (ret)
 	{
-		data->map.tile_y++;
-		tmp = buf;
-		buf = ft_strjoin(tmp, line);
-		free(tmp);
-		free(line);
-		line = get_next_line(fd);
+		buf[ret] = '\0';
+		ft_str_concat(file, buf);
+		ret = read(fd, buf, BUF_SIZE);
 	}
-	free(line);
+	free(buf);
 	close(fd);
+	return (file);
+}
+
+void	load_file(t_data *data, char *filename)
+{
+	int		i;
+	char	*file;
+
+	file = read_file(data, filename);
+	i = 0;
+	data->map.tile_x = 0;
+	data->map.tile_y = 0;
+	while (file[i] && file[i] != '\n')
+	{
+		data->map.tile_x++;
+		i++;
+	}
+	data->map.tile_y++;
+	while (file[i])
+		if (file[i++] == '\n')
+				data->map.tile_y++;
+	data->map.filedata = file;
+	printf("filedata: %s\n", data->map.filedata);
+	printf("tile_x: %d\n", data->map.tile_x);
+	printf("tile_y: %d\n", data->map.tile_y);
+	fflush(stdout);
 	data->map.width = data->map.tile_x * TILE_SIZE;
 	data->map.height = data->map.tile_y * TILE_SIZE;
-	data->map.filedata = buf;
 }
 
 int	valid_file(t_data *data)
