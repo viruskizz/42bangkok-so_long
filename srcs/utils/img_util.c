@@ -12,36 +12,43 @@
 
 #include "so_long.h"
 
-t_tile	set_bg(t_data *data, int x, int y)
+t_tile	*new_bg(t_data *data, int x, int y)
 {
-	t_tile	t;
+	t_tile	*t;
 
-	t.x = x;
-	t.y = y;
-	t.type = '0';
-	t.img.mlx = mlx_xpm_file_to_image(
-			data->mlx, OBJECT_GRASS_PATH, &t.img.w, &t.img.h);
+	t = malloc(sizeof(t_tile));
+	if (!t)
+		exit(1);
+	t->x = x;
+	t->y = y;
+	t->type = '0';
+	t->img.mlx = mlx_xpm_file_to_image(
+			data->mlx, OBJECT_GRASS_PATH, &t->img.w, &t->img.h);
+	t->next = NULL;
 	return (t);
 }
 
 void	set_background(t_data *data)
 {
-	int	x;
-	int	y;
-	int	i;
+	int		x;
+	int		y;
+	t_tile	*bg;
+	t_tile	*tmp;
 
-	i = 0;
 	x = 0;
 	y = 0;
-	data->bg = malloc(sizeof(t_tile) * data->map.tile_x * data->map.tile_y);
 	while (y < data->map.height)
 	{
 		x = 0;
 		while (x < data->map.width)
 		{
-			data->bg[i] = set_bg(data, x, y);
+			bg = new_bg(data, x, y);
+			if (x == 0 && y == 0)
+				data->bg = bg;
+			else
+				tmp->next = bg;
+			tmp = bg;
 			x += TILE_SIZE;
-			i++;
 		}
 		y += TILE_SIZE;
 	}
@@ -49,17 +56,15 @@ void	set_background(t_data *data)
 
 void	render_background(t_data *data)
 {
-	int		i;
-	t_tile	bg;
+	t_tile	*bg;
 
-	i = 0;
-	while (i < data->map.tile_x * data->map.tile_y)
+	bg = data->bg;
+	while (bg)
 	{
-		bg = data->bg[i];
-		if (bg.img.mlx)
+		if (bg->img.mlx)
 			mlx_put_image_to_window(
-				data->mlx, data->win, bg.img.mlx, bg.x, bg.y);
-		i++;
+				data->mlx, data->win, bg->img.mlx, bg->x, bg->y);
+		bg = bg->next;
 	}
 }
 
