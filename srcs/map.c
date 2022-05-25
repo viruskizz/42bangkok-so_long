@@ -81,11 +81,6 @@ void	render_map(t_data *data)
 	}
 }
 
-t_tile	get_tile(t_data *data, int x, int y)
-{
-	return (data->map.tiles[y / SPIRIT_SIZE][x / TILE_SIZE]);
-}
-
 void	validate_map(t_data *data)
 {
 	t_map	m;
@@ -117,7 +112,6 @@ static int	valid_wall(t_map map)
 		x = 0;
 		while (f[i] && f[i] != '\n')
 		{
-			// Column check
 			if ((x == 0 || x == map.tile_x - 1) && f[i] != '1')
 				return (0);
 			if ((y == 0 || y == map.tile_y -1) && f[i] != '1')
