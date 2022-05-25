@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "get_next_line.h"
 #include <fcntl.h>
 #include "so_long.h"
 
@@ -26,6 +25,7 @@ static int	valid_file_ext(t_data *data, char *filename)
 	ext = filename + (len - 4);
 	return (!ft_strncmp(".ber", ext, 4));
 }
+
 static char	*ft_str_concat(char *dest, char *src)
 {
 	int	i;
@@ -53,7 +53,7 @@ static char	*read_file(t_data *data, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		error_game(data, ERROR_FILE_OPEN, "file not found.");
-	if(!valid_file_ext(data, filename))
+	if (!valid_file_ext(data, filename))
 		error_game(data, ERROR_FILE_OPEN, "file extension is not `.ber`");
 	buf = malloc((BUF_SIZE + 1) * sizeof(char));
 	file = malloc(sizeof(char) * 10000);
@@ -69,6 +69,24 @@ static char	*read_file(t_data *data, char *filename)
 	return (file);
 }
 
+void	init_map_data(t_data *data, char *file)
+{
+	if (!file)
+	{
+		data->map.tile_x = 0;
+		data->map.tile_y = 0;
+		data->map.item = 0;
+		data->map.exit = 0;
+		data->map.sprt = 0;
+	}
+	else
+	{
+		data->map.filedata = file;
+		data->map.width = data->map.tile_x * TILE_SIZE;
+		data->map.height = data->map.tile_y * TILE_SIZE;
+	}
+}
+
 void	load_file(t_data *data, char *filename)
 {
 	int		i;
@@ -76,11 +94,7 @@ void	load_file(t_data *data, char *filename)
 
 	file = read_file(data, filename);
 	i = 0;
-	data->map.tile_x = 0;
-	data->map.tile_y = 0;
-	data->map.item = 0;
-	data->map.exit = 0;
-	data->map.sprt = 0;
+	init_map_data(data, NULL);
 	while (file[i])
 	{
 		while (file[i] != '\0' && file[i] != '\n')
@@ -98,7 +112,5 @@ void	load_file(t_data *data, char *filename)
 		data->map.tile_y++;
 		i++;
 	}
-	data->map.filedata = file;
-	data->map.width = data->map.tile_x * TILE_SIZE;
-	data->map.height = data->map.tile_y * TILE_SIZE;
+	init_map_data(data, file);
 }

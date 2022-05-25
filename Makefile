@@ -35,8 +35,7 @@ SRCS		= main.c \
 			  sprite.c \
 			  utils/img_util.c \
 			  utils/file_util.c \
-			  gnl/get_next_line.c \
-			  gnl/get_next_line_utils.c
+				utils/tile_util.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 

@@ -81,17 +81,11 @@ void	render_map(t_data *data)
 	}
 }
 
-t_tile	get_tile(t_data *data, int x, int y)
-{
-	return (data->map.tiles[y / SPIRIT_SIZE][x / TILE_SIZE]);
-}
-
 void	validate_map(t_data *data)
 {
 	t_map	m;
 
 	m = data->map;
-	ft_printf("validating\n");
 	if (m.tile_x * m.tile_y < 4 * 4)
 		error_game(data, ERROR_MAP_INVALID, "map is small.");
 	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y + m.tile_y - 1)
@@ -118,7 +112,6 @@ static int	valid_wall(t_map map)
 		x = 0;
 		while (f[i] && f[i] != '\n')
 		{
-			// Column check
 			if ((x == 0 || x == map.tile_x - 1) && f[i] != '1')
 				return (0);
 			if ((y == 0 || y == map.tile_y -1) && f[i] != '1')

@@ -26,8 +26,6 @@ int	main(void)
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
 	mlx_loop(data.mlx);
-	// free(data.win);
-	// free(data.mlx);
 	return (0);
 }
 
