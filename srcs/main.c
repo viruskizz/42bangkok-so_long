@@ -17,11 +17,17 @@ static int	keyhandler(int keycode, t_data *data);
 static int	mlx_close(int keycode, t_data *data);
 static void	initial(t_data *data, char *filename);
 
-int	main(void)
+// int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	data;
+	char	*filename;
 
-	initial(&data, MAP_FILE);
+	if (argc == 1)
+		filename = MAP_FILE;
+	else
+		filename = argv[1];
+	initial(&data, filename);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
@@ -34,7 +40,7 @@ static void	initial(t_data *data, char *filename)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		error_game(data, ERROR_MLX, NULL);
-	load_file(data, MAP_FILE);
+	load_file(data, filename);
 	validate_map(data);
 	load_map(data);
 	data->win = mlx_new_window(
