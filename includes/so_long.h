@@ -26,7 +26,7 @@
 # define ERROR_MAP_INVALID	20
 
 # define OBJECT_WALL_PATH	"images/objects_64x64/wall.xpm"
-# define OBJECT_ITEM_PATH	"images/objects_64x64/elixir.xpm"
+# define OBJECT_ITEM_PATH	"images/objects_64x64/elixir_small.xpm"
 # define OBJECT_GRASS_PATH	"images/objects_64x64/grass.xpm"
 # define OBJECT_EXIT_PATH	"images/objects_64x64/door.xpm"
 # define SPRITE_SQUALL_PATH	"images/sprites_64x64/lightning_stand.xpm"
@@ -56,8 +56,8 @@
 // # define MAP_FILE	"maps/errors/no_item.ber"
 // # define MAP_FILE	"maps/errors/no_sprite.ber"
 // # define MAP_FILE	"maps/errors/no_wall.ber"
-// # define MAP_FILE	"maps/simple.ber"
-# define MAP_FILE	"maps/large.ber"
+# define MAP_FILE	"maps/simple.ber"
+// # define MAP_FILE	"maps/large.ber"
 
 typedef struct s_img
 {
