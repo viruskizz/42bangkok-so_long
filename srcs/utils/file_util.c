@@ -15,7 +15,18 @@
 #include <fcntl.h>
 #include "so_long.h"
 
-char	*ft_str_concat(char *dest, char *src)
+static int	valid_file_ext(t_data *data, char *filename)
+{
+	int		len;
+	char	*ext;
+
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	ext = filename + (len - 4);
+	return (!ft_strncmp(".ber", ext, 4));
+}
+static char	*ft_str_concat(char *dest, char *src)
 {
 	int	i;
 
@@ -41,7 +52,9 @@ static char	*read_file(t_data *data, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_game(data, ERROR_FILE_OPEN);
+		error_game(data, ERROR_FILE_OPEN, "file not found.");
+	if(!valid_file_ext(data, filename))
+		error_game(data, ERROR_FILE_OPEN, "file extension is not `.ber`");
 	buf = malloc((BUF_SIZE + 1) * sizeof(char));
 	file = malloc(sizeof(char) * 10000);
 	ret = read(fd, buf, BUF_SIZE);
@@ -65,9 +78,9 @@ void	load_file(t_data *data, char *filename)
 	i = 0;
 	data->map.tile_x = 0;
 	data->map.tile_y = 0;
-	data->map.n_item = 0;
-	data->map.n_exit = 0;
-	data->map.n_sprt = 0;
+	data->map.item = 0;
+	data->map.exit = 0;
+	data->map.sprt = 0;
 	while (file[i])
 	{
 		while (file[i] != '\0' && file[i] != '\n')
@@ -75,11 +88,11 @@ void	load_file(t_data *data, char *filename)
 			if (data->map.tile_y == 0)
 				data->map.tile_x++;
 			if (file[i] == 'C')
-				data->map.n_item++;
+				data->map.item++;
 			else if (file[i] == 'E')
-				data->map.n_exit++;
+				data->map.exit++;
 			else if (file[i] == 'P')
-				data->map.n_sprt++;
+				data->map.sprt++;
 			i++;
 		}
 		data->map.tile_y++;
@@ -90,12 +103,14 @@ void	load_file(t_data *data, char *filename)
 	data->map.height = data->map.tile_y * TILE_SIZE;
 }
 
-int	valid_file(t_data *data)
+void	validate_file(t_data *data)
 {
 	t_map	m;
 
 	m = data->map;
-	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y)
-		error_game(data, ERROR_MAP_INVALID);
-	return (0);
+	ft_printf("validating\n");
+	if (m.tile_x * m.tile_y < 4 * 4)
+		error_game(data, ERROR_MAP_INVALID, "map is small.");
+	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y + m.tile_y - 1)
+		error_game(data, ERROR_MAP_INVALID, "map is not rect.");
 }

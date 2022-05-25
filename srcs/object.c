@@ -53,7 +53,6 @@ void	load_objects(t_data *data)
 		}
 		i++;
 	}
-	ft_printf("%p\n", data->objs);
 }
 
 void	render_object(t_data *data)
@@ -83,7 +82,7 @@ void	collect_object(t_data *data)
 		{
 			if (obj->x == t.x && obj->y == t.y)
 			{
-				data->sprt.n_item++;
+				data->sprt.item++;
 				obj->img.mlx = NULL;
 				return ;
 			}

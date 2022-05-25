@@ -38,13 +38,11 @@ void	exit_game(t_data *data, int code)
 	exit(code);
 }
 
-void	error_game(t_data *data, int code)
+void	error_game(t_data *data, int code, char *msg)
 {
 
-	if (code == ERROR_FILE_TYPE)
-		ft_printf("Error: file is not .ber type\n");
-	else if (code == ERROR_FILE_OPEN)
-		ft_printf("Error: open map file\n");
+	if (code == ERROR_FILE_OPEN || code == ERROR_MAP_INVALID)
+		ft_printf("Error: %s\n", msg);
 	else if (code == ERROR_MLX)
 	{
 		ft_printf("Error: MLX lib cannot operation\n");

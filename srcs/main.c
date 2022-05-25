@@ -15,14 +15,13 @@
 static int	render(t_data *data);
 static int	keyhandler(int keycode, t_data *data);
 static int	mlx_close(int keycode, t_data *data);
-static int	initial(t_data *data, char *filename);
+static void	initial(t_data *data, char *filename);
 
 int	main(void)
 {
 	t_data	data;
 
-	if (!initial(&data, MAP_FILE))
-		error_game(&data, ERROR_MLX);
+	initial(&data, MAP_FILE);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
@@ -32,21 +31,21 @@ int	main(void)
 	return (0);
 }
 
-static int	initial(t_data *data, char *filename)
+static void	initial(t_data *data, char *filename)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		error_game(data, ERROR_MLX);
+		error_game(data, ERROR_MLX, NULL);
 	load_file(data, MAP_FILE);
+	validate_file(data);
 	load_map(data);
 	data->win = mlx_new_window(
 			data->mlx, data->map.width, data->map.height, "SO LONG");
 	if (!data->win)
-		error_game(data, ERROR_WIN);
+		error_game(data, ERROR_WIN, NULL);
 	load_background(data);
 	load_sprites(data);
 	load_objects(data);
-	return (1);
 }
 
 static int	mlx_close(int keycode, t_data *data)
@@ -61,15 +60,6 @@ static int	render(t_data *data)
 	render_map(data);
 	render_object(data);
 	render_sprite(data);
-	// if (data->render)
-	// {
-	// 		ft_printf("Render");
-	// 		render_background(data);
-	// 		render_map(data);
-	// 		render_object(data);
-	//		render_sprite(data);
-	// 		data->render = 0;
-	// }
 	return (0);
 }
 

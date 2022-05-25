@@ -47,7 +47,15 @@
 # include "key.h"
 # include "ft_printf.h"
 
-# define MAP_FILE	"maps/simple.ber"
+// # define MAP_FILE	"maps/simple.ber"
+// # define MAP_FILE	"maps/errors/test"
+// # define MAP_FILE	"maps/errors/empty.ber"
+// # define MAP_FILE	"maps/errors/not_rect.ber"
+// # define MAP_FILE	"maps/errors/no_file.ber"
+# define MAP_FILE	"maps/errors/no_exit.ber"
+// # define MAP_FILE	"maps/errors/no_item.ber"
+// # define MAP_FILE	"maps/errors/no_sprite.ber"
+// # define MAP_FILE	"maps/simple.ber"
 
 typedef struct s_img
 {
@@ -76,7 +84,7 @@ typedef struct s_sprt
 {
 	int		x;
 	int		y;
-	int		n_item;
+	int		item;
 	int		moved;
 	t_img	img;
 }	t_sprt;
@@ -88,9 +96,9 @@ typedef struct s_map
 	int		height;
 	int		tile_x;
 	int		tile_y;
-	int		n_item;
-	int		n_exit;
-	int		n_sprt;
+	int		item;
+	int		exit;
+	int		sprt;
 	t_tile	**tiles;
 }	t_map;
 
@@ -106,6 +114,7 @@ typedef struct s_data
 }	t_data;
 
 void	load_file(t_data *data, char *filename);
+void	validate_file(t_data *data);
 void	load_background(t_data *data);
 void	render_background(t_data *data);
 void	load_objects(t_data *data);
@@ -116,7 +125,7 @@ void	render_sprite(t_data *data);
 void	move_sprite(t_data *data, int nx, int ny);
 void	chk_pos_sprite(t_data *data);
 void	exit_game(t_data *data, int code);
-void	error_game(t_data *data, int code);
+void	error_game(t_data *data, int code, char *msg);
 void	load_map(t_data *data);
 void	render_map(t_data *data);
 t_tile	get_tile(t_data *data, int x, int y);
