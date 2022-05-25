@@ -17,9 +17,9 @@ void	exit_game(t_data *data, int code)
 	ft_printf("EXIT\n");
 	// mlx_destroy_image(data->mlx_ptr, data->background.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->objects.walls.mlx_img);
-	// mlx_destroy_image(data->mlx_ptr, data->sprite.mlx_img);
-	ft_printf("mlx: %p\n", data->mlx);
-	ft_printf("win: %p\n", data->win);
+	// mlx_destroy_image(data->mlx, data->sprt.img.mlx);
+	// ft_printf("mlx: %p\n", data->mlx);
+	// ft_printf("win: %p\n", data->win);
 	if (data->mlx && data->win)
 	{
 		// mlx_destroy_window(data->mlx, data->win);

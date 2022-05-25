@@ -28,7 +28,7 @@ void	load_sprites(t_data *data)
 			{
 				s.x = j * TILE_SIZE;
 				s.y = i * TILE_SIZE;
-				s.items = 0;
+				s.n_item = 0;
 				s.moved = 0;
 				s.img.mlx = mlx_xpm_file_to_image(
 						data->mlx, SPRITE_SQUALL_PATH, &s.img.w, &s.img.h);
@@ -68,7 +68,7 @@ void	chk_pos_sprite(t_data *data)
 	t = get_tile(data, data->sprt.x, data->sprt.y);
 	if (t.type == 'E')
 	{
-		if (data->map.items == data->sprt.items)
+		if (data->map.n_item == data->sprt.n_item)
 			exit_game(data, EXIT_SUCCEED);
 	}
 }

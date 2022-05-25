@@ -41,7 +41,6 @@ void	load_map(t_data *data)
 	data->map.tiles = malloc(sizeof(t_tile *) * data->map.tile_y);
 	i = 0;
 	str = data->map.filedata;
-	data->map.items = 0;
 	while (*str)
 	{
 		j = 0;
@@ -50,8 +49,6 @@ void	load_map(t_data *data)
 		{
 			data->map.tiles[i][j] = new_tile(
 					data, *str, j * TILE_SIZE, i * TILE_SIZE);
-			if (*str == 'C')
-				data->map.items++;
 			j++;
 			str++;
 		}

@@ -37,16 +37,17 @@ void	load_background(t_data *data)
 
 	x = 0;
 	y = 0;
+	data->bg = NULL;
 	while (y < data->map.height)
 	{
 		x = 0;
 		while (x < data->map.width)
 		{
 			bg = new_bg(data, x, y);
-			if (x == 0 && y == 0)
-				data->bg = bg;
-			else
+			if (data->bg)
 				tmp->next = bg;
+			else
+				data->bg = bg;
 			tmp = bg;
 			x += TILE_SIZE;
 		}

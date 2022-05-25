@@ -65,20 +65,27 @@ void	load_file(t_data *data, char *filename)
 	i = 0;
 	data->map.tile_x = 0;
 	data->map.tile_y = 0;
-	while (file[i] && file[i] != '\n')
+	data->map.n_item = 0;
+	data->map.n_exit = 0;
+	data->map.n_sprt = 0;
+	while (file[i])
 	{
-		data->map.tile_x++;
+		while (file[i] != '\0' && file[i] != '\n')
+		{
+			if (data->map.tile_y == 0)
+				data->map.tile_x++;
+			if (file[i] == 'C')
+				data->map.n_item++;
+			else if (file[i] == 'E')
+				data->map.n_exit++;
+			else if (file[i] == 'P')
+				data->map.n_sprt++;
+			i++;
+		}
+		data->map.tile_y++;
 		i++;
 	}
-	data->map.tile_y++;
-	while (file[i])
-		if (file[i++] == '\n')
-				data->map.tile_y++;
 	data->map.filedata = file;
-	printf("filedata: %s\n", data->map.filedata);
-	printf("tile_x: %d\n", data->map.tile_x);
-	printf("tile_y: %d\n", data->map.tile_y);
-	fflush(stdout);
 	data->map.width = data->map.tile_x * TILE_SIZE;
 	data->map.height = data->map.tile_y * TILE_SIZE;
 }

@@ -76,7 +76,7 @@ typedef struct s_sprt
 {
 	int		x;
 	int		y;
-	int		items;
+	int		n_item;
 	int		moved;
 	t_img	img;
 }	t_sprt;
@@ -88,7 +88,9 @@ typedef struct s_map
 	int		height;
 	int		tile_x;
 	int		tile_y;
-	int		items;
+	int		n_item;
+	int		n_exit;
+	int		n_sprt;
 	t_tile	**tiles;
 }	t_map;
 
@@ -118,5 +120,6 @@ void	error_game(t_data *data, int code);
 void	load_map(t_data *data);
 void	render_map(t_data *data);
 t_tile	get_tile(t_data *data, int x, int y);
+// void	inspect_map(t_data *data, char attr);
 
 #endif

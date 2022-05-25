@@ -23,8 +23,6 @@ int	main(void)
 
 	if (!initial(&data, MAP_FILE))
 		error_game(&data, ERROR_MLX);
-	// render_background(&data);
-	// render_map(&data);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);

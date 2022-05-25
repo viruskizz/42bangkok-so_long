@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-t_tile	*new_obj(t_data *data, int x, int y)
+static t_tile	*new_obj(t_data *data, int x, int y)
 {
 	t_tile	*obj;
 
@@ -34,6 +34,7 @@ void	load_objects(t_data *data)
 	t_tile	*tmp;
 
 	i = 0;
+	data->objs = NULL;
 	while (i < data->map.tile_y)
 	{
 		j = 0;
@@ -49,9 +50,10 @@ void	load_objects(t_data *data)
 				tmp = obj;
 			}
 			j++;
-		}	
+		}
 		i++;
 	}
+	ft_printf("%p\n", data->objs);
 }
 
 void	render_object(t_data *data)
@@ -81,7 +83,7 @@ void	collect_object(t_data *data)
 		{
 			if (obj->x == t.x && obj->y == t.y)
 			{
-				data->sprt.items++;
+				data->sprt.n_item++;
 				obj->img.mlx = NULL;
 				return ;
 			}
