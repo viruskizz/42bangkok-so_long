@@ -102,15 +102,3 @@ void	load_file(t_data *data, char *filename)
 	data->map.width = data->map.tile_x * TILE_SIZE;
 	data->map.height = data->map.tile_y * TILE_SIZE;
 }
-
-void	validate_file(t_data *data)
-{
-	t_map	m;
-
-	m = data->map;
-	ft_printf("validating\n");
-	if (m.tile_x * m.tile_y < 4 * 4)
-		error_game(data, ERROR_MAP_INVALID, "map is small.");
-	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y + m.tile_y - 1)
-		error_game(data, ERROR_MAP_INVALID, "map is not rect.");
-}

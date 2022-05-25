@@ -37,7 +37,7 @@ static void	initial(t_data *data, char *filename)
 	if (!data->mlx)
 		error_game(data, ERROR_MLX, NULL);
 	load_file(data, MAP_FILE);
-	validate_file(data);
+	validate_map(data);
 	load_map(data);
 	data->win = mlx_new_window(
 			data->mlx, data->map.width, data->map.height, "SO LONG");

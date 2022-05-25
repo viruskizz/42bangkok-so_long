@@ -12,6 +12,8 @@
 
 #include "so_long.h"
 
+static int	valid_wall(t_map map);
+
 static t_tile	new_tile(t_data *data, char type, int x, int y)
 {
 	t_tile	tile;
@@ -82,4 +84,50 @@ void	render_map(t_data *data)
 t_tile	get_tile(t_data *data, int x, int y)
 {
 	return (data->map.tiles[y / SPIRIT_SIZE][x / TILE_SIZE]);
+}
+
+void	validate_map(t_data *data)
+{
+	t_map	m;
+
+	m = data->map;
+	ft_printf("validating\n");
+	if (m.tile_x * m.tile_y < 4 * 4)
+		error_game(data, ERROR_MAP_INVALID, "map is small.");
+	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y + m.tile_y - 1)
+		error_game(data, ERROR_MAP_INVALID, "map is not rect.");
+	if (m.item == 0 || m.sprt == 0 || m.exit != 1)
+		error_game(data, ERROR_MAP_INVALID, "map not meet minimun requirement");
+	if (valid_wall(data->map) == 0)
+		error_game(data, ERROR_MAP_INVALID, "map not covered with wall.");
+}
+
+static int	valid_wall(t_map map)
+{
+	int		i;
+	int		x;
+	int		y;
+	char	*f;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	f = map.filedata;
+	while (f[i])
+	{
+		x = 0;
+		while (f[i] && f[i] != '\n')
+		{
+			// Column check
+			if ((x == 0 || x == map.tile_x - 1) && f[i] != '1')
+				return (0);
+			if ((y == 0 || y == map.tile_y -1) && f[i] != '1')
+				return (0);
+			i++;
+			x++;
+		}
+		i++;
+		y++;
+	}
+	return (1);
 }
