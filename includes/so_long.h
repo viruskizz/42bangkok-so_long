@@ -150,21 +150,23 @@ void	load_background(t_data *data);
 void	render_background(t_data *data);
 void	load_objects(t_data *data);
 void	render_object(t_data *data);
-void	collect_object(t_data *data);
+void	move_sprite(t_data *data, int dirct, int dx, int dy);
+void	sit_sprite(t_data *data);
 void	load_sprites(t_data *data);
 void	render_sprite(t_data *data);
-void	move_sprite(t_data *data, int dirct);
 void	chk_pos_sprite(t_data *data);
 void	exit_game(t_data *data, int code);
 void	error_game(t_data *data, int code, char *msg);
 void	load_map(t_data *data);
 void	validate_map(t_data *data);
 void	render_map(t_data *data);
-int		collecting_animate(t_data *data, char *act, int delay);
-int		walking_animate(t_data *data);
+void	sprt_standing(t_data *data);
+void	sprt_walking(t_data *data);
+void	sprt_collect(t_data *data);
+void	sprt_moving(t_data *data);
 t_tile	get_tile(t_data *data, int x, int y);
 int		get_direction(int cur_x, int cur_y, int nxt_x, int nxt_y);
+t_img	set_img(t_data *data, char *path);
 void	inspect_map(t_data *data, char attr);
-void	delay(int ms);
 
 #endif

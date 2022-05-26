@@ -20,8 +20,7 @@ static t_tile	*new_obj(t_data *data, int x, int y)
 	obj->type = 'C';
 	obj->x = x;
 	obj->y = y;
-	obj->img.mlx = mlx_xpm_file_to_image(
-			data->mlx, OBJECT_ITEM_PATH, &obj->img.w, &obj->img.h);
+	obj->img = set_img(data, OBJECT_ITEM_PATH);
 	obj->next = NULL;
 	return (obj);
 }
@@ -67,36 +66,4 @@ void	render_object(t_data *data)
 				data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
 		obj = obj->next;
 	}
-}
-
-void	collect_object(t_data *data)
-{
-	t_tile	t;
-	t_tile	*obj;
-
-	t = get_tile(data, data->sprt.x, data->sprt.y);
-	// ft_printf("ACT: %d", data->sprt.act);
-	if (data->sprt.act == ACT_STAND)
-		data->sprt.act = ACT_SIT;
-	else if (data->sprt.act == ACT_SIT)
-		data->sprt.act = ACT_STAND;
-	if (t.type == 'C')
-	{
-		obj = data->objs;
-		while (obj)
-		{
-			if (obj->x == t.x && obj->y == t.y)
-			{
-				if (obj->img.mlx)
-				{
-					data->sprt.item++;
-					obj->img.mlx = NULL;
-					data->sprt.act = ACT_COLLECTED;
-				}
-				return ;
-			}
-			obj = obj->next;
-		}
-	}
-	// ft_printf("ACT: %d", data->sprt.act);
 }

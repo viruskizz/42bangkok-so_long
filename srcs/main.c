@@ -64,22 +64,25 @@ static int	render(t_data *data)
 	render_map(data);
 	render_object(data);
 	render_sprite(data);
-	mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");
+	// mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");
 	return (0);
 }
 
 static int	keyhandler(int keycode, t_data *data)
 {
+	int	m;
+
+	m = TILE_SIZE;
 	if (keycode == KEY_LEFT || keycode == KEY_A)
-		move_sprite(data, DIRCT_LEFT);
+		move_sprite(data, DIRCT_LEFT, m * -1, 0);
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		move_sprite(data, DIRCT_RIGHT);
+		move_sprite(data, DIRCT_RIGHT, m, 0);
 	if (keycode == KEY_DOWN || keycode == KEY_S)
-		move_sprite(data, DIRCT_DOWN);
+		move_sprite(data, DIRCT_DOWN, 0, m);
 	if (keycode == KEY_UP || keycode == KEY_W)
-		move_sprite(data, DIRCT_UP);
+		move_sprite(data, DIRCT_UP, 0, m * -1);
 	if (keycode == KEY_SPACE)
-		collect_object(data);
+		sit_sprite(data);
 	if (keycode == KEY_ESC)
 		exit_game(data, EXIT_SUCCEED);
 	return (0);

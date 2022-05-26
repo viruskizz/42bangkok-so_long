@@ -73,3 +73,11 @@ void	render_background(t_data *data)
 // {
 
 // }
+
+t_img	set_img(t_data *data, char *path)
+{
+	t_img img;
+
+	img.mlx = mlx_xpm_file_to_image(data->mlx, path, &img.w, &img.h);
+	return (img);
+}

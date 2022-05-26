@@ -57,3 +57,15 @@ void	error_game(t_data *data, int code, char *msg)
 	free(data->map.filedata);
 	exit(1);
 }
+
+void	chk_pos_sprite(t_data *data)
+{
+	t_tile	t;
+
+	t = get_tile(data, data->sprt.x, data->sprt.y);
+	if (t.type == 'E')
+	{
+		if (data->map.item == data->sprt.item)
+			exit_game(data, EXIT_SUCCEED);
+	}
+}
