@@ -75,6 +75,11 @@ void	collect_object(t_data *data)
 	t_tile	*obj;
 
 	t = get_tile(data, data->sprt.x, data->sprt.y);
+	// ft_printf("ACT: %d", data->sprt.act);
+	if (data->sprt.act == ACT_STAND)
+		data->sprt.act = ACT_SIT;
+	else if (data->sprt.act == ACT_SIT)
+		data->sprt.act = ACT_STAND;
 	if (t.type == 'C')
 	{
 		obj = data->objs;
@@ -86,10 +91,12 @@ void	collect_object(t_data *data)
 				{
 					data->sprt.item++;
 					obj->img.mlx = NULL;
+					data->sprt.act = ACT_COLLECTED;
 				}
 				return ;
 			}
 			obj = obj->next;
 		}
 	}
+	// ft_printf("ACT: %d", data->sprt.act);
 }

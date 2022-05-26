@@ -64,6 +64,7 @@ static int	render(t_data *data)
 	render_map(data);
 	render_object(data);
 	render_sprite(data);
+	mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");
 	return (0);
 }
 

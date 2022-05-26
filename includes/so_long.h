@@ -16,6 +16,8 @@
 # define SPIRIT_SIZE		64
 # define TILE_SIZE			64
 
+# define RED_PIXEL			0xEB4034
+
 # define EXIT_SUCCEED		1
 # define EXIT_FAILURE		1
 
@@ -33,7 +35,7 @@
 # define SPRITE_STAND_RIGHT_PATH	"images/sprites_64x64/cele_stand_right.xpm"
 # define SPRITE_STAND_UP_PATH		"images/sprites_64x64/cele_stand_up.xpm"
 # define SPRITE_STAND_DOWN_PATH		"images/sprites_64x64/cele_stand_down.xpm"
-# define SPRITE_KNEEL_PATH			"images/sprites_64x64/cele_walk_down_1.xpm"
+# define SPRITE_KNEEL_PATH			"images/sprites_64x64/cele_sit.xpm"
 # define SPRITE_WALK_LEFT1_PATH		"images/sprites_64x64/cele_walk_left_1.xpm"
 # define SPRITE_WALK_LEFT2_PATH		"images/sprites_64x64/cele_walk_left_2.xpm"
 # define SPRITE_WALK_RIGHT1_PATH	"images/sprites_64x64/cele_walk_right_1.xpm"
@@ -75,6 +77,7 @@
 # define ACT_WALK		2
 # define ACT_WALK_L		21
 # define ACT_WALK_R		22
+# define ACT_COLLECTED	3
 
 # define DIRCT_LEFT		1
 # define DIRCT_UP		2
@@ -114,6 +117,7 @@ typedef struct s_sprt
 	int		face;
 	int		item;
 	int		moved;
+	unsigned int	animating;
 	t_img	img;
 }	t_sprt;
 

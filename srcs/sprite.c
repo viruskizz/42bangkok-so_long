@@ -12,6 +12,8 @@
 
 #include "so_long.h"
 
+void	standing_anim(t_data *data);
+
 void	load_sprites(t_data *data)
 {
 	int		i;
@@ -32,6 +34,7 @@ void	load_sprites(t_data *data)
 				s.y = i * TILE_SIZE;
 				s.nx = s.x;
 				s.ny = s.y;
+				s.animating = 0;
 				s.act = ACT_STAND;
 				s.face = DIRCT_DOWN;
 				s.item = 0;
@@ -59,6 +62,22 @@ void	render_sprite(t_data *data)
 	// 		data->mlx, SPRITE_STAND_DOWN_PATH, &s.img.w, &s.img.h);
 	if (data->sprt.act == ACT_WALK)
 		walking_animate(data);
+	if (data->sprt.act == ACT_SIT)
+		data->sprt.img.mlx = mlx_xpm_file_to_image(data->mlx, SPRITE_KNEEL_PATH, &data->sprt.img.w, &data->sprt.img.h);
+	if (data->sprt.act == ACT_STAND)
+		standing_anim(data);
+	if (data->sprt.act == ACT_COLLECTED)
+	{
+		data->sprt.img.mlx = mlx_xpm_file_to_image(data->mlx, SPRITE_KNEEL_PATH, &data->sprt.img.w, &data->sprt.img.h);
+		data->sprt.animating += 1;
+		// printf("%d\n", data->sprt.animating);
+		if (data->sprt.animating == 30)
+		{
+			data->sprt.act = ACT_STAND;
+			data->sprt.animating = 0;
+			// standing_anim(data);
+		}
+	}
 	mlx_put_image_to_window(
 		data->mlx, data->win, data->sprt.img.mlx, data->sprt.x, data->sprt.y);
 }
@@ -113,17 +132,7 @@ int		walking_animate(t_data *data)
 	s = data->sprt;
 	// ft_printf("animate %d,%d -> %d,%d\n", s.x, s.y, s.nx, s.ny);
 	if (s.x == s.nx && s.y == s.ny)
-	{
-		if (s.face == DIRCT_LEFT)
-			data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_LEFT_PATH, &s.img.w, &s.img.h);
-		if (s.face == DIRCT_RIGHT)
-			data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_RIGHT_PATH, &s.img.w, &s.img.h);
-		if (s.face == DIRCT_UP)
-			data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_UP_PATH, &s.img.w, &s.img.h);
-		if (s.face == DIRCT_DOWN)
-			data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_DOWN_PATH, &s.img.w, &s.img.h);
-		data->sprt.act = ACT_STAND;
-	}
+		standing_anim(data);
 	if (data->sprt.act != ACT_WALK)
 		return (0);
 	if (s.face == DIRCT_LEFT)
@@ -161,3 +170,20 @@ int		walking_animate(t_data *data)
 	return (0);
 }
 
+void	standing_anim(t_data *data)
+{
+	t_sprt s;
+
+	data->sprt.act = ACT_STAND;
+	s = data->sprt;
+	if (s.act != ACT_STAND)
+		return ;
+	if (s.face == DIRCT_LEFT)
+		data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_LEFT_PATH, &s.img.w, &s.img.h);
+	if (s.face == DIRCT_RIGHT)
+		data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_RIGHT_PATH, &s.img.w, &s.img.h);
+	if (s.face == DIRCT_UP)
+		data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_UP_PATH, &s.img.w, &s.img.h);
+	if (s.face == DIRCT_DOWN)
+		data->sprt.img.mlx =  mlx_xpm_file_to_image(data->mlx, SPRITE_STAND_DOWN_PATH, &s.img.w, &s.img.h);
+}
