@@ -35,6 +35,7 @@ SRCS		= main.c \
 			  sprite.c \
 				animate.c \
 			  utils/img_util.c \
+				utils/dirct_util.c \
 			  utils/file_util.c \
 				utils/tile_util.c
 

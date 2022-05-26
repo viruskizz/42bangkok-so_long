@@ -84,7 +84,6 @@ void	collect_object(t_data *data)
 			{
 				if (obj->img.mlx)
 				{
-					collecting_animate(data, "SIT", 100);
 					data->sprt.item++;
 					obj->img.mlx = NULL;
 				}

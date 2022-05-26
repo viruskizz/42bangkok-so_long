@@ -70,13 +70,13 @@ static int	render(t_data *data)
 static int	keyhandler(int keycode, t_data *data)
 {
 	if (keycode == KEY_LEFT || keycode == KEY_A)
-		move_sprite(data, SPIRIT_SIZE * -1, 0);
+		move_sprite(data, DIRCT_LEFT);
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		move_sprite(data, SPIRIT_SIZE, 0);
+		move_sprite(data, DIRCT_RIGHT);
 	if (keycode == KEY_DOWN || keycode == KEY_S)
-		move_sprite(data, 0, SPIRIT_SIZE);
+		move_sprite(data, DIRCT_DOWN);
 	if (keycode == KEY_UP || keycode == KEY_W)
-		move_sprite(data, 0, SPIRIT_SIZE * -1);
+		move_sprite(data, DIRCT_UP);
 	if (keycode == KEY_SPACE)
 		collect_object(data);
 	if (keycode == KEY_ESC)
