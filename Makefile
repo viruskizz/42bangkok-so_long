@@ -33,6 +33,7 @@ SRCS		= main.c \
 			  map.c \
 			  object.c \
 			  sprite.c \
+				animate.c \
 			  utils/img_util.c \
 			  utils/file_util.c \
 				utils/tile_util.c

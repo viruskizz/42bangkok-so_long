@@ -31,7 +31,7 @@ void	load_sprites(t_data *data)
 				s.item = 0;
 				s.moved = 0;
 				s.img.mlx = mlx_xpm_file_to_image(
-						data->mlx, SPRITE_SQUALL_PATH, &s.img.w, &s.img.h);
+						data->mlx, SPRITE_STAND_PATH, &s.img.w, &s.img.h);
 				data->sprt = s;
 				return ;
 			}

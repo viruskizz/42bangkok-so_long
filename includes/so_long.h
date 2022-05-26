@@ -29,7 +29,8 @@
 # define OBJECT_ITEM_PATH	"images/objects_64x64/elixir_small.xpm"
 # define OBJECT_GRASS_PATH	"images/objects_64x64/grass.xpm"
 # define OBJECT_EXIT_PATH	"images/objects_64x64/door.xpm"
-# define SPRITE_SQUALL_PATH	"images/sprites_64x64/lightning_stand.xpm"
+# define SPRITE_STAND_PATH	"images/sprites_64x64/cele_stand_down.xpm"
+# define SPRITE_KNEEL_PATH	"images/sprites_64x64/cele_walk_down_1.xpm"
 
 # ifdef __linux__
 #  define IS_LINUX 1
@@ -58,6 +59,14 @@
 // # define MAP_FILE	"maps/errors/no_wall.ber"
 # define MAP_FILE	"maps/simple.ber"
 // # define MAP_FILE	"maps/large.ber"
+# define ACT_STAND		0;
+# define ACT_SIT		1;
+# define ACT_WALK		2;
+
+# define DIRCT_LEFT		1
+# define DIRCT_UP		2
+# define DIRCT_RIGHT	3
+# define DIRCT_DOWN		4
 
 typedef struct s_img
 {
@@ -86,6 +95,7 @@ typedef struct s_sprt
 {
 	int		x;
 	int		y;
+	int		act;
 	int		item;
 	int		moved;
 	t_img	img;
@@ -130,6 +140,7 @@ void	error_game(t_data *data, int code, char *msg);
 void	load_map(t_data *data);
 void	validate_map(t_data *data);
 void	render_map(t_data *data);
+int		collecting_animate(t_data *data, char *act, int delay);
 t_tile	get_tile(t_data *data, int x, int y);
 void	inspect_map(t_data *data, char attr);
 

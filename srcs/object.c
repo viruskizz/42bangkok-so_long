@@ -82,8 +82,12 @@ void	collect_object(t_data *data)
 		{
 			if (obj->x == t.x && obj->y == t.y)
 			{
-				data->sprt.item++;
-				obj->img.mlx = NULL;
+				if (obj->img.mlx)
+				{
+					collecting_animate(data, "SIT", 100);
+					data->sprt.item++;
+					obj->img.mlx = NULL;
+				}
 				return ;
 			}
 			obj = obj->next;
