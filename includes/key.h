@@ -13,8 +13,9 @@
 #ifndef KEY_H
 # define KEY_H
 
-# define X_EVENT_KEY_PRESS	2
-# define X_EVENT_KEY_EXIT	17
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_KEY_EXIT		17
 # ifdef __linux__
 
 # else

@@ -82,3 +82,15 @@ void	player_moving(t_data *data)
 	if (p.face == DIRCT_DOWN)
 		data->player.v.y += 2;
 }
+
+void	player_hurting(t_data *data)
+{
+	data->player.img = set_img(data, SPRITE_HURT_PATH);
+	data->player.act = ACT_HURTING;
+	data->player.animating += 1;
+	if (data->player.animating == 20)
+	{
+		data->player.act = ACT_FALLEN;
+		data->player.animating = 0;
+	}
+}

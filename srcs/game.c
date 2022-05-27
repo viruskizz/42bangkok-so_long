@@ -63,11 +63,24 @@ void	error_game(t_data *data, int code, char *msg)
 void	chk_pos_player(t_data *data)
 {
 	t_tile	t;
+	t_sprt	p;
 
-	t = get_tile(data, data->player.v.x, data->player.v.y);
+	p = data->player;
+	t = get_tile(data, p.v.x, p.v.y);
 	if (t.type == 'E')
 	{
-		if (data->map.item == data->player.item)
+		ft_printf("This is exit\n");
+		if (data->map.item == p.item)
 			exit_game(data, EXIT_SUCCEED);
 	}
+	if (is_ovelap_tile(data->boss.v, p.v, (t_vtr){0, 0}, (t_vtr){0, 0}))
+	{
+		// ft_printf("Getting hit\n");
+		if (p.act != ACT_FALLEN && p.act != ACT_HURTING)
+		{
+			ft_printf("Getting hit\n");
+			player_hurting(data);
+		}
+	}
+
 }

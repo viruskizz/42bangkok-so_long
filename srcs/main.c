@@ -14,6 +14,7 @@
 
 static int	render(t_data *data);
 static int	keyhandler(int keycode, t_data *data);
+static int	rkeyhandler(int keycode, t_data *data);
 static int	mlx_close(int keycode, t_data *data);
 static void	initial(t_data *data, char *filename);
 
@@ -30,6 +31,7 @@ int	main(int argc, char **argv)
 	initial(&data, filename);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
+	mlx_hook(data.win, X_EVENT_KEY_RELEASE, 1L << 1, &rkeyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
 	mlx_loop(data.mlx);
 	return (0);
@@ -41,22 +43,17 @@ static void	initial(t_data *data, char *filename)
 	if (!data->mlx)
 		error_game(data, ERROR_MLX, NULL);
 	load_file(data, filename);
-	ft_printf("FILE LOADED\n");
 	validate_map(data);
 	load_map(data);
 	ft_printf("%d,%d\n", data->map.grid_x, data->map.grid_y);
-	ft_printf("MAP LOADED\n");
 	data->win = mlx_new_window(
 			data->mlx, data->map.width, data->map.height, "SO LONG");
 	if (!data->win)
 		error_game(data, ERROR_WIN, NULL);
 	load_backgrounds(data);
-	ft_printf("BG LOADED\n");
 	load_objects(data);
-	ft_printf("OBJ LOADED\n");
 	load_player(data);
 	load_boss(data);
-	ft_printf("PLY LOADED\n");
 }
 
 static int	mlx_close(int keycode, t_data *data)
@@ -95,5 +92,18 @@ static int	keyhandler(int keycode, t_data *data)
 		space_handling(data);
 	if (keycode == KEY_ESC)
 		exit_game(data, EXIT_SUCCEED);
+	return (0);
+}
+
+static int	rkeyhandler(int keycode, t_data *data)
+{
+	if (keycode == KEY_LEFT || keycode == KEY_A)
+		stand_rhandling(data);
+	if (keycode == KEY_RIGHT || keycode == KEY_D)
+		stand_rhandling(data);
+	if (keycode == KEY_DOWN || keycode == KEY_S)
+		stand_rhandling(data);
+	if (keycode == KEY_UP || keycode == KEY_W)
+		stand_rhandling(data);
 	return (0);
 }

@@ -36,6 +36,8 @@
 # define SPRITE_STAND_UP_PATH		"players/cele_stand_up.xpm"
 # define SPRITE_STAND_DOWN_PATH		"players/cele_stand_down.xpm"
 # define SPRITE_KNEEL_PATH			"players/cele_sit.xpm"
+# define SPRITE_HURT_PATH			"players/cele_hurt.xpm"
+# define SPRITE_FALLEN_PATH			"players/cele_fallen.xpm"
 # define SPRITE_WALK_LEFT1_PATH		"players/cele_walk_left_1.xpm"
 # define SPRITE_WALK_LEFT2_PATH		"players/cele_walk_left_2.xpm"
 # define SPRITE_WALK_RIGHT1_PATH	"players/cele_walk_right_1.xpm"
@@ -45,6 +47,18 @@
 # define SPRITE_WALK_DOWN1_PATH		"players/cele_walk_down_1.xpm"
 # define SPRITE_WALK_DOWN2_PATH		"players/cele_walk_down_2.xpm"
 # define BOSS_PATH					"bosses/altos.xpm"
+# define ENEMY_STAND_LEFT_PATH		"enemies/ghost_stand_left.xpm"
+# define ENEMY_STAND_RIGHT_PATH		"enemies/ghost_stand_right.xpm"
+# define ENEMY_STAND_BACK_PATH		"enemies/ghost_stand_back.xpm"
+# define ENEMY_STAND_FRONT_PATH		"enemies/ghost_stand_front.xpm"
+# define ENEMY_WALK_LEFT1_PATH		"enemies/ghost_walk_left_1.xpm"
+# define ENEMY_WALK_LEFT2_PATH		"enemies/ghost_walk_left_2.xpm"
+# define ENEMY_WALK_RIGHT1_PATH		"enemies/ghost_walk_right_1.xpm"
+# define ENEMY_WALK_RIGHT2_PATH		"enemies/ghost_walk_right_2.xpm"
+# define ENEMY_WALK_UP1_PATH		"enemies/ghost_walk_back_1.xpm"
+# define ENEMY_WALK_UP2_PATH		"enemies/ghost_walk_back_2.xpm"
+# define ENEMY_WALK_DOWN1_PATH		"enemies/ghost_walk_front_1.xpm"
+# define ENEMY_WALK_DOWN2_PATH		"enemies/ghost_walk_front_2.xpm"
 
 # ifdef __linux__
 #  define IS_LINUX 1
@@ -79,6 +93,8 @@
 # define ACT_WALK_L		21
 # define ACT_WALK_R		22
 # define ACT_COLLECTED	3
+# define ACT_HURTING	4
+# define ACT_FALLEN		9
 
 # define DIRCT_LEFT		1
 # define DIRCT_UP		2
@@ -116,6 +132,7 @@ typedef struct s_sprt
 	t_vtr	v;
 	t_vtr	nv;
 	int		act;
+	int		n_act;
 	int		face;
 	int		item;
 	int		moved;
@@ -171,9 +188,11 @@ void	player_standing(t_data *data);
 void	player_walking(t_data *data);
 void	player_collect(t_data *data);
 void	player_moving(t_data *data);
+void	player_hurting(t_data *data);
 
 void	moving_handling(t_data *data, int dirct, int dx, int dy);
 void	space_handling(t_data *data);
+void	stand_rhandling(t_data *data);
 
 void	load_boss(t_data *data);
 void	render_boss(t_data *data);
@@ -185,6 +204,7 @@ void	error_game(t_data *data, int code, char *msg);
 t_tile	get_tile(t_data *data, int x, int y);
 int		get_direction(int cur_x, int cur_y, int nxt_x, int nxt_y);
 t_img	set_img(t_data *data, char *path);
+int	is_ovelap_tile(t_vtr v1, t_vtr v2, t_vtr o1, t_vtr o2);
 void	inspect_map(t_data *data, char attr);
 
 #endif

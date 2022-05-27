@@ -17,16 +17,19 @@ static void	collect_object(t_data *data, t_tile t);
 void	moving_handling(t_data *data, int dirct, int dx, int dy)
 {
 	t_tile	nt;
+	t_vtr	nv;
 
 	if (data->player.act != ACT_STAND)
 		return ;
+
 	data->player.act = ACT_WALK;
 	data->player.face = dirct;
-	nt = get_tile(data, data->player.v.x + dx, data->player.v.y + dy);
+	nv.x = data->player.v.x + dx;
+	nv.y = data->player.v.y + dy;
+	nt = get_tile(data, nv.x, nv.y);
 	if (nt.type == '1')
-		return ;
-	data->player.nv.x = data->player.v.x + dx;
-	data->player.nv.y = data->player.v.y + dy;
+			return ;
+	data->player.nv = nv;
 	data->player.moved++;
 	ft_printf("MOVED: %d\n", data->player.moved);
 }
@@ -42,6 +45,12 @@ void	space_handling(t_data *data)
 		data->player.act = ACT_STAND;
 	if (t.type == 'C')
 		collect_object(data, t);
+}
+
+void	stand_rhandling(t_data *data)
+{
+	// ft_printf("rhandling\n");
+	data->player.n_act = ACT_STAND;
 }
 
 static void	collect_object(t_data *data, t_tile t)
