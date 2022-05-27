@@ -22,11 +22,11 @@ void	moving_handling(t_data *data, int dirct, int dx, int dy)
 		return ;
 	data->player.act = ACT_WALK;
 	data->player.face = dirct;
-	nt = get_tile(data, data->player.x + dx, data->player.y + dy);
+	nt = get_tile(data, data->player.v.x + dx, data->player.v.y + dy);
 	if (nt.type == '1')
 		return ;
-	data->player.nx = data->player.x + dx;
-	data->player.ny = data->player.y + dy;
+	data->player.nv.x = data->player.v.x + dx;
+	data->player.nv.y = data->player.v.y + dy;
 	data->player.moved++;
 	ft_printf("MOVED: %d\n", data->player.moved);
 }
@@ -35,7 +35,7 @@ void	space_handling(t_data *data)
 {
 	t_tile	t;
 
-	t = get_tile(data, data->player.x, data->player.y);
+	t = get_tile(data, data->player.v.x, data->player.v.y);
 	if (data->player.act == ACT_STAND)
 		data->player.act = ACT_SIT;
 	else if (data->player.act == ACT_SIT)
@@ -51,7 +51,7 @@ static void	collect_object(t_data *data, t_tile t)
 	obj = data->objs;
 	while (obj)
 	{
-		if (obj->x == t.x && obj->y == t.y)
+		if (obj->v.x == t.v.x && obj->v.y == t.v.y)
 		{
 			if (obj->img.mlx)
 			{

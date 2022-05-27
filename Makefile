@@ -35,6 +35,7 @@ SRCS		= main.c \
 			  object.c \
 			  player.c \
 			  player_mov.c \
+				boss.c \
 				handling.c \
 			  utils/img_util.c \
 				utils/dirct_util.c \

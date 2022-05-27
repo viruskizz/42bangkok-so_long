@@ -16,10 +16,10 @@ static t_sprt	initial_player(t_data *data, int gx, int gy)
 {
 	t_sprt	p;
 
-	p.x = gx * TILE_SIZE;
-	p.y = gy * TILE_SIZE;
-	p.nx = p.x;
-	p.ny = p.y;
+	p.v.x = gx * TILE_SIZE;
+	p.v.y = gy * TILE_SIZE;
+	p.nv.x = p.v.x;
+	p.nv.y = p.v.y;
 	p.animating = 0;
 	p.act = ACT_STAND;
 	p.face = DIRCT_DOWN;
@@ -69,5 +69,5 @@ void	render_player(t_data *data)
 	if (p.act == ACT_COLLECTED)
 		player_collect(data);
 	mlx_put_image_to_window(
-		data->mlx, data->win, data->player.img.mlx, data->player.x, data->player.y);
+		data->mlx, data->win, data->player.img.mlx, data->player.v.x, data->player.v.y);
 }

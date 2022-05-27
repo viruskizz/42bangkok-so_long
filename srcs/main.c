@@ -55,6 +55,7 @@ static void	initial(t_data *data, char *filename)
 	load_objects(data);
 	ft_printf("OBJ LOADED\n");
 	load_player(data);
+	load_boss(data);
 	ft_printf("PLY LOADED\n");
 }
 
@@ -71,6 +72,8 @@ static int	render(t_data *data)
 	render_map(data);
 	render_objects(data);
 	render_player(data);
+	render_boss(data);
+	chk_pos_player(data);
 	// mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");
 	return (0);
 }

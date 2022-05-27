@@ -82,6 +82,8 @@ static void	init_map_data(t_data *data, char *file)
 		data->map.item = 0;
 		data->map.exit = 0;
 		data->map.player = 0;
+		data->map.boss = 1;
+		data->map.enemy = 1;
 	}
 	else
 	{

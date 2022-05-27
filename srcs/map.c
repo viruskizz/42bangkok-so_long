@@ -20,8 +20,8 @@ static t_tile	new_tile(t_data *data, char type, int x, int y)
 	t_img	img;
 
 	tile.type = type;
-	tile.x = x;
-	tile.y = y;
+	tile.v.x = x;
+	tile.v.y = y;
 	if (type == '1')
 		img = set_img(data, OBJECT_WALL_PATH);
 	else if (type == 'E')
@@ -72,7 +72,7 @@ void	render_map(t_data *data)
 			t = data->map.tiles[gy][gx];
 			if (t.img.mlx)
 				mlx_put_image_to_window(
-					data->mlx, data->win, t.img.mlx, t.x, t.y);
+					data->mlx, data->win, t.img.mlx, t.v.x, t.v.y);
 			gx++;
 		}
 		gy++;

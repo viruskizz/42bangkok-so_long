@@ -44,6 +44,7 @@
 # define SPRITE_WALK_UP2_PATH		"players/cele_walk_up_2.xpm"
 # define SPRITE_WALK_DOWN1_PATH		"players/cele_walk_down_1.xpm"
 # define SPRITE_WALK_DOWN2_PATH		"players/cele_walk_down_2.xpm"
+# define BOSS_PATH					"bosses/altos.xpm"
 
 # ifdef __linux__
 #  define IS_LINUX 1
@@ -84,6 +85,12 @@
 # define DIRCT_RIGHT	3
 # define DIRCT_DOWN		4
 
+typedef struct s_vtr
+{
+	int		x;
+	int		y;
+} t_vtr;
+
 typedef struct s_img
 {
 	void	*mlx;
@@ -94,30 +101,23 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
-	int		x;
-	int		y;
 }	t_img;
 
 typedef struct s_tile
 {
 	char			type;
-	int				x;
-	int				y;
+	t_vtr			v;
 	t_img			img;
 	struct s_tile	*next;
 }	t_tile;
 
 typedef struct s_sprt
 {
-	int		x;
-	int		y;
-	int		nx;
-	int		ny;
+	t_vtr	v;
+	t_vtr	nv;
 	int		act;
 	int		face;
 	int		item;
-	int		boss;
-	int		enemy;
 	int		moved;
 	unsigned int	animating;
 	t_img	img;
@@ -133,6 +133,8 @@ typedef struct s_map
 	int		item;
 	int		exit;
 	int		player;
+	int		boss;
+	int		enemy;
 	t_tile	**tiles;
 }	t_map;
 
@@ -173,7 +175,8 @@ void	player_moving(t_data *data);
 void	moving_handling(t_data *data, int dirct, int dx, int dy);
 void	space_handling(t_data *data);
 
-void	load_boss(t_data);
+void	load_boss(t_data *data);
+void	render_boss(t_data *data);
 
 void	chk_pos_player(t_data *data);
 void	exit_game(t_data *data, int code);

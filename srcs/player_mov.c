@@ -35,19 +35,19 @@ void	player_walking(t_data *data)
 	t_sprt	p;
 
 	p = data->player;
-	if (p.face == DIRCT_LEFT && p.x % 32 < 16)
+	if (p.face == DIRCT_LEFT && p.v.x % 32 < 16)
 		data->player.img = set_img(data, SPRITE_WALK_LEFT1_PATH);
 	else if (p.face == DIRCT_LEFT)
 		data->player.img = set_img(data, SPRITE_WALK_LEFT2_PATH);
-	else if (p.face == DIRCT_RIGHT && p.x % 32 < 16)
+	else if (p.face == DIRCT_RIGHT && p.v.x % 32 < 16)
 		data->player.img = set_img(data, SPRITE_WALK_RIGHT1_PATH);
 	else if (p.face == DIRCT_RIGHT)
 		data->player.img = set_img(data, SPRITE_WALK_RIGHT2_PATH);
-	else if (p.face == DIRCT_UP && p.y % 32 < 16)
+	else if (p.face == DIRCT_UP && p.v.y % 32 < 16)
 		data->player.img = set_img(data, SPRITE_WALK_UP1_PATH);
 	else if (p.face == DIRCT_UP)
 		data->player.img = set_img(data, SPRITE_WALK_UP2_PATH);
-	else if (p.face == DIRCT_DOWN && p.y % 32 < 16)
+	else if (p.face == DIRCT_DOWN && p.v.y % 32 < 16)
 		data->player.img = set_img(data, SPRITE_WALK_DOWN1_PATH);
 	else if (p.face == DIRCT_DOWN)
 		data->player.img = set_img(data, SPRITE_WALK_DOWN2_PATH);
@@ -69,16 +69,16 @@ void	player_moving(t_data *data)
 	t_sprt	p;
 
 	p = data->player;
-	if (p.x == p.nx && p.y == p.ny)
+	if (p.v.x == p.nv.x && p.v.y == p.nv.y)
 		player_standing(data);
 	if (data->player.act != ACT_WALK)
 		return ;
 	if (p.face == DIRCT_LEFT)
-		data->player.x -= 2;
+		data->player.v.x -= 2;
 	if (p.face == DIRCT_RIGHT)
-		data->player.x += 2;
+		data->player.v.x += 2;
 	if (p.face == DIRCT_UP)
-		data->player.y -= 2;
+		data->player.v.y -= 2;
 	if (p.face == DIRCT_DOWN)
-		data->player.y += 2;
+		data->player.v.y += 2;
 }

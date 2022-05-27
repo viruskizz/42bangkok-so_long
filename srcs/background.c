@@ -7,8 +7,8 @@ t_tile	*new_bg(t_data *data, int x, int y)
 	t = malloc(sizeof(t_tile));
 	if (!t)
 		exit(1);
-	t->x = x;
-	t->y = y;
+	t->v.x = x;
+	t->v.y = y;
 	t->type = '0';
 	t->img = set_img(data, OBJECT_GRASS_PATH);
 	t->next = NULL;
@@ -51,7 +51,7 @@ void	render_backgrounds(t_data *data)
 	{
 		if (bg->img.mlx)
 			mlx_put_image_to_window(
-				data->mlx, data->win, bg->img.mlx, bg->x, bg->y);
+				data->mlx, data->win, bg->img.mlx, bg->v.x, bg->v.y);
 		bg = bg->next;
 	}
 }

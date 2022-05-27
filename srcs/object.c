@@ -18,8 +18,8 @@ static t_tile	*new_obj(t_data *data, int x, int y)
 
 	obj = malloc(sizeof(t_tile));
 	obj->type = 'C';
-	obj->x = x;
-	obj->y = y;
+	obj->v.x = x;
+	obj->v.y = y;
 	obj->img = set_img(data, OBJECT_ITEM_PATH);
 	obj->next = NULL;
 	return (obj);
@@ -63,7 +63,7 @@ void	render_objects(t_data *data)
 	{
 		if (obj->img.mlx)
 			mlx_put_image_to_window(
-				data->mlx, data->win, obj->img.mlx, obj->x, obj->y);
+				data->mlx, data->win, obj->img.mlx, obj->v.x, obj->v.y);
 		obj = obj->next;
 	}
 }

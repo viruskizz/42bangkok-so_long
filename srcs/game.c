@@ -64,7 +64,7 @@ void	chk_pos_player(t_data *data)
 {
 	t_tile	t;
 
-	t = get_tile(data, data->player.x, data->player.y);
+	t = get_tile(data, data->player.v.x, data->player.v.y);
 	if (t.type == 'E')
 	{
 		if (data->map.item == data->player.item)
