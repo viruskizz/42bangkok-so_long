@@ -27,23 +27,23 @@
 # define ERROR_FILE_TYPE	11
 # define ERROR_MAP_INVALID	20
 
-# define OBJECT_WALL_PATH			"images/objects_64x64/wall.xpm"
-# define OBJECT_ITEM_PATH			"images/objects_64x64/elixir_small.xpm"
-# define OBJECT_GRASS_PATH			"images/objects_64x64/grass.xpm"
-# define OBJECT_EXIT_PATH			"images/objects_64x64/door.xpm"
-# define SPRITE_STAND_LEFT_PATH		"images/sprites_64x64/cele_stand_left.xpm"
-# define SPRITE_STAND_RIGHT_PATH	"images/sprites_64x64/cele_stand_right.xpm"
-# define SPRITE_STAND_UP_PATH		"images/sprites_64x64/cele_stand_up.xpm"
-# define SPRITE_STAND_DOWN_PATH		"images/sprites_64x64/cele_stand_down.xpm"
-# define SPRITE_KNEEL_PATH			"images/sprites_64x64/cele_sit.xpm"
-# define SPRITE_WALK_LEFT1_PATH		"images/sprites_64x64/cele_walk_left_1.xpm"
-# define SPRITE_WALK_LEFT2_PATH		"images/sprites_64x64/cele_walk_left_2.xpm"
-# define SPRITE_WALK_RIGHT1_PATH	"images/sprites_64x64/cele_walk_right_1.xpm"
-# define SPRITE_WALK_RIGHT2_PATH	"images/sprites_64x64/cele_walk_right_2.xpm"
-# define SPRITE_WALK_UP1_PATH		"images/sprites_64x64/cele_walk_up_1.xpm"
-# define SPRITE_WALK_UP2_PATH		"images/sprites_64x64/cele_walk_up_2.xpm"
-# define SPRITE_WALK_DOWN1_PATH		"images/sprites_64x64/cele_walk_down_1.xpm"
-# define SPRITE_WALK_DOWN2_PATH		"images/sprites_64x64/cele_walk_down_2.xpm"
+# define OBJECT_WALL_PATH			"objects/wall.xpm"
+# define OBJECT_ITEM_PATH			"objects/elixir_small.xpm"
+# define OBJECT_GRASS_PATH			"objects/grass.xpm"
+# define OBJECT_EXIT_PATH			"objects/door.xpm"
+# define SPRITE_STAND_LEFT_PATH		"players/cele_stand_left.xpm"
+# define SPRITE_STAND_RIGHT_PATH	"players/cele_stand_right.xpm"
+# define SPRITE_STAND_UP_PATH		"players/cele_stand_up.xpm"
+# define SPRITE_STAND_DOWN_PATH		"players/cele_stand_down.xpm"
+# define SPRITE_KNEEL_PATH			"players/cele_sit.xpm"
+# define SPRITE_WALK_LEFT1_PATH		"players/cele_walk_left_1.xpm"
+# define SPRITE_WALK_LEFT2_PATH		"players/cele_walk_left_2.xpm"
+# define SPRITE_WALK_RIGHT1_PATH	"players/cele_walk_right_1.xpm"
+# define SPRITE_WALK_RIGHT2_PATH	"players/cele_walk_right_2.xpm"
+# define SPRITE_WALK_UP1_PATH		"players/cele_walk_up_1.xpm"
+# define SPRITE_WALK_UP2_PATH		"players/cele_walk_up_2.xpm"
+# define SPRITE_WALK_DOWN1_PATH		"players/cele_walk_down_1.xpm"
+# define SPRITE_WALK_DOWN2_PATH		"players/cele_walk_down_2.xpm"
 
 # ifdef __linux__
 #  define IS_LINUX 1
@@ -130,7 +130,7 @@ typedef struct s_map
 	int		tile_y;
 	int		item;
 	int		exit;
-	int		sprt;
+	int		player;
 	t_tile	**tiles;
 }	t_map;
 
@@ -140,30 +140,40 @@ typedef struct s_data
 	void	*win;
 	int		render;
 	t_tile	*bg;
-	t_sprt	sprt;
+	t_sprt	player;
+	t_sprt	emenies;
 	t_tile	*objs;
 	t_map	map;
 }	t_data;
 
 void	load_file(t_data *data, char *filename);
-void	load_background(t_data *data);
-void	render_background(t_data *data);
-void	load_objects(t_data *data);
-void	render_object(t_data *data);
-void	move_sprite(t_data *data, int dirct, int dx, int dy);
-void	sit_sprite(t_data *data);
-void	load_sprites(t_data *data);
-void	render_sprite(t_data *data);
-void	chk_pos_sprite(t_data *data);
-void	exit_game(t_data *data, int code);
-void	error_game(t_data *data, int code, char *msg);
+void	load_backgrounds(t_data *data);
+void	render_backgrounds(t_data *data);
+void	free_backgrounds(t_data *data);
+
 void	load_map(t_data *data);
 void	validate_map(t_data *data);
 void	render_map(t_data *data);
-void	sprt_standing(t_data *data);
-void	sprt_walking(t_data *data);
-void	sprt_collect(t_data *data);
-void	sprt_moving(t_data *data);
+
+void	load_objects(t_data *data);
+void	render_objects(t_data *data);
+void	free_objects(t_data *data);
+
+void	load_player(t_data *data);
+void	render_player(t_data *data);
+
+void	player_standing(t_data *data);
+void	player_walking(t_data *data);
+void	player_collect(t_data *data);
+void	player_moving(t_data *data);
+
+void	moving_handling(t_data *data, int dirct, int dx, int dy);
+void	space_handling(t_data *data);
+
+void	chk_pos_player(t_data *data);
+void	exit_game(t_data *data, int code);
+void	error_game(t_data *data, int code, char *msg);
+
 t_tile	get_tile(t_data *data, int x, int y);
 int		get_direction(int cur_x, int cur_y, int nxt_x, int nxt_y);
 t_img	set_img(t_data *data, char *path);

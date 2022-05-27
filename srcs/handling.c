@@ -14,33 +14,32 @@
 
 static void	collect_object(t_data *data, t_tile t);
 
-void	move_sprite(t_data *data, int dirct, int dx, int dy)
+void	moving_handling(t_data *data, int dirct, int dx, int dy)
 {
 	t_tile	nt;
 
-	if (data->sprt.act != ACT_STAND)
+	if (data->player.act != ACT_STAND)
 		return ;
-	data->sprt.act = ACT_WALK;
-	data->sprt.face = dirct;
-	nt = get_tile(data, data->sprt.x + dx, data->sprt.y + dy);
+	data->player.act = ACT_WALK;
+	data->player.face = dirct;
+	nt = get_tile(data, data->player.x + dx, data->player.y + dy);
 	if (nt.type == '1')
 		return ;
-	data->sprt.nx = data->sprt.x + dx;
-	data->sprt.ny = data->sprt.y + dy;
-	data->sprt.moved++;
-	ft_printf("MOVED: %d\n", data->sprt.moved);
-	chk_pos_sprite(data);
+	data->player.nx = data->player.x + dx;
+	data->player.ny = data->player.y + dy;
+	data->player.moved++;
+	ft_printf("MOVED: %d\n", data->player.moved);
 }
 
-void	sit_sprite(t_data *data)
+void	space_handling(t_data *data)
 {
 	t_tile	t;
 
-	t = get_tile(data, data->sprt.x, data->sprt.y);
-	if (data->sprt.act == ACT_STAND)
-		data->sprt.act = ACT_SIT;
-	else if (data->sprt.act == ACT_SIT)
-		data->sprt.act = ACT_STAND;
+	t = get_tile(data, data->player.x, data->player.y);
+	if (data->player.act == ACT_STAND)
+		data->player.act = ACT_SIT;
+	else if (data->player.act == ACT_SIT)
+		data->player.act = ACT_STAND;
 	if (t.type == 'C')
 		collect_object(data, t);
 }
@@ -58,8 +57,8 @@ static void	collect_object(t_data *data, t_tile t)
 			{
 				mlx_destroy_image(data->mlx, obj->img.mlx);
 				obj->img.mlx = NULL;
-				data->sprt.act = ACT_COLLECTED;
-				data->sprt.item++;
+				data->player.act = ACT_COLLECTED;
+				data->player.item++;
 			}
 			return ;
 		}

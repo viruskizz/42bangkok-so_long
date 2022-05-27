@@ -14,7 +14,9 @@
 
 void	exit_game(t_data *data, int code)
 {
-	ft_printf("EXIT\n");
+	ft_printf("Exit Game\n");
+	free_backgrounds(data);
+	free_objects(data);
 	// mlx_destroy_image(data->mlx_ptr, data->background.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->objects.walls.mlx_img);
 	// mlx_destroy_image(data->mlx, data->sprt.img.mlx);
@@ -58,14 +60,14 @@ void	error_game(t_data *data, int code, char *msg)
 	exit(1);
 }
 
-void	chk_pos_sprite(t_data *data)
+void	chk_pos_player(t_data *data)
 {
 	t_tile	t;
 
-	t = get_tile(data, data->sprt.x, data->sprt.y);
+	t = get_tile(data, data->player.x, data->player.y);
 	if (t.type == 'E')
 	{
-		if (data->map.item == data->sprt.item)
+		if (data->map.item == data->player.item)
 			exit_game(data, EXIT_SUCCEED);
 	}
 }

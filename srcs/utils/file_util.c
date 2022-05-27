@@ -77,7 +77,7 @@ void	init_map_data(t_data *data, char *file)
 		data->map.tile_y = 0;
 		data->map.item = 0;
 		data->map.exit = 0;
-		data->map.sprt = 0;
+		data->map.player = 0;
 	}
 	else
 	{
@@ -106,7 +106,7 @@ void	load_file(t_data *data, char *filename)
 			else if (file[i] == 'E')
 				data->map.exit++;
 			else if (file[i] == 'P')
-				data->map.sprt++;
+				data->map.player++;
 			i++;
 		}
 		data->map.tile_y++;

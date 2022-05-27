@@ -23,11 +23,9 @@ static t_tile	new_tile(t_data *data, char type, int x, int y)
 	tile.x = x;
 	tile.y = y;
 	if (type == '1')
-		img.mlx = mlx_xpm_file_to_image(
-				data->mlx, OBJECT_WALL_PATH, &img.w, &img.h);
+		img = set_img(data, OBJECT_WALL_PATH);
 	else if (type == 'E')
-		img.mlx = mlx_xpm_file_to_image(
-				data->mlx, OBJECT_EXIT_PATH, &img.w, &img.h);
+		img = set_img(data, OBJECT_EXIT_PATH);
 	else
 		img.mlx = NULL;
 	tile.img = img;
@@ -90,7 +88,7 @@ void	validate_map(t_data *data)
 		error_game(data, ERROR_MAP_INVALID, "map is small.");
 	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y + m.tile_y - 1)
 		error_game(data, ERROR_MAP_INVALID, "map is not rect.");
-	if (m.item == 0 || m.sprt == 0 || m.exit != 1)
+	if (m.item == 0 || m.player == 0 || m.exit != 1)
 		error_game(data, ERROR_MAP_INVALID, "map not meet minimun requirement");
 	if (valid_wall(data->map) == 0)
 		error_game(data, ERROR_MAP_INVALID, "map not covered with wall.");

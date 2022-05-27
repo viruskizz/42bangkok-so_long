@@ -30,11 +30,12 @@ BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= main.c \
 			  game.c \
+				background.c \
 			  map.c \
 			  object.c \
-			  sprite.c \
-			  sprite_animate.c \
-				key_handling.c \
+			  player.c \
+			  player_mov.c \
+				handling.c \
 			  utils/img_util.c \
 				utils/dirct_util.c \
 			  utils/file_util.c \

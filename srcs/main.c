@@ -47,23 +47,24 @@ static void	initial(t_data *data, char *filename)
 			data->mlx, data->map.width, data->map.height, "SO LONG");
 	if (!data->win)
 		error_game(data, ERROR_WIN, NULL);
-	load_background(data);
-	load_sprites(data);
+	load_backgrounds(data);
 	load_objects(data);
+	load_player(data);
 }
 
 static int	mlx_close(int keycode, t_data *data)
 {
-	exit_game(data, EXIT_SUCCEED);
+	ft_printf("Close Game\n");
+	exit(0);
 	return (0);
 }
 
 static int	render(t_data *data)
 {
-	render_background(data);
+	render_backgrounds(data);
 	render_map(data);
-	render_object(data);
-	render_sprite(data);
+	render_objects(data);
+	render_player(data);
 	// mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");
 	return (0);
 }
@@ -74,15 +75,15 @@ static int	keyhandler(int keycode, t_data *data)
 
 	m = TILE_SIZE;
 	if (keycode == KEY_LEFT || keycode == KEY_A)
-		move_sprite(data, DIRCT_LEFT, m * -1, 0);
+		moving_handling(data, DIRCT_LEFT, m * -1, 0);
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		move_sprite(data, DIRCT_RIGHT, m, 0);
+		moving_handling(data, DIRCT_RIGHT, m, 0);
 	if (keycode == KEY_DOWN || keycode == KEY_S)
-		move_sprite(data, DIRCT_DOWN, 0, m);
+		moving_handling(data, DIRCT_DOWN, 0, m);
 	if (keycode == KEY_UP || keycode == KEY_W)
-		move_sprite(data, DIRCT_UP, 0, m * -1);
+		moving_handling(data, DIRCT_UP, 0, m * -1);
 	if (keycode == KEY_SPACE)
-		sit_sprite(data);
+		space_handling(data);
 	if (keycode == KEY_ESC)
 		exit_game(data, EXIT_SUCCEED);
 	return (0);
