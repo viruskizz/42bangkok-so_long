@@ -73,8 +73,8 @@ void	init_map_data(t_data *data, char *file)
 {
 	if (!file)
 	{
-		data->map.tile_x = 0;
-		data->map.tile_y = 0;
+		data->map.grid_x = 0;
+		data->map.grid_y = 0;
 		data->map.item = 0;
 		data->map.exit = 0;
 		data->map.player = 0;
@@ -82,8 +82,8 @@ void	init_map_data(t_data *data, char *file)
 	else
 	{
 		data->map.filedata = file;
-		data->map.width = data->map.tile_x * TILE_SIZE;
-		data->map.height = data->map.tile_y * TILE_SIZE;
+		data->map.width = data->map.grid_x * TILE_SIZE;
+		data->map.height = data->map.grid_y * TILE_SIZE;
 	}
 }
 
@@ -99,8 +99,8 @@ void	load_file(t_data *data, char *filename)
 	{
 		while (file[i] != '\0' && file[i] != '\n')
 		{
-			if (data->map.tile_y == 0)
-				data->map.tile_x++;
+			if (data->map.grid_y == 0)
+				data->map.grid_x++;
 			if (file[i] == 'C')
 				data->map.item++;
 			else if (file[i] == 'E')
@@ -109,7 +109,7 @@ void	load_file(t_data *data, char *filename)
 				data->map.player++;
 			i++;
 		}
-		data->map.tile_y++;
+		data->map.grid_y++;
 		i++;
 	}
 	init_map_data(data, file);

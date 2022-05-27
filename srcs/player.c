@@ -31,24 +31,24 @@ static t_sprt	initial_player(t_data *data, int gx, int gy)
 
 void	load_player(t_data *data)
 {
-	int		i;
-	int		j;
+	int		gx;
+	int		gy;
 	t_sprt	p;
 
-	i = 0;
-	while (i < data->map.tile_y)
+	gy = 0;
+	while (gy < data->map.grid_y)
 	{
-		j = 0;
-		while (j < data->map.tile_x)
+		gx = 0;
+		while (gx < data->map.grid_x)
 		{
-			if (data->map.tiles[i][j].type == 'P')
+			if (data->map.tiles[gy][gx].type == 'P')
 			{
-				data->player = initial_player(data, j, i);
+				data->player = initial_player(data, gx, gy);
 				return ;
 			}
-			j++;
+			gx++;
 		}
-		i++;
+		gy++;
 	}
 }
 

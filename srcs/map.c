@@ -35,47 +35,47 @@ static t_tile	new_tile(t_data *data, char type, int x, int y)
 void	load_map(t_data *data)
 {
 	char	*str;
-	int		i;
-	int		j;
+	int		gx;
+	int		gy;
 
-	data->map.tiles = malloc(sizeof(t_tile *) * data->map.tile_y);
-	i = 0;
+	data->map.tiles = malloc(sizeof(t_tile *) * data->map.grid_y);
+	gy = 0;
 	str = data->map.filedata;
 	while (*str)
 	{
-		j = 0;
-		data->map.tiles[i] = malloc(sizeof(t_tile) * data->map.tile_x);
+		gx = 0;
+		data->map.tiles[gy] = malloc(sizeof(t_tile) * data->map.grid_x);
 		while (*str != '\n' && *str)
 		{
-			data->map.tiles[i][j] = new_tile(
-					data, *str, j * TILE_SIZE, i * TILE_SIZE);
-			j++;
+			data->map.tiles[gy][gx] = new_tile(
+					data, *str, gx * TILE_SIZE, gy * TILE_SIZE);
+			gx++;
 			str++;
 		}
 		str++;
-		i++;
+		gy++;
 	}
 }
 
 void	render_map(t_data *data)
 {
-	int		i;
-	int		j;
+	int		gx;
+	int		gy;
 	t_tile	t;
 
-	i = 0;
-	while (i < data->map.tile_y)
+	gy = 0;
+	while (gy < data->map.grid_y)
 	{
-		j = 0;
-		while (j < data->map.tile_x)
+		gx = 0;
+		while (gx < data->map.grid_x)
 		{
-			t = data->map.tiles[i][j];
+			t = data->map.tiles[gy][gx];
 			if (t.img.mlx)
 				mlx_put_image_to_window(
 					data->mlx, data->win, t.img.mlx, t.x, t.y);
-			j++;
+			gx++;
 		}
-		i++;
+		gy++;
 	}
 }
 
@@ -84,9 +84,9 @@ void	validate_map(t_data *data)
 	t_map	m;
 
 	m = data->map;
-	if (m.tile_x * m.tile_y < 4 * 4)
+	if (m.grid_x * m.grid_y < 4 * 4)
 		error_game(data, ERROR_MAP_INVALID, "map is small.");
-	if (ft_strlen(m.filedata) != m.tile_x * m.tile_y + m.tile_y - 1)
+	if (ft_strlen(m.filedata) != m.grid_x * m.grid_y + m.grid_y - 1)
 		error_game(data, ERROR_MAP_INVALID, "map is not rect.");
 	if (m.item == 0 || m.player == 0 || m.exit != 1)
 		error_game(data, ERROR_MAP_INVALID, "map not meet minimun requirement");
@@ -110,9 +110,9 @@ static int	valid_wall(t_map map)
 		x = 0;
 		while (f[i] && f[i] != '\n')
 		{
-			if ((x == 0 || x == map.tile_x - 1) && f[i] != '1')
+			if ((x == 0 || x == map.grid_x - 1) && f[i] != '1')
 				return (0);
-			if ((y == 0 || y == map.tile_y -1) && f[i] != '1')
+			if ((y == 0 || y == map.grid_y -1) && f[i] != '1')
 				return (0);
 			i++;
 			x++;

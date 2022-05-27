@@ -41,15 +41,21 @@ static void	initial(t_data *data, char *filename)
 	if (!data->mlx)
 		error_game(data, ERROR_MLX, NULL);
 	load_file(data, filename);
+	ft_printf("FILE LOADED\n");
 	validate_map(data);
 	load_map(data);
+	ft_printf("%d,%d\n", data->map.grid_x, data->map.grid_y);
+	ft_printf("MAP LOADED\n");
 	data->win = mlx_new_window(
 			data->mlx, data->map.width, data->map.height, "SO LONG");
 	if (!data->win)
 		error_game(data, ERROR_WIN, NULL);
 	load_backgrounds(data);
+	ft_printf("BG LOADED\n");
 	load_objects(data);
+	ft_printf("OBJ LOADED\n");
 	load_player(data);
+	ft_printf("PLY LOADED\n");
 }
 
 static int	mlx_close(int keycode, t_data *data)

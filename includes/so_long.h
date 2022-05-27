@@ -126,8 +126,8 @@ typedef struct s_map
 	char	*filedata;
 	int		width;
 	int		height;
-	int		tile_x;
-	int		tile_y;
+	int		grid_x;
+	int		grid_y;
 	int		item;
 	int		exit;
 	int		player;
@@ -141,6 +141,7 @@ typedef struct s_data
 	int		render;
 	t_tile	*bg;
 	t_sprt	player;
+	t_sprt	boss;
 	t_sprt	emenies;
 	t_tile	*objs;
 	t_map	map;
@@ -169,6 +170,8 @@ void	player_moving(t_data *data);
 
 void	moving_handling(t_data *data, int dirct, int dx, int dy);
 void	space_handling(t_data *data);
+
+void	load_boss(t_data);
 
 void	chk_pos_player(t_data *data);
 void	exit_game(t_data *data, int code);

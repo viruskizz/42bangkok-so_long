@@ -27,30 +27,30 @@ static t_tile	*new_obj(t_data *data, int x, int y)
 
 void	load_objects(t_data *data)
 {
-	int		i;
-	int		j;
+	int		gx;
+	int		gy;
 	t_tile	*obj;
 	t_tile	*tmp;
 
-	i = 0;
+	gy = 0;
 	data->objs = NULL;
-	while (i < data->map.tile_y)
+	while (gy < data->map.grid_y)
 	{
-		j = 0;
-		while (j < data->map.tile_x)
+		gx = 0;
+		while (gx < data->map.grid_x)
 		{
-			if (data->map.tiles[i][j].type == 'C')
+			if (data->map.tiles[gy][gx].type == 'C')
 			{
-				obj = new_obj(data, j * TILE_SIZE, i * TILE_SIZE);
+				obj = new_obj(data, gx * TILE_SIZE, gy * TILE_SIZE);
 				if (data->objs)
 					tmp->next = obj;
 				else
 					data->objs = obj;
 				tmp = obj;
 			}
-			j++;
+			gx++;
 		}
-		i++;
+		gy++;
 	}
 }
 
