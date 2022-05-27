@@ -14,33 +14,37 @@
 #include <fcntl.h>
 #include "so_long.h"
 
-static int	valid_file_ext(t_data *data, char *filename)
+static char	*read_file(t_data *data, char *filename);
+static void	init_map_data(t_data *data, char *file);
+static int	valid_file_ext(t_data *data, char *filename);
+static char	*ft_str_concat(char *dest, char *src);
+
+void	load_file(t_data *data, char *filename)
 {
-	int		len;
-	char	*ext;
+	int		i;
+	char	*file;
 
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (0);
-	ext = filename + (len - 4);
-	return (!ft_strncmp(".ber", ext, 4));
-}
-
-static char	*ft_str_concat(char *dest, char *src)
-{
-	int	i;
-
+	file = read_file(data, filename);
 	i = 0;
-	while (*(dest + i))
-		i++;
-	while (*src)
+	init_map_data(data, NULL);
+	while (file[i])
 	{
-		*(dest + i) = *src;
+		while (file[i] != '\0' && file[i] != '\n')
+		{
+			if (data->map.grid_y == 0)
+				data->map.grid_x++;
+			if (file[i] == 'C')
+				data->map.item++;
+			else if (file[i] == 'E')
+				data->map.exit++;
+			else if (file[i] == 'P')
+				data->map.player++;
+			i++;
+		}
+		data->map.grid_y++;
 		i++;
-		src++;
 	}
-	*(dest + i) = '\0';
-	return (dest);
+	init_map_data(data, file);
 }
 
 static char	*read_file(t_data *data, char *filename)
@@ -69,7 +73,7 @@ static char	*read_file(t_data *data, char *filename)
 	return (file);
 }
 
-void	init_map_data(t_data *data, char *file)
+static void	init_map_data(t_data *data, char *file)
 {
 	if (!file)
 	{
@@ -87,30 +91,31 @@ void	init_map_data(t_data *data, char *file)
 	}
 }
 
-void	load_file(t_data *data, char *filename)
+static int	valid_file_ext(t_data *data, char *filename)
 {
-	int		i;
-	char	*file;
+	int		len;
+	char	*ext;
 
-	file = read_file(data, filename);
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	ext = filename + (len - 4);
+	return (!ft_strncmp(".ber", ext, 4));
+}
+
+static char	*ft_str_concat(char *dest, char *src)
+{
+	int	i;
+
 	i = 0;
-	init_map_data(data, NULL);
-	while (file[i])
-	{
-		while (file[i] != '\0' && file[i] != '\n')
-		{
-			if (data->map.grid_y == 0)
-				data->map.grid_x++;
-			if (file[i] == 'C')
-				data->map.item++;
-			else if (file[i] == 'E')
-				data->map.exit++;
-			else if (file[i] == 'P')
-				data->map.player++;
-			i++;
-		}
-		data->map.grid_y++;
+	while (*(dest + i))
 		i++;
+	while (*src)
+	{
+		*(dest + i) = *src;
+		i++;
+		src++;
 	}
-	init_map_data(data, file);
+	*(dest + i) = '\0';
+	return (dest);
 }

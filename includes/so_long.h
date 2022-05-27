@@ -116,6 +116,8 @@ typedef struct s_sprt
 	int		act;
 	int		face;
 	int		item;
+	int		boss;
+	int		enemy;
 	int		moved;
 	unsigned int	animating;
 	t_img	img;
