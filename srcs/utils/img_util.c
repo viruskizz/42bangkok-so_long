@@ -12,64 +12,41 @@
 
 #include "so_long.h"
 
-t_tile	*new_bg(t_data *data, int x, int y)
+t_img	set_img(t_data *data, char *path)
 {
-	t_tile	*t;
+	t_img	img;
+	void	*mlx;
+	char	*dir;
+	char	*fpath;
 
-	t = malloc(sizeof(t_tile));
-	if (!t)
-		exit(1);
-	t->x = x;
-	t->y = y;
-	t->type = '0';
-	t->img.mlx = mlx_xpm_file_to_image(
-			data->mlx, OBJECT_GRASS_PATH, &t->img.w, &t->img.h);
-	t->next = NULL;
-	return (t);
+	dir = "images/sprites_64x64/";
+	fpath = ft_strjoin(dir, path);
+	img.mlx = mlx_xpm_file_to_image(data->mlx, fpath, &img.w, &img.h);
+	free(fpath);
+	return (img);
 }
 
-void	load_background(t_data *data)
+t_img	get_number_img(t_data *data, char c)
 {
-	int		x;
-	int		y;
-	t_tile	*bg;
-	t_tile	*tmp;
-
-	x = 0;
-	y = 0;
-	data->bg = NULL;
-	while (y < data->map.height)
-	{
-		x = 0;
-		while (x < data->map.width)
-		{
-			bg = new_bg(data, x, y);
-			if (data->bg)
-				tmp->next = bg;
-			else
-				data->bg = bg;
-			tmp = bg;
-			x += TILE_SIZE;
-		}
-		y += TILE_SIZE;
-	}
+	if (c == '0')
+		return (set_img(data, "numbers/0.xpm"));
+	if (c == '1')
+		return (set_img(data, "numbers/1.xpm"));
+	if (c == '2')
+		return (set_img(data, "numbers/2.xpm"));
+	if (c == '3')
+		return (set_img(data, "numbers/3.xpm"));
+	if (c == '4')
+		return (set_img(data, "numbers/4.xpm"));
+	if (c == '5')
+		return (set_img(data, "numbers/5.xpm"));
+	if (c == '6')
+		return (set_img(data, "numbers/6.xpm"));
+	if (c == '7')
+		return (set_img(data, "numbers/7.xpm"));
+	if (c == '8')
+		return (set_img(data, "numbers/8.xpm"));
+	if (c == '9')
+		return (set_img(data, "numbers/9.xpm"));
+	return (set_img(data, "numbers/0.xpm"));
 }
-
-void	render_background(t_data *data)
-{
-	t_tile	*bg;
-
-	bg = data->bg;
-	while (bg)
-	{
-		if (bg->img.mlx)
-			mlx_put_image_to_window(
-				data->mlx, data->win, bg->img.mlx, bg->x, bg->y);
-		bg = bg->next;
-	}
-}
-
-// void	free_background(t_data *data)
-// {
-
-// }
