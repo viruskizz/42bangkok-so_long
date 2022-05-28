@@ -27,7 +27,7 @@ void	moving_handling(t_data *data, int dirct, int dx, int dy)
 	nv.y = data->player.v.y + dy;
 	nt = get_tile(data, nv);
 	if (nt.type == '1')
-			return ;
+		return ;
 	data->player.nv = nv;
 	data->player.moved++;
 	ft_printf("MOVED: %d\n", data->player.moved);

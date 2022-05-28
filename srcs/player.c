@@ -32,8 +32,8 @@ void	render_player(t_data *data)
 		player_standing(data);
 	else if (p.act == ACT_COLLECTED)
 		player_collect(data);
-	mlx_put_image_to_window(
-		data->mlx, data->win, data->player.img.mlx, data->player.v.x, data->player.v.y);
+	mlx_put_image_to_window(data->mlx, data->win,
+		data->player.img.mlx, data->player.v.x, data->player.v.y);
 }
 
 void	chk_pos_player(t_data *data)

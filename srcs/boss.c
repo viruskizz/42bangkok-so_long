@@ -14,7 +14,7 @@
 
 static t_sprt	initial_boss(t_data *data, int gx, int gy)
 {
-	t_sprt b;
+	t_sprt	b;
 
 	b.v.x = gx * TILE_SIZE;
 	b.v.y = gy * TILE_SIZE;
@@ -37,7 +37,7 @@ void	load_boss(t_data *data)
 
 void	render_boss(t_data *data)
 {
-	t_sprt b;
+	t_sprt	b;
 
 	b = data->boss;
 	if (b.img.mlx)

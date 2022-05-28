@@ -43,7 +43,7 @@ void	move_enemies(t_data *data, t_sprt *e)
 		mv = get_move_vtr(e->face, 1);
 		nv = add_vtr(e->v, mv);
 		e->v = nv;
-		return;
+		return ;
 	}
 	mv = get_move_vtr(e->face, 0);
 	nv = add_vtr(e->v, mv);
@@ -51,7 +51,7 @@ void	move_enemies(t_data *data, t_sprt *e)
 	if (nt.type == '1')
 	{
 		e->face = data->stime % 4 + 1;
-		return;
+		return ;
 	}
 	e->nv = nv;
 	enemy_walking(data, e);

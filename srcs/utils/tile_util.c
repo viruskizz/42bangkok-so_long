@@ -14,13 +14,14 @@
 
 t_tile	get_tile(t_data *data, t_vtr v)
 {
-	int gx;
-	int gy;
+	int	gx;
+	int	gy;
 
 	gx = v.x / SPIRIT_SIZE;
 	gy = v.y / SPIRIT_SIZE;
 	return (data->map.tiles[gy][gx]);
 }
+
 /**
  * Rect1 left of Rect 2:	v1.x + ts < v2.x
  * Rect1 Right of Rect2:	v1.x > v2.x + ts

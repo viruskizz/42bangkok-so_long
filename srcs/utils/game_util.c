@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_util.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/28 23:08:24 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/28 23:08:26 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "so_long.h"
 
@@ -12,8 +23,8 @@ void	render_sprts_util(t_data *data, t_sprt *s)
 	}
 }
 
-
-void	render_sprts_fnc_util(t_data *data, t_sprt *s, void (*f)(t_data*, t_sprt*))
+void	render_sprts_fnc_util(t_data *data, t_sprt *s,
+	void (*f)(t_data*, t_sprt*))
 {
 	while (s)
 	{

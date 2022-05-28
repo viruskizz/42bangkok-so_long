@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/28 23:02:31 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/28 23:02:32 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	initial_player(t_data *data, t_tile t)
@@ -20,7 +32,7 @@ void	initial_player(t_data *data, t_tile t)
 
 void	new_enemy(t_data *data, t_tile t)
 {
-	t_sprt *e;
+	t_sprt	*e;
 
 	if (t.type != 'M')
 		return ;
