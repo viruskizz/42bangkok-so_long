@@ -12,25 +12,7 @@
 
 #include "so_long.h"
 
-static void	new_obj(t_data *data, t_tile t);
-
-void	load_objects(t_data *data)
-{
-	data->objs = NULL;
-	grid_loop_util(data, &new_obj);
-}
-
-void	render_objects(t_data *data)
-{
-	render_sprts_util(data, data->objs);
-}
-
-void	free_objects(t_data *data)
-{
-	free_sprts_util(data, data->objs);
-}
-
-static void	new_obj(t_data *data, t_tile t)
+void	new_obj(t_data *data, t_tile t)
 {
 	t_sprt	*obj;
 

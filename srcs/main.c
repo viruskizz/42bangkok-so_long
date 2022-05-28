@@ -53,9 +53,10 @@ static void	initial(t_data *data, char *filename)
 	load_backgrounds(data);
 	load_panel(data);
 	load_score(data);
-	load_objects(data);
+	// load_objects(data);
 	load_player(data);
 	load_enemies(data);
+	load_game(data);
 }
 
 static int	mlx_close(int keycode, t_data *data)
@@ -74,10 +75,13 @@ static int	render(t_data *data)
 	}
 	else
 		data->frame += 1;
+	// render_game(data);
 	render_backgrounds(data);
-	render_panel(data);
+	// render_panel(data);
+	render_game(data);
 	render_score(data);
-	render_objects(data);
+	// render_objects(data);
+
 	render_player(data);
 	render_enemies(data);
 	chk_pos_player(data);

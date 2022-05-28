@@ -12,11 +12,18 @@
 
 #include "so_long.h"
 
+void	load_game(t_data *data)
+{
+	data->objs = NULL;
+	grid_loop_util(data, &new_obj);
+}
+
 void	exit_game(t_data *data, int code)
 {
 	ft_printf("Exit Game\n");
 	free_backgrounds(data);
-	free_objects(data);
+	// free_objects(data);
+	free_sprts_util(data, data->objs);
 	// mlx_destroy_image(data->mlx_ptr, data->background.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->objects.walls.mlx_img);
 	// mlx_destroy_image(data->mlx, data->sprt.img.mlx);
@@ -58,6 +65,12 @@ void	error_game(t_data *data, int code, char *msg)
 	}
 	free(data->map.filedata);
 	exit(1);
+}
+
+void	render_game(t_data *data)
+{
+	render_sprts_util(data, data->panel.bg);
+	render_sprts_util(data, data->objs);
 }
 
 void	chk_pos_player(t_data *data)

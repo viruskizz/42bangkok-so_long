@@ -194,9 +194,7 @@ void	free_backgrounds(t_data *data);
 void	load_map(t_data *data);
 void	validate_map(t_data *data);
 
-void	load_objects(t_data *data);
-void	render_objects(t_data *data);
-void	free_objects(t_data *data);
+void	new_obj(t_data *data, t_tile t);
 
 void	load_player(t_data *data);
 void	render_player(t_data *data);
@@ -225,9 +223,11 @@ void	load_score(t_data *data);
 void	render_score(t_data *data);
 void	update_score(t_data *data);
 
-void	chk_pos_player(t_data *data);
+void	load_game(t_data *data);
 void	exit_game(t_data *data, int code);
 void	error_game(t_data *data, int code, char *msg);
+void	render_game(t_data *data);
+void	chk_pos_player(t_data *data);
 
 t_tile	get_tile(t_data *data, t_vtr v);
 int		is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2);
