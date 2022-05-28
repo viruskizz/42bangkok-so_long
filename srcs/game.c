@@ -15,15 +15,24 @@
 void	load_game(t_data *data)
 {
 	data->objs = NULL;
+	data->bg = NULL;
+	grid_loop_util(data, &new_bg);
+	load_panel(data);
+	load_score(data);
 	grid_loop_util(data, &new_obj);
+	grid_loop_util(data, &initial_player);
+	grid_loop_util(data, &new_enemy);
+	load_panel(data);
 }
 
 void	exit_game(t_data *data, int code)
 {
 	ft_printf("Exit Game\n");
-	free_backgrounds(data);
+	// free_backgrounds(data);
 	// free_objects(data);
+	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);
+	free_sprts_util(data, data->panel.bg);
 	// mlx_destroy_image(data->mlx_ptr, data->background.mlx_img);
 	// mlx_destroy_image(data->mlx_ptr, data->objects.walls.mlx_img);
 	// mlx_destroy_image(data->mlx, data->sprt.img.mlx);
@@ -65,36 +74,4 @@ void	error_game(t_data *data, int code, char *msg)
 	}
 	free(data->map.filedata);
 	exit(1);
-}
-
-void	render_game(t_data *data)
-{
-	render_sprts_util(data, data->panel.bg);
-	render_sprts_util(data, data->objs);
-}
-
-void	chk_pos_player(t_data *data)
-{
-	t_tile	t;
-	t_sprt	p;
-	t_sprt	*e;
-
-	p = data->player;
-	t = get_tile(data, p.v);
-	if (t.type == 'E')
-	{
-		ft_printf("This is exit\n");
-		if (data->map.item == p.item)
-			exit_game(data, EXIT_SUCCEED);
-	}
-	e = data->enemies;
-	while (e)
-	{
-		if (is_ovelap_tile(e->v, p.v, 0, 0))
-		{
-			if (p.act != ACT_HURTING && p.act != ACT_FALLEN)
-				player_hurting(data);
-		}
-		e = e->next;
-	}
 }

@@ -31,7 +31,6 @@ int	main(int argc, char **argv)
 	initial(&data, filename);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
-	mlx_hook(data.win, X_EVENT_KEY_RELEASE, 1L << 1, &rkeyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
 	mlx_loop(data.mlx);
 	return (0);
@@ -50,12 +49,6 @@ static void	initial(t_data *data, char *filename)
 	data->win = mlx_new_window(data->mlx, data->w, data->h, "SO LONG");
 	if (!data->win)
 		error_game(data, ERROR_WIN, NULL);
-	load_backgrounds(data);
-	load_panel(data);
-	load_score(data);
-	// load_objects(data);
-	load_player(data);
-	load_enemies(data);
 	load_game(data);
 }
 
@@ -75,17 +68,13 @@ static int	render(t_data *data)
 	}
 	else
 		data->frame += 1;
-	// render_game(data);
-	render_backgrounds(data);
-	// render_panel(data);
-	render_game(data);
-	render_score(data);
-	// render_objects(data);
-
+	render_sprts_util(data, data->bg);
+	render_sprts_util(data, data->panel.bg);
+	render_sprts_util(data, data->objs);
+	render_sprts_util(data, data->panel.score);
+	render_sprts_fnc_util(data, data->enemies, &move_enemies);
 	render_player(data);
-	render_enemies(data);
 	chk_pos_player(data);
-	// mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");
 	return (0);
 }
 
@@ -106,18 +95,5 @@ static int	keyhandler(int keycode, t_data *data)
 		space_handling(data);
 	if (keycode == KEY_ESC)
 		exit_game(data, EXIT_SUCCEED);
-	return (0);
-}
-
-static int	rkeyhandler(int keycode, t_data *data)
-{
-	if (keycode == KEY_LEFT || keycode == KEY_A)
-		stand_rhandling(data);
-	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		stand_rhandling(data);
-	if (keycode == KEY_DOWN || keycode == KEY_S)
-		stand_rhandling(data);
-	if (keycode == KEY_UP || keycode == KEY_W)
-		stand_rhandling(data);
 	return (0);
 }

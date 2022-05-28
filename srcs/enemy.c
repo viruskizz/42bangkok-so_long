@@ -1,50 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/28 22:58:47 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/28 22:58:48 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-static void	new_enemy(t_data *data, t_tile t);
-static void	move_enemies(t_data *data, t_sprt *e);
-
-void	load_enemies(t_data *data)
+void	enemy_walking(t_data *data, t_sprt *e)
 {
-	data->enemies = NULL;
-	grid_loop_util(data, &new_enemy);
+	if (e->face == DIRCT_LEFT && e->v.x % 32 < 16)
+		e->img = set_img(data, ENEMY_WALK_LEFT1_PATH);
+	else if (e->face == DIRCT_LEFT)
+		e->img = set_img(data, ENEMY_WALK_LEFT2_PATH);
+	else if (e->face == DIRCT_RIGHT && e->v.x % 32 < 16)
+		e->img = set_img(data, ENEMY_WALK_RIGHT1_PATH);
+	else if (e->face == DIRCT_RIGHT)
+		e->img = set_img(data, ENEMY_WALK_RIGHT2_PATH);
+	else if (e->face == DIRCT_UP && e->v.y % 32 < 16)
+		e->img = set_img(data, ENEMY_WALK_UP1_PATH);
+	else if (e->face == DIRCT_UP)
+		e->img = set_img(data, ENEMY_WALK_UP2_PATH);
+	else if (e->face == DIRCT_DOWN && e->v.y % 32 < 16)
+		e->img = set_img(data, ENEMY_WALK_DOWN1_PATH);
+	else if (e->face == DIRCT_DOWN)
+		e->img = set_img(data, ENEMY_WALK_DOWN2_PATH);
 }
 
-void	render_enemies(t_data *data)
-{
-	t_sprt *e;
-
-	e = data->enemies;
-	while (e)
-	{
-		move_enemies(data, e);
-		enemy_walking(data, e);
-		if (e->img.mlx)
-			mlx_put_image_to_window(data->mlx, data->win, e->img.mlx, e->v.x, e->v.y);
-		e = e->next;
-	}
-}
-
-static void	new_enemy(t_data *data, t_tile t)
-{
-	t_sprt *e;
-
-	if (t.type != 'M')
-		return ;
-	e = malloc(sizeof(t_sprt));
-	e->v = t.v;
-	e->nv = t.v;
-	e->animating = 0;
-	e->act = ACT_STAND;
-	e->face = data->frame % 4 + 1;
-	e->next = NULL;
-	e->img = set_img(data, ENEMY_STAND_FRONT_PATH);
-	if (!data->enemies)
-		data->enemies = e;
-	else
-		add_sprt_list(data->enemies, e);
-}
-
-static void	move_enemies(t_data *data, t_sprt *e)
+void	move_enemies(t_data *data, t_sprt *e)
 {
 	t_tile	nt;
 	t_vtr	nv;
@@ -66,4 +54,5 @@ static void	move_enemies(t_data *data, t_sprt *e)
 		return;
 	}
 	e->nv = nv;
+	enemy_walking(data, e);
 }
