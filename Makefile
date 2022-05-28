@@ -9,7 +9,7 @@ PRINTF_DIR	= ft_printf
 INCLUDE_DIR	= ./includes
 INCLUDES 	= -I $(INCLUDE_DIR) \
 			  -I $(LIBFT_DIR) \
-			  -I $(PRINTF_DIR)/includes \
+			  -I $(PRINTF_DIR) \
 			  -I $(MLX_DIR) 
  
 LIBS 		= -L$(LIBFT_DIR) -lft \
