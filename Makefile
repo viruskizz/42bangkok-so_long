@@ -28,12 +28,12 @@ endif
 
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
-SRCS		= main.c \
-			  game.c \
+SRCS		=	main.c \
+				game.c \
 				panel.c \
-			  map.c \
-			  player.c \
-			  player_mov.c \
+				map.c \
+				player.c \
+				player_mov.c \
 				boss.c \
 				enemy.c \
 				handling.c \
@@ -41,14 +41,23 @@ SRCS		= main.c \
 				validate.c \
 				utils/game_util.c \
 				utils/common_util.c \
-			  utils/vector_util.c \
-			  utils/img_util.c \
-			  utils/file_util.c \
+				utils/vector_util.c \
+				utils/img_util.c \
+				utils/file_util.c \
 				utils/tile_util.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 all: $(NAME)
+
+linux:
+	gcc srcs/*.c srcs/*/*.c \
+	-Iincludes \
+	-Ift_printf -Ilibft -lft \
+	-lftprintf -Llibft -Lft_printf \
+	-I/usr/local/include -L/usr/local/lib \
+	-Lmlx_linux -Imlx_linux -lmlx_Linux -lX11 -lXext -lm -lz \
+	-o $(NAME)
 
 refast: cleanbuild $(OBJS)
 	$(CC) -g $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)

@@ -54,7 +54,7 @@ void	new_obj(t_data *data, t_tile t)
 {
 	t_sprt	*obj;
 
-	if (t.type != '0')
+	if (t.type == '1' || t.type == 'C' || t.type == 'E')
 	{
 		obj = malloc(sizeof(t_sprt));
 		obj->v = t.v;

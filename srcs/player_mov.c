@@ -20,6 +20,7 @@ void	player_standing(t_data *data)
 	p = data->player;
 	if (p.act != ACT_STAND)
 		return ;
+	mlx_destroy_image(data->mlx, p.img.mlx);
 	if (p.face == DIRCT_LEFT)
 		data->player.img = set_img(data, SPRITE_STAND_LEFT_PATH);
 	if (p.face == DIRCT_RIGHT)
@@ -35,6 +36,7 @@ void	player_walking(t_data *data)
 	t_sprt	p;
 
 	p = data->player;
+	mlx_destroy_image(data->mlx, p.img.mlx);
 	if (p.face == DIRCT_LEFT && p.v.x % 32 < 16)
 		data->player.img = set_img(data, SPRITE_WALK_LEFT1_PATH);
 	else if (p.face == DIRCT_LEFT)

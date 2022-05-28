@@ -44,11 +44,8 @@ static void	initial(t_data *data, char *filename)
 	if (!data->mlx)
 		error_game(data, ERROR_MLX, NULL);
 	load_file(data, filename);
-	ft_printf("File loaded\n");
 	load_map(data);
-	ft_printf("Map loaded\n");
 	load_tiles(data);
-	ft_printf("Tiles loaded\n");
 	data->win = mlx_new_window(data->mlx, data->w, data->h, "SO LONG");
 	if (!data->win)
 		error_game(data, ERROR_WIN, NULL);
@@ -73,8 +70,8 @@ static int	render(t_data *data)
 		data->frame += 1;
 	render_sprts_util(data, data->bg);
 	render_sprts_util(data, data->panel.bg);
-	render_sprts_util(data, data->objs);
 	render_sprts_util(data, data->panel.score);
+	render_sprts_util(data, data->objs);
 	render_sprts_fnc_util(data, data->enemies, &move_enemies);
 	render_player(data);
 	chk_pos_player(data);

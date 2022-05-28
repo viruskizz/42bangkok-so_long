@@ -14,6 +14,7 @@
 
 void	enemy_walking(t_data *data, t_sprt *e)
 {
+	mlx_destroy_image(data->mlx, e->img.mlx);
 	if (e->face == DIRCT_LEFT && e->v.x % 32 < 16)
 		e->img = set_img(data, ENEMY_WALK_LEFT1_PATH);
 	else if (e->face == DIRCT_LEFT)

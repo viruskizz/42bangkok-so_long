@@ -15,6 +15,7 @@
 t_img	set_img(t_data *data, char *path)
 {
 	t_img	img;
+	void	*mlx;
 	char	*dir;
 	char	*fpath;
 

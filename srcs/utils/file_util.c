@@ -39,8 +39,8 @@ static char	*read_file(t_data *data, char *filename)
 		error_game(data, ERROR_FILE_OPEN, "file not found.");
 	if (!validate_file_ext(data, filename))
 		error_game(data, ERROR_FILE_OPEN, "file extension is not `.ber`");
-	buf = malloc((BUF_SIZE + 1) * sizeof(char));
-	file = malloc(sizeof(char) * 10000);
+	buf = ft_calloc((BUF_SIZE + 1), sizeof(char));
+	file = ft_calloc(sizeof(char), 10000);
 	ret = read(fd, buf, BUF_SIZE);
 	while (ret)
 	{

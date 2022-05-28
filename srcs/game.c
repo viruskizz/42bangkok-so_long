@@ -16,13 +16,13 @@ void	load_game(t_data *data)
 {
 	data->objs = NULL;
 	data->bg = NULL;
+	data->enemies = NULL;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
 	load_score(data);
 	grid_loop_util(data, &new_obj);
 	grid_loop_util(data, &initial_player);
 	grid_loop_util(data, &new_enemy);
-	load_panel(data);
 }
 
 void	exit_game(t_data *data, int code)

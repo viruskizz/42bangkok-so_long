@@ -212,13 +212,12 @@ void	space_handling(t_data *data);
 void	load_boss(t_data *data);
 void	render_boss(t_data *data);
 
-void	render_enemies(t_data *data);
 void	move_enemies(t_data *data, t_sprt *e);
+void	enemy_walking(t_data *data, t_sprt *e);
 
 void	load_panel(t_data *data);
 
 void	load_score(t_data *data);
-// void	render_score(t_data *data);
 void	update_score(t_data *data);
 
 void	load_game(t_data *data);
