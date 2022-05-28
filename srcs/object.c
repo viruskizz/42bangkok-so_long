@@ -12,35 +12,12 @@
 
 #include "so_long.h"
 
-static void	new_obj(t_data *data, t_tile t)
-{
-	t_sprt	*obj;
-	t_sprt	*tmp;
-
-	if (t.type != '0')
-	{
-		obj = malloc(sizeof(t_sprt));
-		obj->v = t.v;
-		obj->type = t.type;
-		if (t.type == 'C')
-			obj->img = set_img(data, OBJECT_ITEM_PATH);
-		else if (t.type == '1')
-			obj->img = set_img(data, OBJECT_WALL_PATH);
-		else if (t.type == 'E')
-			obj->img = set_img(data, OBJECT_EXIT_PATH);
-		obj->next = NULL;
-		if (!data->objs)
-			data->objs = obj;
-		else
-			add_tile_list(data->objs, obj);
-	}
-}
+static void	new_obj(t_data *data, t_tile t);
 
 void	load_objects(t_data *data)
 {
 	data->objs = NULL;
 	grid_loop_util(data, &new_obj);
-	printf("OBJS: %d,%d\n", data->objs->v.x, data->objs->v.y);
 }
 
 void	render_objects(t_data *data)
@@ -67,5 +44,28 @@ void	free_objects(t_data *data)
 		if (obj->img.mlx)
 			mlx_destroy_image(data->mlx, obj->img.mlx);
 		obj = obj->next;
+	}
+}
+
+static void	new_obj(t_data *data, t_tile t)
+{
+	t_sprt	*obj;
+
+	if (t.type != '0')
+	{
+		obj = malloc(sizeof(t_sprt));
+		obj->v = t.v;
+		obj->type = t.type;
+		if (t.type == 'C')
+			obj->img = set_img(data, OBJECT_ITEM_PATH);
+		else if (t.type == '1')
+			obj->img = set_img(data, OBJECT_WALL_PATH);
+		else if (t.type == 'E')
+			obj->img = set_img(data, OBJECT_EXIT_PATH);
+		obj->next = NULL;
+		if (!data->objs)
+			data->objs = obj;
+		else
+			add_tile_list(data->objs, obj);
 	}
 }

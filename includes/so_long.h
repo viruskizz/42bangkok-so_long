@@ -123,8 +123,8 @@ typedef struct s_img
 
 typedef struct s_tile
 {
-	char			type;
-	t_vtr			v;
+	char	type;
+	t_vtr	v;
 }	t_tile;
 
 typedef struct s_sprt

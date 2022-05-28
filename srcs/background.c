@@ -1,47 +1,11 @@
 #include "so_long.h"
 
-t_sprt	*new_bg(t_data *data, int x, int y)
-{
-	t_sprt	*t;
-
-	t = malloc(sizeof(t_sprt));
-	if (!t)
-		exit(1);
-	t->v.x = x;
-	t->v.y = y;
-	t->type = '0';
-	t->img = set_img(data, OBJECT_GRASS_PATH);
-	t->next = NULL;
-	return (t);
-}
+static void	new_bg(t_data *data, t_tile t);
 
 void	load_backgrounds(t_data *data)
 {
-	int		x;
-	int		y;
-	t_sprt	*bg;
-	t_sprt	*tmp;
-
-	x = 0;
-	y = 0;
 	data->bg = NULL;
-
-	while (y < data->map.height)
-	{
-		x = 0;
-		while (x < data->map.width)
-		{
-			bg = new_bg(data, x, y);
-			if (data->bg)
-				tmp->next = bg;
-			else
-				data->bg = bg;
-			tmp = bg;
-			ft_printf("BG: %d,%d\n", tmp->v.x, tmp->v.y);
-			x += TILE_SIZE;
-		}
-		y += TILE_SIZE;
-	}
+	grid_loop_util(data, &new_bg);
 }
 
 void	render_backgrounds(t_data *data)
@@ -69,4 +33,21 @@ void	free_backgrounds(t_data *data)
 			mlx_destroy_image(data->mlx, bg->img.mlx);
 		bg = bg->next;
 	}
+}
+
+static void	new_bg(t_data *data, t_tile t)
+{
+	t_sprt	*bg;
+
+	bg = malloc(sizeof(t_sprt));
+	if (!bg)
+		exit(1);
+	bg->v = t.v;
+	bg->type = '0';
+	bg->img = set_img(data, OBJECT_GRASS_PATH);
+	bg->next = NULL;
+	if (!data->bg)
+		data->bg = bg;
+	else
+		add_tile_list(data->bg, bg);
 }

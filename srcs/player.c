@@ -12,44 +12,27 @@
 
 #include "so_long.h"
 
-static t_sprt	initial_player(t_data *data, int gx, int gy)
+static void	initial_player(t_data *data, t_tile t)
 {
 	t_sprt	p;
 
-	p.v.x = gx * TILE_SIZE;
-	p.v.y = gy * TILE_SIZE;
-	p.nv.x = p.v.x;
-	p.nv.y = p.v.y;
+	if (t.type != 'P')
+		return ;
+	p.type = t.type;
+	p.v = t.v;
+	p.nv = p.v;
 	p.animating = 0;
 	p.act = ACT_STAND;
 	p.face = DIRCT_DOWN;
 	p.item = 0;
 	p.moved = 0;
 	p.img = set_img(data, SPRITE_STAND_DOWN_PATH);
-	return (p);
+	data->player = p;
 }
 
 void	load_player(t_data *data)
 {
-	int		gx;
-	int		gy;
-	t_sprt	p;
-
-	gy = 0;
-	while (gy < data->map.grid_y)
-	{
-		gx = 0;
-		while (gx < data->map.grid_x)
-		{
-			if (data->map.tiles[gy][gx].type == 'P')
-			{
-				data->player = initial_player(data, gx, gy);
-				return ;
-			}
-			gx++;
-		}
-		gy++;
-	}
+	grid_loop_util(data, &initial_player);
 }
 
 void	render_player(t_data *data)
