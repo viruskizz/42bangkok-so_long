@@ -31,6 +31,8 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->bg);
 	free_sprts_util(data, data->objs);
 	free_sprts_util(data, data->panel.bg);
+	free_sprts_util(data, data->panel.score);
+	free_sprts_util(data, data->enemies);
 	if (data->map.filedata)
 		free(data->map.filedata);
 	if (data->mlx)
