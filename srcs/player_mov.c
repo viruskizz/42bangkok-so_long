@@ -57,7 +57,7 @@ void	player_collect(t_data *data)
 {
 	data->player.img = set_img(data, SPRITE_KNEEL_PATH);
 	data->player.animating += 1;
-	if (data->player.animating == 30)
+	if (data->player.animating == FRAME_RATE / 2)
 	{
 		data->player.act = ACT_STAND;
 		data->player.animating = 0;

@@ -12,9 +12,11 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# define FRAME_RATE			60
 # define BUF_SIZE			4098
 # define SPIRIT_SIZE		64
 # define TILE_SIZE			64
+# define ENEMY				1
 
 # define RED_PIXEL			0xEB4034
 
@@ -123,21 +125,21 @@ typedef struct s_tile
 {
 	char			type;
 	t_vtr			v;
-	t_img			img;
-	struct s_tile	*next;
 }	t_tile;
 
 typedef struct s_sprt
 {
 	t_vtr	v;
 	t_vtr	nv;
+	t_img	img;
+	char	type;
 	int		act;
 	int		n_act;
 	int		face;
 	int		item;
 	int		moved;
-	unsigned int	animating;
-	t_img	img;
+	int		animating;
+	struct s_sprt	*next;
 }	t_sprt;
 
 typedef struct s_map
@@ -159,12 +161,13 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	int		render;
-	t_tile	*bg;
+	int		frame;
+	int		stime;
+	t_sprt	*bg;
 	t_sprt	player;
 	t_sprt	boss;
-	t_sprt	emenies;
-	t_tile	*objs;
+	t_sprt	*enemies;
+	t_sprt	*objs;
 	t_map	map;
 }	t_data;
 
@@ -175,7 +178,6 @@ void	free_backgrounds(t_data *data);
 
 void	load_map(t_data *data);
 void	validate_map(t_data *data);
-void	render_map(t_data *data);
 
 void	load_objects(t_data *data);
 void	render_objects(t_data *data);
@@ -197,14 +199,28 @@ void	stand_rhandling(t_data *data);
 void	load_boss(t_data *data);
 void	render_boss(t_data *data);
 
+void	load_enemies(t_data *data);
+void	render_enemies(t_data *data);
+void	enemy_walking(t_data *data, t_sprt *e);
+
 void	chk_pos_player(t_data *data);
 void	exit_game(t_data *data, int code);
 void	error_game(t_data *data, int code, char *msg);
 
-t_tile	get_tile(t_data *data, int x, int y);
+t_tile	get_tile(t_data *data, t_vtr v);
+int		is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2);
+t_tile	random_free_tile(t_data *data, int r);
+
 int		get_direction(int cur_x, int cur_y, int nxt_x, int nxt_y);
+t_vtr	get_move_vtr(int drct, int msize);
+
+t_vtr	set_vtr(int x, int y);
+t_vtr	add_vtr(t_vtr v1, t_vtr v2);
+
+void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile));
+void	add_tile_list(t_sprt *list, t_sprt *new);
+
 t_img	set_img(t_data *data, char *path);
-int	is_ovelap_tile(t_vtr v1, t_vtr v2, t_vtr o1, t_vtr o2);
 void	inspect_map(t_data *data, char attr);
 
 #endif

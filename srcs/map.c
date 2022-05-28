@@ -22,13 +22,6 @@ static t_tile	new_tile(t_data *data, char type, int x, int y)
 	tile.type = type;
 	tile.v.x = x;
 	tile.v.y = y;
-	if (type == '1')
-		img = set_img(data, OBJECT_WALL_PATH);
-	else if (type == 'E')
-		img = set_img(data, OBJECT_EXIT_PATH);
-	else
-		img.mlx = NULL;
-	tile.img = img;
 	return (tile);
 }
 
@@ -53,28 +46,6 @@ void	load_map(t_data *data)
 			str++;
 		}
 		str++;
-		gy++;
-	}
-}
-
-void	render_map(t_data *data)
-{
-	int		gx;
-	int		gy;
-	t_tile	t;
-
-	gy = 0;
-	while (gy < data->map.grid_y)
-	{
-		gx = 0;
-		while (gx < data->map.grid_x)
-		{
-			t = data->map.tiles[gy][gx];
-			if (t.img.mlx)
-				mlx_put_image_to_window(
-					data->mlx, data->win, t.img.mlx, t.v.x, t.v.y);
-			gx++;
-		}
 		gy++;
 	}
 }

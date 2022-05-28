@@ -17,3 +17,25 @@ int		get_direction(int cur_x, int cur_y, int nxt_x, int nxt_y)
 		return (DIRCT_UP);
 	return (0);
 }
+
+t_vtr	get_move_vtr(int drct, int msize)
+{
+	t_vtr	v;
+	int		m;
+
+	v.x = 0;
+	v.y = 0;
+	if (msize == 0)
+		m = TILE_SIZE;
+	else
+		m = msize;
+	if (drct == DIRCT_LEFT)
+		v.x = m * -1;
+	if (drct == DIRCT_RIGHT)
+		v.x = m;
+	if (drct == DIRCT_UP)
+		v.y = m * -1;
+	if (drct == DIRCT_DOWN)
+		v.y = m;
+	return (v);
+}

@@ -1,10 +1,10 @@
 #include "so_long.h"
 
-t_tile	*new_bg(t_data *data, int x, int y)
+t_sprt	*new_bg(t_data *data, int x, int y)
 {
-	t_tile	*t;
+	t_sprt	*t;
 
-	t = malloc(sizeof(t_tile));
+	t = malloc(sizeof(t_sprt));
 	if (!t)
 		exit(1);
 	t->v.x = x;
@@ -19,12 +19,13 @@ void	load_backgrounds(t_data *data)
 {
 	int		x;
 	int		y;
-	t_tile	*bg;
-	t_tile	*tmp;
+	t_sprt	*bg;
+	t_sprt	*tmp;
 
 	x = 0;
 	y = 0;
 	data->bg = NULL;
+
 	while (y < data->map.height)
 	{
 		x = 0;
@@ -36,6 +37,7 @@ void	load_backgrounds(t_data *data)
 			else
 				data->bg = bg;
 			tmp = bg;
+			ft_printf("BG: %d,%d\n", tmp->v.x, tmp->v.y);
 			x += TILE_SIZE;
 		}
 		y += TILE_SIZE;
@@ -44,7 +46,7 @@ void	load_backgrounds(t_data *data)
 
 void	render_backgrounds(t_data *data)
 {
-	t_tile	*bg;
+	t_sprt	*bg;
 
 	bg = data->bg;
 	while (bg)
@@ -58,7 +60,7 @@ void	render_backgrounds(t_data *data)
 
 void	free_backgrounds(t_data *data)
 {
-	t_tile	*bg;
+	t_sprt	*bg;
 
 	bg = data->bg;
 	while (bg)

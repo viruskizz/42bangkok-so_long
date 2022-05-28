@@ -40,12 +40,13 @@ int	main(int argc, char **argv)
 static void	initial(t_data *data, char *filename)
 {
 	data->mlx = mlx_init();
+	data->frame = 0;
+	data->stime = 0;
 	if (!data->mlx)
 		error_game(data, ERROR_MLX, NULL);
 	load_file(data, filename);
 	validate_map(data);
 	load_map(data);
-	ft_printf("%d,%d\n", data->map.grid_x, data->map.grid_y);
 	data->win = mlx_new_window(
 			data->mlx, data->map.width, data->map.height, "SO LONG");
 	if (!data->win)
@@ -53,6 +54,7 @@ static void	initial(t_data *data, char *filename)
 	load_backgrounds(data);
 	load_objects(data);
 	load_player(data);
+	load_enemies(data);
 	load_boss(data);
 }
 
@@ -65,10 +67,17 @@ static int	mlx_close(int keycode, t_data *data)
 
 static int	render(t_data *data)
 {
+	if (data->frame == FRAME_RATE)
+	{
+		data->frame = 0;
+		data->stime += 1;
+	}
+	else
+		data->frame += 1;
 	render_backgrounds(data);
-	render_map(data);
 	render_objects(data);
 	render_player(data);
+	render_enemies(data);
 	render_boss(data);
 	chk_pos_player(data);
 	// mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");

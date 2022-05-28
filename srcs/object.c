@@ -12,51 +12,40 @@
 
 #include "so_long.h"
 
-static t_tile	*new_obj(t_data *data, int x, int y)
+static void	new_obj(t_data *data, t_tile t)
 {
-	t_tile	*obj;
+	t_sprt	*obj;
+	t_sprt	*tmp;
 
-	obj = malloc(sizeof(t_tile));
-	obj->type = 'C';
-	obj->v.x = x;
-	obj->v.y = y;
-	obj->img = set_img(data, OBJECT_ITEM_PATH);
-	obj->next = NULL;
-	return (obj);
+	if (t.type != '0')
+	{
+		obj = malloc(sizeof(t_sprt));
+		obj->v = t.v;
+		obj->type = t.type;
+		if (t.type == 'C')
+			obj->img = set_img(data, OBJECT_ITEM_PATH);
+		else if (t.type == '1')
+			obj->img = set_img(data, OBJECT_WALL_PATH);
+		else if (t.type == 'E')
+			obj->img = set_img(data, OBJECT_EXIT_PATH);
+		obj->next = NULL;
+		if (!data->objs)
+			data->objs = obj;
+		else
+			add_tile_list(data->objs, obj);
+	}
 }
 
 void	load_objects(t_data *data)
 {
-	int		gx;
-	int		gy;
-	t_tile	*obj;
-	t_tile	*tmp;
-
-	gy = 0;
 	data->objs = NULL;
-	while (gy < data->map.grid_y)
-	{
-		gx = 0;
-		while (gx < data->map.grid_x)
-		{
-			if (data->map.tiles[gy][gx].type == 'C')
-			{
-				obj = new_obj(data, gx * TILE_SIZE, gy * TILE_SIZE);
-				if (data->objs)
-					tmp->next = obj;
-				else
-					data->objs = obj;
-				tmp = obj;
-			}
-			gx++;
-		}
-		gy++;
-	}
+	grid_loop_util(data, &new_obj);
+	printf("OBJS: %d,%d\n", data->objs->v.x, data->objs->v.y);
 }
 
 void	render_objects(t_data *data)
 {
-	t_tile	*obj;
+	t_sprt	*obj;
 
 	obj = data->objs;
 	while (obj)
@@ -70,7 +59,7 @@ void	render_objects(t_data *data)
 
 void	free_objects(t_data *data)
 {
-	t_tile	*obj;
+	t_sprt	*obj;
 
 	obj = data->objs;
 	while (obj)
