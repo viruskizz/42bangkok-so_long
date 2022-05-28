@@ -22,6 +22,7 @@ static t_tile	new_tile(t_data *data, char type, int x, int y)
 	tile.type = type;
 	tile.v.x = x;
 	tile.v.y = y;
+
 	return (tile);
 }
 

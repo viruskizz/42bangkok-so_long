@@ -21,7 +21,6 @@ void	load_boss(t_data *data)
 	int	gy;
 
 	data->boss = initial_boss(data, 2, 2);
-	// while (gy < data->map_gr)
 }
 
 void	render_boss(t_data *data)

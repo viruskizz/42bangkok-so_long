@@ -37,11 +37,13 @@ void	moving_handling(t_data *data, int dirct, int dx, int dy)
 void	space_handling(t_data *data)
 {
 	t_tile	t;
+	t_sprt	p;
 
+	p = data->player;
 	t = get_tile(data, data->player.v);
-	if (data->player.act == ACT_STAND)
+	if (p.act == ACT_STAND)
 		data->player.act = ACT_SIT;
-	else if (data->player.act == ACT_SIT)
+	else if (p.act == ACT_SIT)
 		data->player.act = ACT_STAND;
 	if (t.type == 'C')
 		collect_object(data, t);
@@ -56,6 +58,7 @@ void	stand_rhandling(t_data *data)
 static void	collect_object(t_data *data, t_tile t)
 {
 	t_sprt	*obj;
+	t_sprt	p;
 
 	obj = data->objs;
 	while (obj)

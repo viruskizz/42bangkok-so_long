@@ -34,5 +34,3 @@ void	add_tile_list(t_sprt *list, t_sprt *new)
 		tmp->next = new;
 	}
 }
-
-// void	otp_

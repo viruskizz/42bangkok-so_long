@@ -87,7 +87,8 @@
 // # define MAP_FILE	"maps/errors/no_item.ber"
 // # define MAP_FILE	"maps/errors/no_sprite.ber"
 // # define MAP_FILE	"maps/errors/no_wall.ber"
-# define MAP_FILE		"maps/simple.ber"
+// # define MAP_FILE		"maps/simple.ber"
+# define MAP_FILE		"maps/simple_mon.ber"
 // # define MAP_FILE	"maps/large.ber"
 # define ACT_STAND		0
 # define ACT_SIT		1

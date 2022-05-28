@@ -55,7 +55,6 @@ static void	initial(t_data *data, char *filename)
 	load_objects(data);
 	load_player(data);
 	load_enemies(data);
-	load_boss(data);
 }
 
 static int	mlx_close(int keycode, t_data *data)
@@ -78,7 +77,6 @@ static int	render(t_data *data)
 	render_objects(data);
 	render_player(data);
 	render_enemies(data);
-	render_boss(data);
 	chk_pos_player(data);
 	// mlx_string_put(data->mlx, data->win, 100, 100, RED_PIXEL, "Araiva");
 	return (0);

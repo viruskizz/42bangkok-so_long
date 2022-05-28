@@ -1,31 +1,12 @@
 #include "so_long.h"
 
-static t_sprt	*load_from_map(t_data *data);
-static t_sprt	*new_monster(t_data *data, t_vtr v);
-static void		move_enemies(t_data *data, t_sprt *e);
-
+static void	new_enemy(t_data *data, t_tile t);
+static void	move_enemies(t_data *data, t_sprt *e);
 
 void	load_enemies(t_data *data)
 {
-	int		i;
-	t_tile	ft;
-	t_sprt	*e;
-	t_sprt	*tmp;
-
-	i = 0;
 	data->enemies = NULL;
-	tmp = load_from_map(data);
-	while (i++ < ENEMY)
-	{
-		ft = random_free_tile(data, 0);
-		e = new_monster(data, ft.v);
-		if (data->enemies)
-			tmp->next = e;
-		else
-			data->enemies = e;
-		data->map.enemy++;
-		tmp = e;
-	}
+	grid_loop_util(data, &new_enemy);
 }
 
 void	render_enemies(t_data *data)
@@ -43,51 +24,24 @@ void	render_enemies(t_data *data)
 	}
 }
 
-
-static t_sprt	*load_from_map(t_data *data)
-{
-	int		gx;
-	int		gy;
-	t_sprt	*e;
-	t_sprt	*tmp;
-
-	gy = 0;
-	data->enemies = NULL;
-	tmp = data->enemies;
-	while (gy < data->map.grid_y)
-	{
-		gx = 0;
-		while (gx < data->map.grid_x)
-		{
-			if (data->map.tiles[gy][gx].type == 'M')
-			{
-				e = new_monster(data, (t_vtr){gx, gy});
-				if (tmp)
-					tmp->next = e;
-				else
-					data->enemies = e;
-				tmp = e;
-			}
-			gx++;
-		}
-		gy++;
-	}
-	return (tmp);
-}
-
-static t_sprt	*new_monster(t_data *data, t_vtr v)
+static void	new_enemy(t_data *data, t_tile t)
 {
 	t_sprt *e;
 
+	if (t.type != 'M')
+		return ;
 	e = malloc(sizeof(t_sprt));
-	e->v = v;
-	e->nv = v;
+	e->v = t.v;
+	e->nv = t.v;
 	e->animating = 0;
 	e->act = ACT_STAND;
 	e->face = data->frame % 4 + 1;
 	e->next = NULL;
 	e->img = set_img(data, ENEMY_STAND_FRONT_PATH);
-	return (e);
+	if (!data->enemies)
+		data->enemies = e;
+	else
+		add_tile_list(data->enemies, e);
 }
 
 static void	move_enemies(t_data *data, t_sprt *e)

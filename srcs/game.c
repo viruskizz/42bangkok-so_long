@@ -64,11 +64,9 @@ void	chk_pos_player(t_data *data)
 {
 	t_tile	t;
 	t_sprt	p;
-	t_sprt	b;
 	t_sprt	*e;
 
 	p = data->player;
-	b = data->boss;
 	t = get_tile(data, p.v);
 	if (t.type == 'E')
 	{
@@ -76,21 +74,11 @@ void	chk_pos_player(t_data *data)
 		if (data->map.item == p.item)
 			exit_game(data, EXIT_SUCCEED);
 	}
-	if (is_ovelap_tile(p.v, b.v, 0, 0))
-	{
-		// ft_printf("Getting hit\n");
-		if (p.act != ACT_FALLEN && p.act != ACT_HURTING)
-		{
-			ft_printf("Getting hit from boss\n");
-			player_hurting(data);
-		}
-	}
 	e = data->enemies;
 	while (e)
 	{
 		if (is_ovelap_tile(e->v, p.v, 0, 0))
 		{
-			// ft_printf("Getting hit from enemy\n");
 			if (p.act != ACT_HURTING && p.act != ACT_FALLEN)
 				player_hurting(data);
 		}

@@ -21,28 +21,30 @@ static char	*ft_str_concat(char *dest, char *src);
 
 void	load_file(t_data *data, char *filename)
 {
-	int		i;
 	char	*file;
+	char	*f;
 
 	file = read_file(data, filename);
-	i = 0;
+	f = file;
 	init_map_data(data, NULL);
-	while (file[i])
+	while (*f)
 	{
-		while (file[i] != '\0' && file[i] != '\n')
+		while (*f && *f != '\n')
 		{
 			if (data->map.grid_y == 0)
 				data->map.grid_x++;
-			if (file[i] == 'C')
+			if (*f == 'C')
 				data->map.item++;
-			else if (file[i] == 'E')
+			else if (*f == 'E')
 				data->map.exit++;
-			else if (file[i] == 'P')
+			else if (*f == 'P')
 				data->map.player++;
-			i++;
+			else if (*f == 'M')
+				data->map.enemy++;
+			f++;
 		}
 		data->map.grid_y++;
-		i++;
+		f++;
 	}
 	init_map_data(data, file);
 }
