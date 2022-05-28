@@ -82,6 +82,7 @@ static int	keyhandler(int keycode, t_data *data)
 {
 	int	m;
 
+	ft_printf("key: %d\n", keycode);
 	m = TILE_SIZE;
 	if (keycode == KEY_LEFT || keycode == KEY_A)
 		moving_handling(data, DIRCT_LEFT, m * -1, 0);

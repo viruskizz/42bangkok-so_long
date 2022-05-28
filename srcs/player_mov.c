@@ -57,6 +57,7 @@ void	player_walking(t_data *data)
 
 void	player_collect(t_data *data)
 {
+	mlx_destroy_image(data->mlx, data->player.img.mlx);
 	data->player.img = set_img(data, SPRITE_KNEEL_PATH);
 	data->player.animating += 1;
 	if (data->player.animating == FRAME_RATE / 2)
@@ -87,6 +88,7 @@ void	player_moving(t_data *data)
 
 void	player_hurting(t_data *data)
 {
+	mlx_destroy_image(data->mlx, data->player.img.mlx);
 	data->player.img = set_img(data, SPRITE_HURT_PATH);
 	data->player.act = ACT_HURTING;
 	data->player.animating += 1;

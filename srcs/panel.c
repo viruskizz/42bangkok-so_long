@@ -67,16 +67,17 @@ void	update_score(t_data *data)
 	while (i < SCORE_LEN)
 	{
 		if (i == 3 && len >= 1)
-			s->img = get_number_img(data, txt[len - 1]);
+			s->img = get_number_img(data, txt[len - 1], &s->img);
 		else if (i == 2 && len >= 2)
-			s->img = get_number_img(data, txt[len - 2]);
+			s->img = get_number_img(data, txt[len - 2], &s->img);
 		else if (i == 1 && len >= 3)
-			s->img = get_number_img(data, txt[len - 3]);
+			s->img = get_number_img(data, txt[len - 3], &s->img);
 		else if (i == 0 && len == 4)
-			s->img = get_number_img(data, txt[len - 4]);
+			s->img = get_number_img(data, txt[len - 4], &s->img);
 		i++;
 		s = s->next;
 	}
+	free(txt);
 }
 
 static void	init_number(t_data *data, int i)
@@ -84,13 +85,11 @@ static void	init_number(t_data *data, int i)
 	int		sx;
 	t_sprt	*s;
 
-	// sx = (data->w / 2) - TILE_SIZE * 2;
-	// sx = 0;
 	sx = data->w - SCORE_LEN * TILE_SIZE;
 	s = malloc(sizeof(t_sprt));
 	s->v.x = sx + i * TILE_SIZE;
 	s->v.y = data->map.height;
-	s->img = get_number_img(data, '0');
+	s->img = get_number_img(data, '0', NULL);
 	s->next = NULL;
 	if (!data->panel.score)
 		data->panel.score = s;

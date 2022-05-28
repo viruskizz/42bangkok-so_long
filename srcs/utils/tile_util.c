@@ -51,7 +51,6 @@ int	is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2)
 		return (0);
 	if ((v1.y + w1) < (v2.y + o2) || (v1.y + o1) > (v2.y + w2))
 		return (0);
-	// ft_printf("Overlap: E(%d,%d) = P(%d,%d)\n", v1.x, v1.y, v2.x, v2.y);
 	return (1);
 }
 

@@ -26,8 +26,10 @@ t_img	set_img(t_data *data, char *path)
 	return (img);
 }
 
-t_img	get_number_img(t_data *data, char c)
+t_img	get_number_img(t_data *data, char c, t_img *img)
 {
+	if (img)
+		mlx_destroy_image(data->mlx, img->mlx);
 	if (c == '0')
 		return (set_img(data, "numbers/0.xpm"));
 	if (c == '1')

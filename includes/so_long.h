@@ -238,7 +238,7 @@ void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile));
 void	add_sprt_list(t_sprt *list, t_sprt *new);
 
 t_img	set_img(t_data *data, char *path);
-t_img	get_number_img(t_data *data, char c);
+t_img	get_number_img(t_data *data, char c, t_img *img);
 
 void	render_sprts_util(t_data *data, t_sprt *s);
 void	render_sprts_fnc_util(t_data *data, t_sprt *s, void (*f)(t_data*, t_sprt*));

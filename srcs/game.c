@@ -35,15 +35,19 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->enemies);
 	if (data->map.filedata)
 		free(data->map.filedata);
-	if (data->mlx)
-		free(data->mlx);
-	if (data->win)
-		free(data->win);
-	// if (IS_LINUX)
-	// {
-	// 	mlx_destroy_display(data->mlx_ptr); // ONLY Linux
-	// 	free(data->mlx_ptr); // Free ONLY Linux
-	// }
+	if (IS_LINUX)
+	{
+		mlx_clear_window(data->mlx, data->win);
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
+	}
+	else
+	{
+		if (data->mlx)
+			free(data->mlx);
+		if (data->win)
+			free(data->win);
+	}
 	exit(code);
 }
 
