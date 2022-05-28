@@ -22,29 +22,12 @@ void	load_objects(t_data *data)
 
 void	render_objects(t_data *data)
 {
-	t_sprt	*obj;
-
-	obj = data->objs;
-	while (obj)
-	{
-		if (obj->img.mlx)
-			mlx_put_image_to_window(
-				data->mlx, data->win, obj->img.mlx, obj->v.x, obj->v.y);
-		obj = obj->next;
-	}
+	render_sprts_util(data, data->objs);
 }
 
 void	free_objects(t_data *data)
 {
-	t_sprt	*obj;
-
-	obj = data->objs;
-	while (obj)
-	{
-		if (obj->img.mlx)
-			mlx_destroy_image(data->mlx, obj->img.mlx);
-		obj = obj->next;
-	}
+	free_sprts_util(data, data->objs);
 }
 
 static void	new_obj(t_data *data, t_tile t)

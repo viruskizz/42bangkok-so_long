@@ -41,6 +41,7 @@ SRCS		= main.c \
 				enemy.c \
 				enemy_mov.c \
 				handling.c \
+				utils/game_util.c \
 				utils/common_util.c \
 			  utils/vector_util.c \
 			  utils/img_util.c \

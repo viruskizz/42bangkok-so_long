@@ -32,6 +32,7 @@ void	moving_handling(t_data *data, int dirct, int dx, int dy)
 	data->player.nv = nv;
 	data->player.moved++;
 	ft_printf("MOVED: %d\n", data->player.moved);
+	update_score(data);
 }
 
 void	space_handling(t_data *data)

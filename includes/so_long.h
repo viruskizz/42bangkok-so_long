@@ -17,6 +17,7 @@
 # define SPIRIT_SIZE		64
 # define TILE_SIZE			64
 # define ENEMY				1
+# define SCORE_LEN			4
 
 # define RED_PIXEL			0xEB4034
 
@@ -222,6 +223,7 @@ void	load_panel(t_data *data);
 void	render_panel(t_data *data);
 void	load_score(t_data *data);
 void	render_score(t_data *data);
+void	update_score(t_data *data);
 
 void	chk_pos_player(t_data *data);
 void	exit_game(t_data *data, int code);
@@ -243,6 +245,7 @@ void	add_sprt_list(t_sprt *list, t_sprt *new);
 t_img	set_img(t_data *data, char *path);
 t_img	get_number_img(t_data *data, char c);
 
-void	inspect_map(t_data *data, char attr);
+void	render_sprts_util(t_data *data, t_sprt *s);
+void	free_sprts_util(t_data *data, t_sprt *s);
 
 #endif

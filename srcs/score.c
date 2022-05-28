@@ -26,6 +26,32 @@ void	render_score(t_data *data)
 	}
 }
 
+void	update_score(t_data *data)
+{
+	char	*txt;
+	int		len;
+	int		i;
+	t_sprt	*s;
+
+	txt = ft_itoa(data->player.moved);
+	len = ft_strlen(txt);
+	s = data->panel.score;
+	i = 0;
+	while (i < SCORE_LEN)
+	{
+		if (i == 3 && len >= 1)
+			s->img = get_number_img(data, txt[len - 1]);
+		else if (i == 2 && len >= 2)
+			s->img = get_number_img(data, txt[len - 2]);
+		else if (i == 1 && len >= 3)
+			s->img = get_number_img(data, txt[len - 3]);
+		else if (i == 0 && len == 4)
+			s->img = get_number_img(data, txt[len - 4]);
+		i++;
+		s = s->next;
+	}
+}
+
 static void	init_number(t_data *data, int i)
 {
 	int		sx;
