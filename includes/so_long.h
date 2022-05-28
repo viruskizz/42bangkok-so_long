@@ -75,6 +75,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <mlx.h>
+// # include "mlx.h"
 # include "libft.h"
 # include "key.h"
 # include "ft_printf.h"
