@@ -49,5 +49,5 @@ static void	new_bg(t_data *data, t_tile t)
 	if (!data->bg)
 		data->bg = bg;
 	else
-		add_tile_list(data->bg, bg);
+		add_sprt_list(data->bg, bg);
 }

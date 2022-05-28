@@ -66,6 +66,6 @@ static void	new_obj(t_data *data, t_tile t)
 		if (!data->objs)
 			data->objs = obj;
 		else
-			add_tile_list(data->objs, obj);
+			add_sprt_list(data->objs, obj);
 	}
 }

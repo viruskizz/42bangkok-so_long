@@ -24,3 +24,28 @@ t_img	set_img(t_data *data, char *path)
 	free(fpath);
 	return (img);
 }
+
+t_img	get_number_img(t_data *data, char c)
+{
+	if (c == '0')
+		return (set_img(data, "numbers/0.xpm"));
+	if (c == '1')
+		return (set_img(data, "numbers/1.xpm"));
+	if (c == '2')
+		return (set_img(data, "numbers/2.xpm"));
+	if (c == '3')
+		return (set_img(data, "numbers/3.xpm"));
+	if (c == '4')
+		return (set_img(data, "numbers/4.xpm"));
+	if (c == '5')
+		return (set_img(data, "numbers/5.xpm"));
+	if (c == '6')
+		return (set_img(data, "numbers/6.xpm"));
+	if (c == '7')
+		return (set_img(data, "numbers/7.xpm"));
+	if (c == '8')
+		return (set_img(data, "numbers/8.xpm"));
+	if (c == '9')
+		return (set_img(data, "numbers/9.xpm"));
+	return (set_img(data, "numbers/0.xpm"));
+}

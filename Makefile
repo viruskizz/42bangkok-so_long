@@ -31,6 +31,8 @@ SRC_DIR		= ./srcs
 SRCS		= main.c \
 			  game.c \
 				background.c \
+				panel.c \
+				score.c \
 			  map.c \
 			  object.c \
 			  player.c \

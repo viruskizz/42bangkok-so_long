@@ -47,11 +47,12 @@ static void	initial(t_data *data, char *filename)
 	load_file(data, filename);
 	validate_map(data);
 	load_map(data);
-	data->win = mlx_new_window(
-			data->mlx, data->map.width, data->map.height, "SO LONG");
+	data->win = mlx_new_window(data->mlx, data->w, data->h, "SO LONG");
 	if (!data->win)
 		error_game(data, ERROR_WIN, NULL);
 	load_backgrounds(data);
+	load_panel(data);
+	load_score(data);
 	load_objects(data);
 	load_player(data);
 	load_enemies(data);
@@ -74,6 +75,8 @@ static int	render(t_data *data)
 	else
 		data->frame += 1;
 	render_backgrounds(data);
+	render_panel(data);
+	render_score(data);
 	render_objects(data);
 	render_player(data);
 	render_enemies(data);

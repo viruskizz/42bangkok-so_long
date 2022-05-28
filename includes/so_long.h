@@ -158,18 +158,31 @@ typedef struct s_map
 	t_tile	**tiles;
 }	t_map;
 
+typedef struct s_panel
+{
+	int		w;
+	int		h;
+	t_vtr	v;
+	t_sprt	*bg;
+	t_sprt	*score;
+}	t_panel;
+
+
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
 	int		frame;
 	int		stime;
+	int		w;
+	int		h;
 	t_sprt	*bg;
 	t_sprt	player;
 	t_sprt	boss;
 	t_sprt	*enemies;
 	t_sprt	*objs;
 	t_map	map;
+	t_panel	panel;
 }	t_data;
 
 void	load_file(t_data *data, char *filename);
@@ -186,6 +199,7 @@ void	free_objects(t_data *data);
 
 void	load_player(t_data *data);
 void	render_player(t_data *data);
+void	render_text(t_data *data);
 
 void	player_standing(t_data *data);
 void	player_walking(t_data *data);
@@ -204,6 +218,11 @@ void	load_enemies(t_data *data);
 void	render_enemies(t_data *data);
 void	enemy_walking(t_data *data, t_sprt *e);
 
+void	load_panel(t_data *data);
+void	render_panel(t_data *data);
+void	load_score(t_data *data);
+void	render_score(t_data *data);
+
 void	chk_pos_player(t_data *data);
 void	exit_game(t_data *data, int code);
 void	error_game(t_data *data, int code, char *msg);
@@ -219,9 +238,11 @@ t_vtr	set_vtr(int x, int y);
 t_vtr	add_vtr(t_vtr v1, t_vtr v2);
 
 void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile));
-void	add_tile_list(t_sprt *list, t_sprt *new);
+void	add_sprt_list(t_sprt *list, t_sprt *new);
 
 t_img	set_img(t_data *data, char *path);
+t_img	get_number_img(t_data *data, char c);
+
 void	inspect_map(t_data *data, char attr);
 
 #endif

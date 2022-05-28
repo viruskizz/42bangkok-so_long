@@ -92,6 +92,8 @@ static void	init_map_data(t_data *data, char *file)
 		data->map.filedata = file;
 		data->map.width = data->map.grid_x * TILE_SIZE;
 		data->map.height = data->map.grid_y * TILE_SIZE;
+		data->w = data->map.width;
+		data->h = data->map.height + TILE_SIZE;
 	}
 }
 

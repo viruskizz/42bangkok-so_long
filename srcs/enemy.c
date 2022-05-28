@@ -41,7 +41,7 @@ static void	new_enemy(t_data *data, t_tile t)
 	if (!data->enemies)
 		data->enemies = e;
 	else
-		add_tile_list(data->enemies, e);
+		add_sprt_list(data->enemies, e);
 }
 
 static void	move_enemies(t_data *data, t_sprt *e)

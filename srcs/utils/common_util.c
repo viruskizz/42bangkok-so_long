@@ -20,7 +20,7 @@ void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile))
 	}
 }
 
-void	add_tile_list(t_sprt *list, t_sprt *new)
+void	add_sprt_list(t_sprt *list, t_sprt *new)
 {
 	t_sprt	*tmp;
 
