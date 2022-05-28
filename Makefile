@@ -1,6 +1,6 @@
 NAME		= so_long
 CC			= gcc
-# CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 RM			= /bin/rm -f
 
 LIBFT_DIR	= libft
@@ -68,13 +68,8 @@ linux:
 refast: cleanbuild $(OBJS)
 	$(CC) -g $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
-ifeq ($(UNAME), Linux)
 $(NAME): $(OBJS) libs
 		$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLX_FLAGS) -o $(NAME)
-else
-$(NAME): $(OBJS) libs
-		$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLX_FLAGS) -o $(NAME)
-endif
 
 $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)

@@ -192,7 +192,7 @@ void	load_map(t_data *data);
 void	load_tiles(t_data *data);
 
 void	validate_map(t_data *data);
-int		validate_file_ext(t_data *data, char *filename);
+int		validate_file_ext(char *filename);
 
 void	initial_player(t_data *data, t_tile t);
 void	new_enemy(t_data *data, t_tile t);

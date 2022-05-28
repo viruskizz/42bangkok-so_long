@@ -14,11 +14,9 @@
 
 static int	render(t_data *data);
 static int	keyhandler(int keycode, t_data *data);
-static int	rkeyhandler(int keycode, t_data *data);
 static int	mlx_close(int keycode, t_data *data);
 static void	initial(t_data *data, char *filename);
 
-// int	main(void)
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -55,6 +53,8 @@ static void	initial(t_data *data, char *filename)
 static int	mlx_close(int keycode, t_data *data)
 {
 	ft_printf("Close Game\n");
+	(void) data;
+	(void) keycode;
 	exit(0);
 	return (0);
 }

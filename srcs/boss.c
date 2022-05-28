@@ -29,9 +29,6 @@ static t_sprt	initial_boss(t_data *data, int gx, int gy)
 
 void	load_boss(t_data *data)
 {
-	int	gx;
-	int	gy;
-
 	data->boss = initial_boss(data, 2, 2);
 }
 

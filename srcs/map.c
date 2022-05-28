@@ -14,10 +14,9 @@
 
 static void	init_map_data(t_data *data, int is_init);
 
-static t_tile	new_tile(t_data *data, char type, int x, int y)
+static t_tile	new_tile(char type, int x, int y)
 {
 	t_tile	tile;
-	t_img	img;
 
 	tile.type = type;
 	tile.v.x = x;
@@ -69,8 +68,7 @@ void	load_tiles(t_data *data)
 		data->map.tiles[gy] = malloc(sizeof(t_tile) * data->map.grid_x);
 		while (*str != '\n' && *str)
 		{
-			data->map.tiles[gy][gx] = new_tile(
-					data, *str, gx * TILE_SIZE, gy * TILE_SIZE);
+			data->map.tiles[gy][gx] = new_tile(*str, gx * TILE_SIZE, gy * TILE_SIZE);
 			gx++;
 			str++;
 		}

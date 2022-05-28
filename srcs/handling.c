@@ -52,7 +52,6 @@ void	space_handling(t_data *data)
 static void	collect_object(t_data *data, t_tile t)
 {
 	t_sprt	*obj;
-	t_sprt	p;
 
 	obj = data->objs;
 	while (obj)

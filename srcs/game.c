@@ -37,9 +37,9 @@ void	exit_game(t_data *data, int code)
 		free(data->map.filedata);
 	if (IS_LINUX)
 	{
-		mlx_clear_window(data->mlx, data->win);
-		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_display(data->mlx);
+		// mlx_clear_window(data->mlx, data->win);
+		// mlx_destroy_window(data->mlx, data->win);
+		// mlx_destroy_display(data->mlx);
 	}
 	else
 	{
