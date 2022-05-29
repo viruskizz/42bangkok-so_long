@@ -145,6 +145,7 @@ void	new_bg(t_data *data, t_tile t);
 void	render_player(t_data *data);
 void	check_player(t_data *data);
 void	check_object_player(t_data *data, t_tile t);
+void	player_switch_acting(t_data *data);
 void	player_standing(t_data *data);
 void	player_walking(t_data *data);
 void	player_collecting(t_data *data);

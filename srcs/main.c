@@ -68,7 +68,6 @@ static int	render(t_data *data)
 
 static int	keyhandler(int keycode, t_data *data)
 {
-	ft_printf("key: %d\n", keycode);
 	if (keycode == KEY_LEFT || keycode == KEY_A)
 		moving_handling(data, DIRCT_LEFT);
 	if (keycode == KEY_RIGHT || keycode == KEY_D)

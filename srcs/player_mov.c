@@ -12,6 +12,20 @@
 
 #include "so_long.h"
 
+void	player_switch_acting(t_data *data)
+{
+	t_sprt	p;
+
+	p = data->player;
+	mlx_destroy_image(data->mlx, p.img.mlx);
+	if (p.act == ACT_FALLEN)
+		data->player.img = set_img(data, SPRITE_FALLEN_PATH);
+	else if (p.act == ACT_SLEEP)
+		data->player.img = set_img(data, SPRITE_SLEEP_PATH);
+	else if (p.act == ACT_SIT)
+		data->player.img = set_img(data, SPRITE_KNEEL_PATH);
+}
+
 void	player_standing(t_data *data)
 {
 	t_sprt	p;

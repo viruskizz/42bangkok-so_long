@@ -53,7 +53,9 @@ void	ctrl_handling(t_data *data, int is_release)
 	if (is_release)
 	{
 		if (data->player.act == ACT_SLEEP)
+		{
 			data->player.act = ACT_STAND;
+		}
 	}
 	else
 	{
