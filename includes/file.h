@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/30 01:25:08 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/05/30 01:25:09 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FILE_H
-#define FILE_H
+# define FILE_H
 // # define MAP_FILE				"maps/simple.ber"
 // # define MAP_FILE				"maps/errors/test"
 // # define MAP_FILE				"maps/errors/empty.ber"

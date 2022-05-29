@@ -45,15 +45,10 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->panel.bg);
 	free_sprts_util(data, data->panel.score);
 	free_sprts_util(data, data->enemies);
+	mlx_destroy_image(data->mlx, data->player.img.mlx);
+	free_map_tiles(data);
 	if (data->map.filedata)
 		free(data->map.filedata);
-	if (!IS_LINUX)
-	{
-		if (data->mlx)
-			free(data->mlx);
-		if (data->win)
-			free(data->win);
-	}
 	exit(code);
 }
 

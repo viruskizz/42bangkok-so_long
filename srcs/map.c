@@ -78,6 +78,20 @@ void	load_tiles(t_data *data)
 	}
 }
 
+void	free_map_tiles(t_data *data)
+{
+	int		gy;
+
+	gy = 0;
+	ft_printf("freeing\n");
+	while (gy < data->map.grid_y)
+	{
+		free(data->map.tiles[gy]);
+		gy++;
+	}
+	free(data->map.tiles);
+}
+
 static void	init_map_data(t_data *data, int is_init)
 {
 	if (is_init)

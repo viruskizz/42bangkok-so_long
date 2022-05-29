@@ -43,7 +43,7 @@ typedef struct s_vtr
 {
 	int		x;
 	int		y;
-} t_vtr;
+}	t_vtr;
 
 typedef struct s_img
 {
@@ -102,7 +102,6 @@ typedef struct s_panel
 	t_sprt	*score;
 }	t_panel;
 
-
 typedef struct s_data
 {
 	void	*mlx;
@@ -130,6 +129,7 @@ void	load_score(t_data *data);
 
 void	validate_map(t_data *data);
 int		validate_file_ext(char *filename);
+void	free_map_tiles(t_data *data);
 
 void	load_game(t_data *data);
 void	render_game(t_data *data);
@@ -163,7 +163,6 @@ void	ctrl_handling(t_data *data, int is_release);
 void	enter_handling(t_data *data);
 void	update_score(t_data *data);
 
-
 t_tile	get_tile(t_data *data, t_vtr v);
 t_tile	random_free_tile(t_data *data, int r, int t);
 int		is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2);
@@ -178,7 +177,8 @@ t_img	get_number_img(t_data *data, char c, t_img *img);
 void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile));
 void	add_sprt_list(t_sprt *list, t_sprt *new);
 void	render_sprts_util(t_data *data, t_sprt *s);
-void	render_sprts_fnc_util(t_data *data, t_sprt *s, void (*f)(t_data*, t_sprt*));
+void	render_sprts_fnc_util(t_data *data, t_sprt *s,
+			void (*f)(t_data*, t_sprt*));
 void	free_sprts_util(t_data *data, t_sprt *s);
 
 #endif
