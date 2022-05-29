@@ -87,11 +87,10 @@ static void	init_map_data(t_data *data, int is_init)
 		data->map.exit = 0;
 		data->map.player = 0;
 		data->map.boss = 1;
-		data->map.enemy = 1;
+		data->map.enemy = 0;
 	}
 	else
 	{
-		data->n_enemy = data->map.enemy;
 		data->map.width = data->map.grid_x * data->bsize;
 		data->map.height = data->map.grid_y * data->bsize;
 		data->w = data->map.width;

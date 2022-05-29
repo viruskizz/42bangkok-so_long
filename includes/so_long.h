@@ -150,6 +150,7 @@ void	player_moving(t_data *data);
 void	player_hurting(t_data *data);
 
 void	render_enemies(t_data *game);
+void	respawn_enemies(t_data *data);
 
 // void	moving_handling(t_data *data, int dirct, int dx, int dy);
 void	moving_handling(t_data *data, int dirct);
@@ -158,7 +159,7 @@ void	update_score(t_data *data);
 
 
 t_tile	get_tile(t_data *data, t_vtr v);
-t_tile	random_free_tile(t_data *data, int r);
+t_tile	random_free_tile(t_data *data, int r, int t);
 int		is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2);
 
 t_vtr	set_vtr(int x, int y);

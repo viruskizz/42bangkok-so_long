@@ -33,17 +33,14 @@ void	render_enemies(t_data *game)
 
 void	respawn_enemies(t_data *game)
 {
-	t_sprt	e;
-	int		i;
+	t_tile	t;
 
-	if (game->map.enemy == game->n_enemy)
+	if (game->map.enemy >= ENEMY)
 		return ;
-	i = game->map.enemy;
-	while (i <= game->n_enemy)
-	{
-		i++;
-		game->n_enemy++;
-	}
+	t = random_free_tile(game, FRAME_RATE / 2, game->map.enemy);
+	t.type = 'M';
+	new_enemy(game, t);
+	game->map.enemy++;
 }
 
 static void	enemy_walking(t_data *data, t_sprt *e)

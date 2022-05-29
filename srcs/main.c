@@ -67,9 +67,12 @@ static int	render(t_data *data)
 	{
 		data->frame = 0;
 		data->stime += 1;
+		if (data->stime % 3 == 0)
+			respawn_enemies(data);
 	}
 	else
 		data->frame += 1;
+
 	render_game(data);
 	check_player(data);
 	return (0);
