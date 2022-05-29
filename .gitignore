@@ -4,3 +4,5 @@
 *.a
 .DS_STORE
 so_long
+build
+ft_printf/*.a
