@@ -40,7 +40,7 @@ t_vtr	get_move_vtr(int drct, int msize)
 	if (msize == 0)
 		m = TILE_SIZE;
 	else
-		m = msize;
+		m = msize * TILE_SIZE / 32;
 	if (drct == DIRCT_LEFT)
 		v.x = m * -1;
 	if (drct == DIRCT_RIGHT)

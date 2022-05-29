@@ -14,7 +14,7 @@
 # define GAME_H
 # define FRAME_RATE			60
 # define BUF_SIZE			4098
-# define TILE_SIZE			32
+# define TILE_SIZE			64
 # define ENEMY				10
 # define SPAWN_RATE			3
 # define SCORE_LEN			4
