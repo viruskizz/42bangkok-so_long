@@ -12,56 +12,24 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define FRAME_RATE			60
-# define BUF_SIZE			4098
-# define SPIRIT_SIZE		64
-# define TILE_SIZE			64
-# define ENEMY				1
-# define SCORE_LEN			4
 
-# define RED_PIXEL			0xEB4034
+# include <stdint.h>
+# include <stdlib.h>
+# include <mlx.h>
+# include "ft_printf.h"
+# include "libft.h"
+# include "game.h"
+# include "key.h"
+# include "sprite.h"
+# include "file.h"
 
-# define EXIT_SUCCEED		1
+# define EXIT_SUCCEED		0
 # define EXIT_FAILURE		1
-
 # define ERROR_MLX 			1
 # define ERROR_WIN			2
 # define ERROR_FILE_OPEN	10
 # define ERROR_FILE_TYPE	11
 # define ERROR_MAP_INVALID	20
-
-# define OBJECT_WALL_PATH			"objects/wall.xpm"
-# define OBJECT_ITEM_PATH			"objects/elixir_small.xpm"
-# define OBJECT_GRASS_PATH			"objects/grass.xpm"
-# define OBJECT_EXIT_PATH			"objects/door.xpm"
-# define SPRITE_STAND_LEFT_PATH		"players/cele_stand_left.xpm"
-# define SPRITE_STAND_RIGHT_PATH	"players/cele_stand_right.xpm"
-# define SPRITE_STAND_UP_PATH		"players/cele_stand_up.xpm"
-# define SPRITE_STAND_DOWN_PATH		"players/cele_stand_down.xpm"
-# define SPRITE_KNEEL_PATH			"players/cele_sit.xpm"
-# define SPRITE_HURT_PATH			"players/cele_hurt.xpm"
-# define SPRITE_FALLEN_PATH			"players/cele_fallen.xpm"
-# define SPRITE_WALK_LEFT1_PATH		"players/cele_walk_left_1.xpm"
-# define SPRITE_WALK_LEFT2_PATH		"players/cele_walk_left_2.xpm"
-# define SPRITE_WALK_RIGHT1_PATH	"players/cele_walk_right_1.xpm"
-# define SPRITE_WALK_RIGHT2_PATH	"players/cele_walk_right_2.xpm"
-# define SPRITE_WALK_UP1_PATH		"players/cele_walk_up_1.xpm"
-# define SPRITE_WALK_UP2_PATH		"players/cele_walk_up_2.xpm"
-# define SPRITE_WALK_DOWN1_PATH		"players/cele_walk_down_1.xpm"
-# define SPRITE_WALK_DOWN2_PATH		"players/cele_walk_down_2.xpm"
-# define BOSS_PATH					"bosses/altos.xpm"
-# define ENEMY_STAND_LEFT_PATH		"enemies/ghost_stand_left.xpm"
-# define ENEMY_STAND_RIGHT_PATH		"enemies/ghost_stand_right.xpm"
-# define ENEMY_STAND_BACK_PATH		"enemies/ghost_stand_back.xpm"
-# define ENEMY_STAND_FRONT_PATH		"enemies/ghost_stand_front.xpm"
-# define ENEMY_WALK_LEFT1_PATH		"enemies/ghost_walk_left_1.xpm"
-# define ENEMY_WALK_LEFT2_PATH		"enemies/ghost_walk_left_2.xpm"
-# define ENEMY_WALK_RIGHT1_PATH		"enemies/ghost_walk_right_1.xpm"
-# define ENEMY_WALK_RIGHT2_PATH		"enemies/ghost_walk_right_2.xpm"
-# define ENEMY_WALK_UP1_PATH		"enemies/ghost_walk_back_1.xpm"
-# define ENEMY_WALK_UP2_PATH		"enemies/ghost_walk_back_2.xpm"
-# define ENEMY_WALK_DOWN1_PATH		"enemies/ghost_walk_front_1.xpm"
-# define ENEMY_WALK_DOWN2_PATH		"enemies/ghost_walk_front_2.xpm"
 
 # ifdef __linux__
 #  define IS_LINUX 1
@@ -70,41 +38,6 @@
 #  define IS_LINUX 0
 #  define OS "MAC"
 # endif
-
-# include <stdio.h>
-# include <stdint.h>
-# include <stdlib.h>
-# include <mlx.h>
-// # include "mlx.h"
-# include "libft.h"
-# include "key.h"
-# include "ft_printf.h"
-
-// # define MAP_FILE	"maps/simple.ber"
-// # define MAP_FILE	"maps/errors/test"
-// # define MAP_FILE	"maps/errors/empty.ber"
-// # define MAP_FILE	"maps/errors/not_rect.ber"
-// # define MAP_FILE	"maps/errors/no_file.ber"
-// # define MAP_FILE	"maps/errors/no_exit.ber"
-// # define MAP_FILE	"maps/errors/no_item.ber"
-// # define MAP_FILE	"maps/errors/no_sprite.ber"
-// # define MAP_FILE	"maps/errors/no_wall.ber"
-// # define MAP_FILE		"maps/simple.ber"
-# define MAP_FILE		"maps/simple_mon.ber"
-// # define MAP_FILE	"maps/large.ber"
-# define ACT_STAND		0
-# define ACT_SIT		1
-# define ACT_WALK		2
-# define ACT_WALK_L		21
-# define ACT_WALK_R		22
-# define ACT_COLLECTED	3
-# define ACT_HURTING	4
-# define ACT_FALLEN		9
-
-# define DIRCT_LEFT		1
-# define DIRCT_UP		2
-# define DIRCT_RIGHT	3
-# define DIRCT_DOWN		4
 
 typedef struct s_vtr
 {
@@ -132,16 +65,16 @@ typedef struct s_tile
 
 typedef struct s_sprt
 {
-	t_vtr	v;
-	t_vtr	nv;
-	t_img	img;
-	char	type;
-	int		act;
-	int		n_act;
-	int		face;
-	int		item;
-	int		moved;
-	int		animating;
+	t_vtr			v;
+	t_vtr			nv;
+	t_img			img;
+	char			type;
+	int				act;
+	int				n_act;
+	int				face;
+	int				item;
+	int				moved;
+	int				animating;
 	struct s_sprt	*next;
 }	t_sprt;
 
