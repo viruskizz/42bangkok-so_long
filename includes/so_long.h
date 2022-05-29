@@ -133,6 +133,7 @@ int		validate_file_ext(char *filename);
 
 void	load_game(t_data *data);
 void	render_game(t_data *data);
+int		close_game(int keycode, t_data *data);
 void	exit_game(t_data *data, int code);
 void	error_game(t_data *data, int code, char *msg);
 
@@ -146,7 +147,7 @@ void	check_player(t_data *data);
 void	check_object_player(t_data *data, t_tile t);
 void	player_standing(t_data *data);
 void	player_walking(t_data *data);
-void	player_collect(t_data *data);
+void	player_collecting(t_data *data);
 void	player_moving(t_data *data);
 void	player_hurting(t_data *data);
 void	player_sleeping(t_data *data);

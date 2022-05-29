@@ -68,7 +68,8 @@ void	load_tiles(t_data *data)
 		data->map.tiles[gy] = malloc(sizeof(t_tile) * data->map.grid_x);
 		while (*str != '\n' && *str)
 		{
-			data->map.tiles[gy][gx] = new_tile(*str, gx * data->bsize, gy * data->bsize);
+			data->map.tiles[gy][gx] = new_tile(
+					*str, gx * data->bsize, gy * data->bsize);
 			gx++;
 			str++;
 		}

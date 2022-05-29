@@ -81,3 +81,12 @@ void	error_game(t_data *data, int code, char *msg)
 	free(data->map.filedata);
 	exit(1);
 }
+
+int	close_game(int keycode, t_data *data)
+{
+	ft_printf("Close Game\n");
+	(void) data;
+	(void) keycode;
+	exit(0);
+	return (0);
+}

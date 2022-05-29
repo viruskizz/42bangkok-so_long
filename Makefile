@@ -40,6 +40,7 @@ SRCS		=	main.c \
 				map.c \
 				player.c \
 				player_mov.c \
+				player_mov2.c \
 				enemy.c \
 				handling.c \
 				init.c \

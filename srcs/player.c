@@ -27,10 +27,7 @@ void	render_player(t_data *data)
 		player_walking(data);
 	}
 	else if (p.act == ACT_SLEEP)
-	{
-		// ft_printf("Sleeping\n");
 		data->player.img = set_img(data, SPRITE_SLEEP_PATH);
-	}
 	else if (p.act == ACT_SIT)
 		data->player.img = set_img(data, SPRITE_KNEEL_PATH);
 	else if (p.act == ACT_INTERACT)
@@ -38,8 +35,7 @@ void	render_player(t_data *data)
 	else if (p.act == ACT_STAND)
 		player_standing(data);
 	else if (p.act == ACT_COLLECTED)
-		player_collect(data);
-	// ft_printf("ACT: %d\n", p.act);
+		player_collecting(data);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->player.img.mlx, data->player.v.x, data->player.v.y);
 }

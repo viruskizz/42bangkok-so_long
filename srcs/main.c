@@ -15,10 +15,7 @@
 static int	render(t_data *data);
 static int	keyhandler(int keycode, t_data *data);
 static int	rkeyhandler(int keycode, t_data *data);
-static int	mlx_close(int keycode, t_data *data);
 static void	initial(t_data *data, char *filename);
-
-int	g_bsize = TILE_SIZE;
 
 int	main(int argc, char **argv)
 {
@@ -30,12 +27,11 @@ int	main(int argc, char **argv)
 	else
 		filename = argv[1];
 	data.bsize = TILE_SIZE;
-	g_bsize = data.bsize;
 	initial(&data, filename);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_RELEASE, 1L << 1, &rkeyhandler, &data);
-	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
+	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &close_game, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }
@@ -54,15 +50,6 @@ static void	initial(t_data *data, char *filename)
 	load_game(data);
 }
 
-static int	mlx_close(int keycode, t_data *data)
-{
-	ft_printf("Close Game\n");
-	(void) data;
-	(void) keycode;
-	exit(0);
-	return (0);
-}
-
 static int	render(t_data *data)
 {
 	if (data->frame == FRAME_RATE)
@@ -74,7 +61,6 @@ static int	render(t_data *data)
 	}
 	else
 		data->frame += 1;
-
 	render_game(data);
 	check_player(data);
 	return (0);
