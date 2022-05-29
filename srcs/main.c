@@ -67,7 +67,7 @@ static int	render(t_data *data)
 	{
 		data->frame = 0;
 		data->stime += 1;
-		if (data->stime % 3 == 0)
+		if (data->stime % SPAWN_RATE == 0)
 			respawn_enemies(data);
 	}
 	else
