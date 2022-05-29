@@ -14,26 +14,6 @@
 
 static void	collect_object(t_data *data, t_tile t);
 
-// void	moving_handling(t_data *data, int dirct, int dx, int dy)
-// {
-// 	t_tile	nt;
-// 	t_vtr	nv;
-
-// 	if (data->player.act != ACT_STAND)
-// 		return ;
-// 	data->player.act = ACT_WALK;
-// 	data->player.face = dirct;
-// 	nv.x = data->player.v.x + dx;
-// 	nv.y = data->player.v.y + dy;
-// 	nt = get_tile(data, nv);
-// 	if (nt.type == '1')
-// 		return ;
-// 	data->player.nv = nv;
-// 	data->player.moved++;
-// 	ft_printf("MOVED: %d\n", data->player.moved);
-// 	update_score(data);
-// }
-
 void	moving_handling(t_data *data, int dirct)
 {
 	t_tile	nt;
@@ -68,6 +48,37 @@ void	space_handling(t_data *data)
 		data->player.act = ACT_STAND;
 	if (t.type == 'C')
 		collect_object(data, t);
+}
+
+void	ctrl_handling(t_data *data, int is_release)
+{
+	if (is_release)
+	{
+		if (data->player.act == ACT_SLEEP)
+			data->player.act = ACT_STAND;
+	}
+	else
+	{
+		if (data->player.act == ACT_STAND)
+			data->player.act = ACT_SLEEP;
+	}
+}
+
+void	enter_handling(t_data *data)
+{
+	// t_tile	t;
+	// t_sprt	p;
+
+	if (data->player.act != ACT_STAND)
+		return ;
+	data->player.act = ACT_INTERACT;
+	// t = get_tile(data, data->player.v);
+	// p = data->player;
+	// if (t.type == 'E')
+	// {
+	// 	if (data->map.item == p.item)
+	// 		exit_game(data, EXIT_SUCCEED);
+	// }
 }
 
 static void	collect_object(t_data *data, t_tile t)

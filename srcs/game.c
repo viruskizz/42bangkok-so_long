@@ -33,8 +33,8 @@ void	render_game(t_data *data)
 	render_sprts_util(data, data->panel.bg);
 	render_sprts_util(data, data->panel.score);
 	render_sprts_util(data, data->objs);
-	render_enemies(data);
 	render_player(data);
+	render_enemies(data);
 }
 
 void	exit_game(t_data *data, int code)

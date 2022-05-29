@@ -14,6 +14,7 @@
 
 static int	render(t_data *data);
 static int	keyhandler(int keycode, t_data *data);
+static int	rkeyhandler(int keycode, t_data *data);
 static int	mlx_close(int keycode, t_data *data);
 static void	initial(t_data *data, char *filename);
 
@@ -33,6 +34,7 @@ int	main(int argc, char **argv)
 	initial(&data, filename);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
+	mlx_hook(data.win, X_EVENT_KEY_RELEASE, 1L << 1, &rkeyhandler, &data);
 	mlx_hook(data.win, X_EVENT_KEY_EXIT, 1L << 0, &mlx_close, &data);
 	mlx_loop(data.mlx);
 	return (0);
@@ -91,7 +93,18 @@ static int	keyhandler(int keycode, t_data *data)
 		moving_handling(data, DIRCT_UP);
 	if (keycode == KEY_SPACE)
 		space_handling(data);
+	if (keycode == KEY_CTRL)
+		ctrl_handling(data, 0);
+	if (keycode == KEY_ENTER)
+		enter_handling(data);
 	if (keycode == KEY_ESC)
 		exit_game(data, EXIT_SUCCEED);
+	return (0);
+}
+
+static int	rkeyhandler(int keycode, t_data *data)
+{
+	if (keycode == KEY_CTRL)
+		ctrl_handling(data, 1);
 	return (0);
 }

@@ -148,13 +148,16 @@ void	player_walking(t_data *data);
 void	player_collect(t_data *data);
 void	player_moving(t_data *data);
 void	player_hurting(t_data *data);
+void	player_sleeping(t_data *data);
+void	player_interacting(t_data *data);
 
 void	render_enemies(t_data *game);
 void	respawn_enemies(t_data *data);
 
-// void	moving_handling(t_data *data, int dirct, int dx, int dy);
 void	moving_handling(t_data *data, int dirct);
 void	space_handling(t_data *data);
+void	ctrl_handling(t_data *data, int is_release);
+void	enter_handling(t_data *data);
 void	update_score(t_data *data);
 
 

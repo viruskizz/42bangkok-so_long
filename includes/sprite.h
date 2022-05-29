@@ -8,6 +8,8 @@
 # define ACT_WALK_R		22
 # define ACT_COLLECTED	3
 # define ACT_HURTING	4
+# define ACT_INTERACT	5
+# define ACT_SLEEP		8
 # define ACT_FALLEN		9
 
 # define DIRCT_LEFT		1

@@ -28,6 +28,8 @@
 #  define KEY_D				100
 #  define KEY_W				119
 # else
+#  define KEY_CTRL			256
+#  define KEY_ENTER			36
 #  define KEY_SPACE			49
 #  define KEY_ESC			53
 #  define KEY_LEFT			123
