@@ -12,6 +12,41 @@
 
 #include "so_long.h"
 
+void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile))
+{
+	t_tile	t;
+	int		gx;
+	int		gy;
+
+	gy = 0;
+	while (gy < data->map.grid_y)
+	{
+		gx = 0;
+		while (gx < data->map.grid_x)
+		{
+			t = data->map.tiles[gy][gx];
+			f(data, t);
+			gx++;
+		}
+		gy++;
+	}
+}
+
+void	add_sprt_list(t_sprt *list, t_sprt *new)
+{
+	t_sprt	*tmp;
+
+	if (!list)
+		list = new;
+	else
+	{
+		tmp = list;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
 void	render_sprts_util(t_data *data, t_sprt *s)
 {
 	while (s)
@@ -41,10 +76,10 @@ void	free_sprts_util(t_data *data, t_sprt *s)
 	t_sprt	*tmp;
 
 	tmp = s;
-	while (s)
+	while (tmp)
 	{
-		if (s->img.mlx)
-			mlx_destroy_image(data->mlx, s->img.mlx);
-		s = s->next;
+		if (tmp->img.mlx)
+			mlx_destroy_image(data->mlx, tmp->img.mlx);
+		tmp = tmp->next;
 	}
 }

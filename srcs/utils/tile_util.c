@@ -17,8 +17,8 @@ t_tile	get_tile(t_data *data, t_vtr v)
 	int	gx;
 	int	gy;
 
-	gx = v.x / SPIRIT_SIZE;
-	gy = v.y / SPIRIT_SIZE;
+	gx = v.x / data->bsize;
+	gy = v.y / data->bsize;
 	return (data->map.tiles[gy][gx]);
 }
 
@@ -51,11 +51,10 @@ int	is_ovelap_tile(t_vtr v1, t_vtr v2, int o1, int o2)
 		return (0);
 	if ((v1.y + w1) < (v2.y + o2) || (v1.y + o1) > (v2.y + w2))
 		return (0);
-	// ft_printf("Overlap: E(%d,%d) = P(%d,%d)\n", v1.x, v1.y, v2.x, v2.y);
 	return (1);
 }
 
-t_tile	random_free_tile(t_data *data, int r)
+t_tile	random_free_tile(t_data *data, int r, int t)
 {
 	t_tile	**tiles;
 	t_tile	ft;
@@ -69,10 +68,10 @@ t_tile	random_free_tile(t_data *data, int r)
 		gx = 0;
 		while (gx < data->map.grid_x)
 		{
-			if (tiles[gy][gx].type == '0')
+			if (tiles[gy][gx].type == '0' && --t < 0)
 			{
 				ft = tiles[gy][gx];
-				if (data->frame % 60 <= r)
+				if (data->frame % 60 < r)
 					return (ft);
 			}
 			gx++;

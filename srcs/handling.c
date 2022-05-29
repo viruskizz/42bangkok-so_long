@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_handling.c                                     :+:      :+:    :+:   */
+/*   handling.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: araiva <tsomsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/27 02:21:27 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/05/27 02:21:28 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/05/29 23:55:44 by araiva            #+#    #+#             */
+/*   Updated: 2022/05/29 23:55:45 by araiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	collect_object(t_data *data, t_tile t);
-
-void	moving_handling(t_data *data, int dirct, int dx, int dy)
+void	moving_handling(t_data *data, int dirct)
 {
 	t_tile	nt;
+	t_vtr	mv;
 	t_vtr	nv;
 
 	if (data->player.act != ACT_STAND)
 		return ;
 	data->player.act = ACT_WALK;
 	data->player.face = dirct;
-	nv.x = data->player.v.x + dx;
-	nv.y = data->player.v.y + dy;
+	mv = get_move_vtr(data->player.face, 0);
+	nv = add_vtr(data->player.v, mv);
 	nt = get_tile(data, nv);
 	if (nt.type == '1')
 		return ;
@@ -46,28 +45,28 @@ void	space_handling(t_data *data)
 	else if (p.act == ACT_SIT)
 		data->player.act = ACT_STAND;
 	if (t.type == 'C')
-		collect_object(data, t);
+		check_object_player(data, t);
 }
 
-static void	collect_object(t_data *data, t_tile t)
+void	ctrl_handling(t_data *data, int is_release)
 {
-	t_sprt	*obj;
-	t_sprt	p;
-
-	obj = data->objs;
-	while (obj)
+	if (is_release)
 	{
-		if (obj->v.x == t.v.x && obj->v.y == t.v.y && t.type == 'C')
+		if (data->player.act == ACT_SLEEP)
 		{
-			if (obj->img.mlx)
-			{
-				mlx_destroy_image(data->mlx, obj->img.mlx);
-				obj->img.mlx = NULL;
-				data->player.act = ACT_COLLECTED;
-				data->player.item++;
-			}
-			return ;
+			data->player.act = ACT_STAND;
 		}
-		obj = obj->next;
 	}
+	else
+	{
+		if (data->player.act == ACT_STAND)
+			data->player.act = ACT_SLEEP;
+	}
+}
+
+void	enter_handling(t_data *data)
+{
+	if (data->player.act != ACT_STAND)
+		return ;
+	data->player.act = ACT_INTERACT;
 }

@@ -15,38 +15,42 @@
 t_img	set_img(t_data *data, char *path)
 {
 	t_img	img;
-	void	*mlx;
 	char	*dir;
 	char	*fpath;
 
-	dir = "images/sprites_64x64/";
+	if (TILE_SIZE == 32)
+		dir = "images/sprites_32x32/";
+	else
+		dir = "images/sprites_64x64/";
 	fpath = ft_strjoin(dir, path);
 	img.mlx = mlx_xpm_file_to_image(data->mlx, fpath, &img.w, &img.h);
 	free(fpath);
 	return (img);
 }
 
-t_img	get_number_img(t_data *data, char c)
+t_img	get_number_img(t_data *data, char c, t_img *img)
 {
+	if (img)
+		mlx_destroy_image(data->mlx, img->mlx);
 	if (c == '0')
-		return (set_img(data, "numbers/0.xpm"));
+		return (set_img(data, TEXT_NUMBER_0));
 	if (c == '1')
-		return (set_img(data, "numbers/1.xpm"));
+		return (set_img(data, TEXT_NUMBER_1));
 	if (c == '2')
-		return (set_img(data, "numbers/2.xpm"));
+		return (set_img(data, TEXT_NUMBER_2));
 	if (c == '3')
-		return (set_img(data, "numbers/3.xpm"));
+		return (set_img(data, TEXT_NUMBER_3));
 	if (c == '4')
-		return (set_img(data, "numbers/4.xpm"));
+		return (set_img(data, TEXT_NUMBER_4));
 	if (c == '5')
-		return (set_img(data, "numbers/5.xpm"));
+		return (set_img(data, TEXT_NUMBER_5));
 	if (c == '6')
-		return (set_img(data, "numbers/6.xpm"));
+		return (set_img(data, TEXT_NUMBER_6));
 	if (c == '7')
-		return (set_img(data, "numbers/7.xpm"));
+		return (set_img(data, TEXT_NUMBER_7));
 	if (c == '8')
-		return (set_img(data, "numbers/8.xpm"));
+		return (set_img(data, TEXT_NUMBER_8));
 	if (c == '9')
-		return (set_img(data, "numbers/9.xpm"));
-	return (set_img(data, "numbers/0.xpm"));
+		return (set_img(data, TEXT_NUMBER_9));
+	return (set_img(data, TEXT_NUMBER_0));
 }

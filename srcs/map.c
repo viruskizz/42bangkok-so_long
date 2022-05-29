@@ -14,10 +14,9 @@
 
 static void	init_map_data(t_data *data, int is_init);
 
-static t_tile	new_tile(t_data *data, char type, int x, int y)
+static t_tile	new_tile(char type, int x, int y)
 {
 	t_tile	tile;
-	t_img	img;
 
 	tile.type = type;
 	tile.v.x = x;
@@ -70,13 +69,26 @@ void	load_tiles(t_data *data)
 		while (*str != '\n' && *str)
 		{
 			data->map.tiles[gy][gx] = new_tile(
-					data, *str, gx * TILE_SIZE, gy * TILE_SIZE);
+					*str, gx * data->bsize, gy * data->bsize);
 			gx++;
 			str++;
 		}
 		str++;
 		gy++;
 	}
+}
+
+void	free_map_tiles(t_data *data)
+{
+	int		gy;
+
+	gy = 0;
+	while (gy < data->map.grid_y)
+	{
+		free(data->map.tiles[gy]);
+		gy++;
+	}
+	free(data->map.tiles);
 }
 
 static void	init_map_data(t_data *data, int is_init)
@@ -89,13 +101,13 @@ static void	init_map_data(t_data *data, int is_init)
 		data->map.exit = 0;
 		data->map.player = 0;
 		data->map.boss = 1;
-		data->map.enemy = 1;
+		data->map.enemy = 0;
 	}
 	else
 	{
-		data->map.width = data->map.grid_x * TILE_SIZE;
-		data->map.height = data->map.grid_y * TILE_SIZE;
+		data->map.width = data->map.grid_x * data->bsize;
+		data->map.height = data->map.grid_y * data->bsize;
 		data->w = data->map.width;
-		data->h = data->map.height + TILE_SIZE;
+		data->h = data->map.height + data->bsize;
 	}
 }

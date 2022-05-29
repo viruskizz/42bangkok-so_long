@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	initial_player(t_data *data, t_tile t)
+void	new_player(t_data *data, t_tile t)
 {
 	t_sprt	p;
 

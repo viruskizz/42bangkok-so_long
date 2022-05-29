@@ -14,7 +14,7 @@
 
 static int	valid_wall(t_map map);
 
-int	validate_file_ext(t_data *data, char *filename)
+int	validate_file_ext(char *filename)
 {
 	int		len;
 	char	*ext;

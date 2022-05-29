@@ -17,12 +17,24 @@ void	load_game(t_data *data)
 	data->objs = NULL;
 	data->bg = NULL;
 	data->enemies = NULL;
+	data->frame = 0;
+	data->stime = 0;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
 	load_score(data);
 	grid_loop_util(data, &new_obj);
-	grid_loop_util(data, &initial_player);
+	grid_loop_util(data, &new_player);
 	grid_loop_util(data, &new_enemy);
+}
+
+void	render_game(t_data *data)
+{
+	render_sprts_util(data, data->bg);
+	render_sprts_util(data, data->panel.bg);
+	render_sprts_util(data, data->panel.score);
+	render_sprts_util(data, data->objs);
+	render_player(data);
+	render_enemies(data);
 }
 
 void	exit_game(t_data *data, int code)
@@ -35,15 +47,12 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->enemies);
 	if (data->map.filedata)
 		free(data->map.filedata);
-	if (data->mlx)
-		free(data->mlx);
-	if (data->win)
-		free(data->win);
-	// if (IS_LINUX)
-	// {
-	// 	mlx_destroy_display(data->mlx_ptr); // ONLY Linux
-	// 	free(data->mlx_ptr); // Free ONLY Linux
-	// }
+	if (IS_LINUX)
+	{
+		mlx_clear_window(data->mlx, data->win);
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
+	}
 	exit(code);
 }
 
@@ -64,4 +73,13 @@ void	error_game(t_data *data, int code, char *msg)
 	}
 	free(data->map.filedata);
 	exit(1);
+}
+
+int	close_game(int keycode, t_data *data)
+{
+	ft_printf("Close Game\n");
+	(void) data;
+	(void) keycode;
+	exit(0);
+	return (0);
 }

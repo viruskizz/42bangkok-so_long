@@ -17,39 +17,33 @@ void	render_player(t_data *data)
 	t_sprt	p;
 
 	p = data->player;
-	if (p.act == ACT_FALLEN)
-		data->player.img = set_img(data, SPRITE_FALLEN_PATH);
-	else if (p.act == ACT_HURTING)
+	if (p.act == ACT_HURTING)
 		player_hurting(data);
 	else if (p.act == ACT_WALK)
 	{
 		player_moving(data);
 		player_walking(data);
 	}
-	else if (p.act == ACT_SIT)
-		data->player.img = set_img(data, SPRITE_KNEEL_PATH);
+	else if (p.act == ACT_INTERACT)
+		player_interacting(data);
 	else if (p.act == ACT_STAND)
 		player_standing(data);
 	else if (p.act == ACT_COLLECTED)
-		player_collect(data);
+		player_collecting(data);
+	else
+		player_switch_acting(data);
 	mlx_put_image_to_window(data->mlx, data->win,
 		data->player.img.mlx, data->player.v.x, data->player.v.y);
 }
 
-void	chk_pos_player(t_data *data)
+void	check_player(t_data *data)
 {
-	t_tile	t;
 	t_sprt	p;
 	t_sprt	*e;
 
 	p = data->player;
-	t = get_tile(data, p.v);
-	if (t.type == 'E')
-	{
-		ft_printf("This is exit\n");
-		if (data->map.item == p.item)
-			exit_game(data, EXIT_SUCCEED);
-	}
+	if (p.act == ACT_SLEEP)
+		return ;
 	e = data->enemies;
 	while (e)
 	{
@@ -59,5 +53,27 @@ void	chk_pos_player(t_data *data)
 				player_hurting(data);
 		}
 		e = e->next;
+	}
+}
+
+void	check_object_player(t_data *data, t_tile t)
+{
+	t_sprt	*obj;
+
+	obj = data->objs;
+	while (obj)
+	{
+		if (obj->v.x == t.v.x && obj->v.y == t.v.y && t.type == 'C')
+		{
+			if (obj->img.mlx)
+			{
+				mlx_destroy_image(data->mlx, obj->img.mlx);
+				obj->img.mlx = NULL;
+				data->player.act = ACT_COLLECTED;
+				data->player.item++;
+			}
+			return ;
+		}
+		obj = obj->next;
 	}
 }
