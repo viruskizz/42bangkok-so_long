@@ -17,8 +17,8 @@ t_tile	get_tile(t_data *data, t_vtr v)
 	int	gx;
 	int	gy;
 
-	gx = v.x / SPIRIT_SIZE;
-	gy = v.y / SPIRIT_SIZE;
+	gx = v.x / data->bsize;
+	gy = v.y / data->bsize;
 	return (data->map.tiles[gy][gx]);
 }
 

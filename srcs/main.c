@@ -17,6 +17,8 @@ static int	keyhandler(int keycode, t_data *data);
 static int	mlx_close(int keycode, t_data *data);
 static void	initial(t_data *data, char *filename);
 
+int	g_bsize = TILE_SIZE;
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -26,6 +28,8 @@ int	main(int argc, char **argv)
 		filename = MAP_FILE;
 	else
 		filename = argv[1];
+	data.bsize = TILE_SIZE;
+	g_bsize = data.bsize;
 	initial(&data, filename);
 	mlx_loop_hook(data.mlx, &render, &data);
 	mlx_hook(data.win, X_EVENT_KEY_PRESS, 1L << 0, &keyhandler, &data);
@@ -73,18 +77,15 @@ static int	render(t_data *data)
 
 static int	keyhandler(int keycode, t_data *data)
 {
-	int	m;
-
 	ft_printf("key: %d\n", keycode);
-	m = TILE_SIZE;
 	if (keycode == KEY_LEFT || keycode == KEY_A)
-		moving_handling(data, DIRCT_LEFT, m * -1, 0);
+		moving_handling(data, DIRCT_LEFT);
 	if (keycode == KEY_RIGHT || keycode == KEY_D)
-		moving_handling(data, DIRCT_RIGHT, m, 0);
+		moving_handling(data, DIRCT_RIGHT);
 	if (keycode == KEY_DOWN || keycode == KEY_S)
-		moving_handling(data, DIRCT_DOWN, 0, m);
+		moving_handling(data, DIRCT_DOWN);
 	if (keycode == KEY_UP || keycode == KEY_W)
-		moving_handling(data, DIRCT_UP, 0, m * -1);
+		moving_handling(data, DIRCT_UP);
 	if (keycode == KEY_SPACE)
 		space_handling(data);
 	if (keycode == KEY_ESC)

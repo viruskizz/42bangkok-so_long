@@ -111,6 +111,8 @@ typedef struct s_data
 	int		stime;
 	int		w;
 	int		h;
+	int		bsize;
+	int		n_enemy;
 	t_sprt	*bg;
 	t_sprt	player;
 	t_sprt	boss;
@@ -147,10 +149,10 @@ void	player_collect(t_data *data);
 void	player_moving(t_data *data);
 void	player_hurting(t_data *data);
 
-void	move_enemies(t_data *data, t_sprt *e);
-void	enemy_walking(t_data *data, t_sprt *e);
+void	render_enemies(t_data *game);
 
-void	moving_handling(t_data *data, int dirct, int dx, int dy);
+// void	moving_handling(t_data *data, int dirct, int dx, int dy);
+void	moving_handling(t_data *data, int dirct);
 void	space_handling(t_data *data);
 void	update_score(t_data *data);
 

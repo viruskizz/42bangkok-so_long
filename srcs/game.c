@@ -33,7 +33,7 @@ void	render_game(t_data *data)
 	render_sprts_util(data, data->panel.bg);
 	render_sprts_util(data, data->panel.score);
 	render_sprts_util(data, data->objs);
-	render_sprts_fnc_util(data, data->enemies, &move_enemies);
+	render_enemies(data);
 	render_player(data);
 }
 

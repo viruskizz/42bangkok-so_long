@@ -61,9 +61,9 @@ void	render_sprts_util(t_data *data, t_sprt *s)
 void	render_sprts_fnc_util(t_data *data, t_sprt *s,
 	void (*f)(t_data*, t_sprt*))
 {
-	while (s)
 	{
-		f(data, s);
+		while (s)
+	f(data, s);
 		if (s->img.mlx)
 			mlx_put_image_to_window(
 				data->mlx, data->win, s->img.mlx, s->v.x, s->v.y);

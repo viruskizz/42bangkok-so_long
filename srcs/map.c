@@ -68,7 +68,7 @@ void	load_tiles(t_data *data)
 		data->map.tiles[gy] = malloc(sizeof(t_tile) * data->map.grid_x);
 		while (*str != '\n' && *str)
 		{
-			data->map.tiles[gy][gx] = new_tile(*str, gx * TILE_SIZE, gy * TILE_SIZE);
+			data->map.tiles[gy][gx] = new_tile(*str, gx * data->bsize, gy * data->bsize);
 			gx++;
 			str++;
 		}
@@ -91,9 +91,10 @@ static void	init_map_data(t_data *data, int is_init)
 	}
 	else
 	{
-		data->map.width = data->map.grid_x * TILE_SIZE;
-		data->map.height = data->map.grid_y * TILE_SIZE;
+		data->n_enemy = data->map.enemy;
+		data->map.width = data->map.grid_x * data->bsize;
+		data->map.height = data->map.grid_y * data->bsize;
 		data->w = data->map.width;
-		data->h = data->map.height + TILE_SIZE;
+		data->h = data->map.height + data->bsize;
 	}
 }

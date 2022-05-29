@@ -18,7 +18,10 @@ t_img	set_img(t_data *data, char *path)
 	char	*dir;
 	char	*fpath;
 
-	dir = "images/sprites_64x64/";
+	if (TILE_SIZE == 32)
+		dir = "images/sprites_32x32/";
+	else
+		dir = "images/sprites_64x64/";
 	fpath = ft_strjoin(dir, path);
 	img.mlx = mlx_xpm_file_to_image(data->mlx, fpath, &img.w, &img.h);
 	free(fpath);
