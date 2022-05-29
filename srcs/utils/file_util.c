@@ -19,10 +19,13 @@ static char	*ft_str_concat(char *dest, char *src);
 
 void	load_file(t_data *data, char *filename)
 {
+	char	*filepath;
 	char	*file;
 
-	file = read_file(data, filename);
+	filepath = ft_strjoin("maps/", filename);
+	file = read_file(data, filepath);
 	data->map.filedata = file;
+	free(filepath);
 }
 
 static char	*read_file(t_data *data, char *filename)

@@ -83,7 +83,6 @@ void	free_map_tiles(t_data *data)
 	int		gy;
 
 	gy = 0;
-	ft_printf("freeing\n");
 	while (gy < data->map.grid_y)
 	{
 		free(data->map.tiles[gy]);

@@ -12,18 +12,6 @@
 
 #ifndef FILE_H
 # define FILE_H
-// # define MAP_FILE				"maps/simple.ber"
-// # define MAP_FILE				"maps/errors/test"
-// # define MAP_FILE				"maps/errors/empty.ber"
-// # define MAP_FILE				"maps/errors/not_rect.ber"
-// # define MAP_FILE				"maps/errors/no_file.ber"
-// # define MAP_FILE				"maps/errors/no_exit.ber"
-// # define MAP_FILE				"maps/errors/no_item.ber"
-// # define MAP_FILE				"maps/errors/no_sprite.ber"
-// # define MAP_FILE				"maps/errors/no_wall.ber"
-// # define MAP_FILE					"maps/simple.ber"
-# define MAP_FILE					"maps/simple_mon.ber"
-// # define MAP_FILE					"maps/large.ber"
 # define TEXT_NUMBER_0				"numbers/0.xpm"
 # define TEXT_NUMBER_1				"numbers/1.xpm"
 # define TEXT_NUMBER_2				"numbers/2.xpm"
