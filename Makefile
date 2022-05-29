@@ -10,6 +10,7 @@ INCLUDE_DIR	= includes
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Linux)
+	SRCS_PLATFORM = game_Linux.c
 	MLX_DIR		= mlx_Linux
 	MLX_FLAGS	= -Imlx_Linux -Lmlx_Linux -lmlx_Linux -lXext -lX11 -lm -lz
 	INCLUDES 	= -I$(INCLUDE_DIR) \
@@ -20,6 +21,7 @@ ifeq ($(UNAME), Linux)
 				  -L$(PRINTF_DIR) -lftprintf \
 				  -L/usr/lib 
 else
+	SRCS_PLATFORM = game_Macos.c
 	MLX_DIR		= mlx
 	MLX_FLAGS	= -L$(MLX_DIR) -lmlx \
 				  -framework OpenGL \
@@ -34,8 +36,8 @@ endif
 
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
-SRCS		=	main.c \
-				game.c \
+SRCS		=	$(SRCS_PLATFORM) \
+				main.c \
 				panel.c \
 				map.c \
 				player.c \

@@ -47,13 +47,7 @@ void	exit_game(t_data *data, int code)
 	free_sprts_util(data, data->enemies);
 	if (data->map.filedata)
 		free(data->map.filedata);
-	if (IS_LINUX)
-	{
-		// mlx_clear_window(data->mlx, data->win);
-		// mlx_destroy_window(data->mlx, data->win);
-		// mlx_destroy_display(data->mlx);
-	}
-	else
+	if (!IS_LINUX)
 	{
 		if (data->mlx)
 			free(data->mlx);
