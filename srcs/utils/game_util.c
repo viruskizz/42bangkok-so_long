@@ -76,10 +76,10 @@ void	free_sprts_util(t_data *data, t_sprt *s)
 	t_sprt	*tmp;
 
 	tmp = s;
-	while (s)
+	while (tmp)
 	{
-		if (s->img.mlx)
-			mlx_destroy_image(data->mlx, s->img.mlx);
-		s = s->next;
+		if (tmp->img.mlx)
+			mlx_destroy_image(data->mlx, tmp->img.mlx);
+		tmp = tmp->next;
 	}
 }

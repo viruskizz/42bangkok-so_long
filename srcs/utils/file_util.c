@@ -20,10 +20,8 @@ static char	*ft_str_concat(char *dest, char *src);
 void	load_file(t_data *data, char *filename)
 {
 	char	*file;
-	char	*f;
 
 	file = read_file(data, filename);
-	f = file;
 	data->map.filedata = file;
 }
 

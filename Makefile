@@ -54,20 +54,11 @@ OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 all: $(NAME)
 
-linux:
-	gcc srcs/*.c srcs/*/*.c \
-	-Iincludes \
-	-Ift_printf -Ilibft -lft \
-	-lftprintf -Llibft -Lft_printf \
-	-I/usr/local/include -L/usr/local/lib \
-	-Lmlx_linux -Imlx_linux -lmlx_Linux -lX11 -lXext -lm -lz \
-	-o $(NAME)
-
-refast: cleanbuild $(OBJS)
-	$(CC) -g $(INCLUDES) $(LIBS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
+restart: cbuild $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) $(MLX_FLAGS) -o $(NAME)
 
 $(NAME): $(OBJS) libs
-		$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(MLX_FLAGS) -o $(NAME)
 
 $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
@@ -82,7 +73,7 @@ bonus: all
 
 re: fclean all
 
-cleanbuild:
+cbuild:
 	-$(RM) -r $(BUILD_DIR)
 
 clean:

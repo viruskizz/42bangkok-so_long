@@ -17,6 +17,8 @@
 # define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT		17
 # ifdef __linux__
+#  define KEY_CTRL			65507
+#  define KEY_ENTER			65293
 #  define KEY_SPACE			32
 #  define KEY_ESC			65307
 #  define KEY_LEFT			65361

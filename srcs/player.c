@@ -46,14 +46,12 @@ void	render_player(t_data *data)
 
 void	check_player(t_data *data)
 {
-	t_tile	t;
 	t_sprt	p;
 	t_sprt	*e;
 
 	p = data->player;
 	if (p.act == ACT_SLEEP)
 		return ;
-	t = get_tile(data, p.v);
 	e = data->enemies;
 	while (e)
 	{
