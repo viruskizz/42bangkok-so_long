@@ -17,12 +17,24 @@ void	load_game(t_data *data)
 	data->objs = NULL;
 	data->bg = NULL;
 	data->enemies = NULL;
+	data->frame = 0;
+	data->stime = 0;
 	grid_loop_util(data, &new_bg);
 	load_panel(data);
 	load_score(data);
 	grid_loop_util(data, &new_obj);
-	grid_loop_util(data, &initial_player);
+	grid_loop_util(data, &new_player);
 	grid_loop_util(data, &new_enemy);
+}
+
+void	render_game(t_data *data)
+{
+	render_sprts_util(data, data->bg);
+	render_sprts_util(data, data->panel.bg);
+	render_sprts_util(data, data->panel.score);
+	render_sprts_util(data, data->objs);
+	render_sprts_fnc_util(data, data->enemies, &move_enemies);
+	render_player(data);
 }
 
 void	exit_game(t_data *data, int code)

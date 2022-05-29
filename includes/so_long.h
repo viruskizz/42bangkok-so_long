@@ -123,42 +123,37 @@ typedef struct s_data
 void	load_file(t_data *data, char *filename);
 void	load_map(t_data *data);
 void	load_tiles(t_data *data);
+void	load_panel(t_data *data);
+void	load_score(t_data *data);
 
 void	validate_map(t_data *data);
 int		validate_file_ext(char *filename);
 
-void	initial_player(t_data *data, t_tile t);
+void	load_game(t_data *data);
+void	render_game(t_data *data);
+void	exit_game(t_data *data, int code);
+void	error_game(t_data *data, int code, char *msg);
+
+void	new_player(t_data *data, t_tile t);
 void	new_enemy(t_data *data, t_tile t);
 void	new_obj(t_data *data, t_tile t);
 void	new_bg(t_data *data, t_tile t);
 
 void	render_player(t_data *data);
-
+void	check_player(t_data *data);
 void	player_standing(t_data *data);
 void	player_walking(t_data *data);
 void	player_collect(t_data *data);
 void	player_moving(t_data *data);
 void	player_hurting(t_data *data);
 
-void	moving_handling(t_data *data, int dirct, int dx, int dy);
-void	space_handling(t_data *data);
-
-void	load_boss(t_data *data);
-void	render_boss(t_data *data);
-
 void	move_enemies(t_data *data, t_sprt *e);
 void	enemy_walking(t_data *data, t_sprt *e);
 
-void	load_panel(t_data *data);
-
-void	load_score(t_data *data);
+void	moving_handling(t_data *data, int dirct, int dx, int dy);
+void	space_handling(t_data *data);
 void	update_score(t_data *data);
 
-void	load_game(t_data *data);
-void	exit_game(t_data *data, int code);
-void	error_game(t_data *data, int code, char *msg);
-void	render_game(t_data *data);
-void	chk_pos_player(t_data *data);
 
 t_tile	get_tile(t_data *data, t_vtr v);
 t_tile	random_free_tile(t_data *data, int r);
@@ -168,12 +163,11 @@ t_vtr	set_vtr(int x, int y);
 t_vtr	add_vtr(t_vtr v1, t_vtr v2);
 t_vtr	get_move_vtr(int drct, int msize);
 
-void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile));
-void	add_sprt_list(t_sprt *list, t_sprt *new);
-
 t_img	set_img(t_data *data, char *path);
 t_img	get_number_img(t_data *data, char c, t_img *img);
 
+void	grid_loop_util(t_data *data, void (*f)(t_data*, t_tile));
+void	add_sprt_list(t_sprt *list, t_sprt *new);
 void	render_sprts_util(t_data *data, t_sprt *s);
 void	render_sprts_fnc_util(t_data *data, t_sprt *s, void (*f)(t_data*, t_sprt*));
 void	free_sprts_util(t_data *data, t_sprt *s);

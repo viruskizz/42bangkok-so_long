@@ -19,7 +19,7 @@ ifeq ($(UNAME), Linux)
 	LIBS		= -L$(LIBFT_DIR) -lft \
 				  -L$(PRINTF_DIR) -lftprintf \
 				  -L/usr/lib 
-else # for MACOS(Darwin or Other)
+else
 	MLX_DIR		= mlx
 	MLX_FLAGS	= -L$(MLX_DIR) -lmlx \
 				  -framework OpenGL \
@@ -40,13 +40,11 @@ SRCS		=	main.c \
 				map.c \
 				player.c \
 				player_mov.c \
-				boss.c \
 				enemy.c \
 				handling.c \
 				init.c \
 				validate.c \
 				utils/game_util.c \
-				utils/common_util.c \
 				utils/vector_util.c \
 				utils/img_util.c \
 				utils/file_util.c \

@@ -37,8 +37,6 @@ int	main(int argc, char **argv)
 static void	initial(t_data *data, char *filename)
 {
 	data->mlx = mlx_init();
-	data->frame = 0;
-	data->stime = 0;
 	if (!data->mlx)
 		error_game(data, ERROR_MLX, NULL);
 	load_file(data, filename);
@@ -68,13 +66,8 @@ static int	render(t_data *data)
 	}
 	else
 		data->frame += 1;
-	render_sprts_util(data, data->bg);
-	render_sprts_util(data, data->panel.bg);
-	render_sprts_util(data, data->panel.score);
-	render_sprts_util(data, data->objs);
-	render_sprts_fnc_util(data, data->enemies, &move_enemies);
-	render_player(data);
-	chk_pos_player(data);
+	render_game(data);
+	check_player(data);
 	return (0);
 }
 
