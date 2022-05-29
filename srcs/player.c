@@ -63,3 +63,25 @@ void	check_player(t_data *data)
 		e = e->next;
 	}
 }
+
+void	check_object_player(t_data *data, t_tile t)
+{
+	t_sprt	*obj;
+
+	obj = data->objs;
+	while (obj)
+	{
+		if (obj->v.x == t.v.x && obj->v.y == t.v.y && t.type == 'C')
+		{
+			if (obj->img.mlx)
+			{
+				mlx_destroy_image(data->mlx, obj->img.mlx);
+				obj->img.mlx = NULL;
+				data->player.act = ACT_COLLECTED;
+				data->player.item++;
+			}
+			return ;
+		}
+		obj = obj->next;
+	}
+}

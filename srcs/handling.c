@@ -12,8 +12,6 @@
 
 #include "so_long.h"
 
-static void	collect_object(t_data *data, t_tile t);
-
 void	moving_handling(t_data *data, int dirct)
 {
 	t_tile	nt;
@@ -47,7 +45,7 @@ void	space_handling(t_data *data)
 	else if (p.act == ACT_SIT)
 		data->player.act = ACT_STAND;
 	if (t.type == 'C')
-		collect_object(data, t);
+		check_object_player(data, t);
 }
 
 void	ctrl_handling(t_data *data, int is_release)
@@ -66,39 +64,7 @@ void	ctrl_handling(t_data *data, int is_release)
 
 void	enter_handling(t_data *data)
 {
-	// t_tile	t;
-	// t_sprt	p;
-
 	if (data->player.act != ACT_STAND)
 		return ;
 	data->player.act = ACT_INTERACT;
-	// t = get_tile(data, data->player.v);
-	// p = data->player;
-	// if (t.type == 'E')
-	// {
-	// 	if (data->map.item == p.item)
-	// 		exit_game(data, EXIT_SUCCEED);
-	// }
-}
-
-static void	collect_object(t_data *data, t_tile t)
-{
-	t_sprt	*obj;
-
-	obj = data->objs;
-	while (obj)
-	{
-		if (obj->v.x == t.v.x && obj->v.y == t.v.y && t.type == 'C')
-		{
-			if (obj->img.mlx)
-			{
-				mlx_destroy_image(data->mlx, obj->img.mlx);
-				obj->img.mlx = NULL;
-				data->player.act = ACT_COLLECTED;
-				data->player.item++;
-			}
-			return ;
-		}
-		obj = obj->next;
-	}
 }
