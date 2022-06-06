@@ -18,12 +18,21 @@ make
 
 
 ## How to play
+### Rule
+
+
+### Key control
+you can control the main character with specific key below. Sometime you need to hide yourself from an enemy. You need press `spacebar` to collect an item from ground.
+
 |Key|Description|
 |--|--|
-|A or ⬅️ | Walk Left|
-|W or ⬆️ | Walk Up|
-|S or ⬇️ | Walk Down|
-|D or ➡️ | Walk Right|
+| `A` or ⬅️ | Walk Left|
+| `W` or ⬆️ | Walk Up|
+| `S` or ⬇️ | Walk Down|
+| `D` or ➡️ | Walk Right|
+| `CTRL` or `Control`| Hide|
+| `Spacebar` | Sit or Get an item |
+| `Enter` | Action to Exit Door |
 
 
 ## REFERÊNCIAS
