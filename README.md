@@ -1,9 +1,10 @@
 # 42Bangkok so_long
 ![norminette](https://github.com/andersonhsporto/ft-so_long/workflows/norminette/badge.svg)
 Creating a 2D graphic game with MinilibX.
-<div align="center">
+<!-- <div align="center">
     <img src="assets/zo_long-thumb.png" alt="Logo" width="80%">
-</div>
+</div> -->
+![so_long-cover](https://raw.githubusercontent.com/viruskizz/42bangkok-so_long/main/assets/zo_long-thumb.png)
 <hr>
 
 ## Installation
