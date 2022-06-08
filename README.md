@@ -21,6 +21,23 @@ make
 ### Rule
 Control your character to collect all items in the map. Collect all items in map before exit. Avoid the enemy nonetheless you would died.
 
+### Command
+
+Run game by execute `so_long` file.
+```bash
+./so_long
+```
+
+Run game with specific map file by add file name as argument
+```
+./so_long "simple.ber"
+```
+
+Recompile a game, After edit `game.h` setting
+```bash
+make restart
+```
+
 ### Key control
 You can control the main character with specific key below. Sometime you need to hide yourself from an enemy. You need press `spacebar` to collect an item from ground.
 
@@ -33,6 +50,8 @@ You can control the main character with specific key below. Sometime you need to
 | `CTRL` or `Control`| Hide|
 | `Spacebar` | Sit or Get an item |
 | `Enter` | Action to Exit Door |
+
+<img src="assets/zo_long-playing.gif" alt="Logo" width="80%">
 
 ## Customize
 ### Game Settings
@@ -67,8 +86,8 @@ You can create your own map file as you like but need to follow these rules.
 - map is contained with 1 item, 1 player and 1 exit door.
 - map file name need end with `.ber`
 
-The symbol is defined in file follow like these
-|Char|Description|
+The character is defined in file follow like these
+| Character |Description|
 |--|--|
 | `0` | Free space |
 | `1` | Wall |
@@ -96,6 +115,10 @@ The symbol is defined in file follow like these
 - [Pacman Game Example]
 - [Sprite Resources]
 
+## Thank you
+- Github README inspiration: [@S-LucasSerrano]
+- Sprite Images editor: [AmityKDA] and [Kassaidin]
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [MiniLibX]: https://github.com/42Paris/minilibx-linux
@@ -105,3 +128,6 @@ The symbol is defined in file follow like these
 [Basic Game Example]: https://github.com/andersonhsporto/ft-so_long
 [Pacman Game Example]: https://github.com/madebypixel02/so_long
 [Sprite Resources]: https://www.spriters-resource.com/
+[@S-LucasSerrano]: https://github.com/S-LucasSerrano/so_long
+[Kassaidin]: https://github.com/Kassaidin
+[AmityKDA]: https://github.com/AmityKDA
