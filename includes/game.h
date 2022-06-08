@@ -18,17 +18,5 @@
 # define ENEMY				0
 # define SPAWN_RATE			3
 # define SCORE_LEN			4
-# define RED_PIXEL			0xEB4034
-// # define MAP_FILE		"simple.ber"
-// # define MAP_FILE		"errors/test"
-// # define MAP_FILE		"errors/empty.ber"
-// # define MAP_FILE		"errors/not_rect.ber"
-// # define MAP_FILE		"errors/no_file.ber"
-// # define MAP_FILE		"errors/no_exit.ber"
-// # define MAP_FILE		"errors/no_item.ber"
-// # define MAP_FILE		"errors/no_sprite.ber"
-// # define MAP_FILE		"errors/no_wall.ber"
-// # define MAP_FILE		"simple.ber"
 # define MAP_FILE			"simple_mon.ber"
-// # define MAP_FILE		"large.ber"
 #endif
