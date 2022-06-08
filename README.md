@@ -1,5 +1,6 @@
 # 42Bangkok so_long
 ![norminette](https://github.com/andersonhsporto/ft-so_long/workflows/norminette/badge.svg)
+Creating a 2D graphic game with MinilibX.
 <div align="center">
     <img src="assets/zo_long-thumb.png" alt="Logo" width="80%">
 </div>
@@ -84,7 +85,9 @@ _*NOT RECOMMENDED TO CHANGE THIS VALUE_
 You can create your own map file as you like but need to follow these rules.
 - map is covered with walls
 - map is contained with 1 item, 1 player and 1 exit door.
+- The map must be rectangular
 - map file name need end with `.ber`
+- place map file in `maps` directory
 
 The character is defined in file follow like these
 | Character |Description|
@@ -119,6 +122,7 @@ The character is defined in file follow like these
 - Github README inspiration: [@S-LucasSerrano]
 - Sprite Images editor: [AmityKDA] and [Kassaidin]
 
+~~ Good luck with your projects! ~~
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [MiniLibX]: https://github.com/42Paris/minilibx-linux
