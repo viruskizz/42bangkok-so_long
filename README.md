@@ -55,6 +55,8 @@ You can control the main character with specific key below. Sometime you need to
 
 <img src="assets/zo_long-playing.gif" alt="Logo" width="80%">
 
+[Watch full demo]
+
 ## Customize
 ### Game Settings
 You also can customize this game as you like. Just edit `includes/game.h` file. the game setting has describe below
@@ -126,6 +128,7 @@ The character is defined in file follow like these
 ~~ Good luck with your projects! ~~
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[Watch full demo]: https://www.youtube.com/watch?v=uNdFxDJdcTA
 [MiniLibX]: https://github.com/42Paris/minilibx-linux
 [MiniLibX Document]: https://harm-smits.github.io/42docs/libs/minilibx/introduction.html
 [MiniLibX Tutorial]: https://aurelienbrabant.fr/blog/pixel-drawing-with-the-minilibx
