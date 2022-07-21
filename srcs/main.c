@@ -82,6 +82,8 @@ static int	keyhandler(int keycode, t_data *data)
 		ctrl_handling(data, 0);
 	if (keycode == KEY_ENTER)
 		enter_handling(data);
+	if (keycode == KEY_R)
+		restart_handling(data);
 	if (keycode == KEY_ESC)
 		exit_game(data, EXIT_SUCCEED);
 	return (0);

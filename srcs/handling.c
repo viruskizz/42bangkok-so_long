@@ -70,3 +70,32 @@ void	enter_handling(t_data *data)
 		return ;
 	data->player.act = ACT_INTERACT;
 }
+
+void	restart_handling(t_data *data)
+{
+	t_sprt	*objs;
+
+	restart_player(data);
+	objs = data->objs;
+	while(objs)
+	{
+		ft_printf("%c: %d, %d\n", objs->type, objs->v.x, objs->v.y);
+		if (objs->type == 'C' && objs->img.mlx)
+		{
+			mlx_destroy_image(data->mlx, objs->img.mlx);
+			objs->img.mlx = NULL;
+		}
+		objs = objs->next;
+	}
+	objs = data->objs;
+	while(objs)
+	{
+		ft_printf("%c: %d, %d\n", objs->type, objs->v.x, objs->v.y);
+		if (objs->type == 'C')
+		{
+			objs->img = set_img(data, OBJECT_ITEM_PATH);
+		}
+		objs = objs->next;
+	}
+	// grid_loop_util(data, &new_obj);
+}

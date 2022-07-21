@@ -145,6 +145,8 @@ void	new_bg(t_data *data, t_tile t);
 void	render_player(t_data *data);
 void	check_player(t_data *data);
 void	check_object_player(t_data *data, t_tile t);
+void	restart_player(t_data *data);
+
 void	player_switch_acting(t_data *data);
 void	player_standing(t_data *data);
 void	player_walking(t_data *data);
@@ -161,6 +163,7 @@ void	moving_handling(t_data *data, int dirct);
 void	space_handling(t_data *data);
 void	ctrl_handling(t_data *data, int is_release);
 void	enter_handling(t_data *data);
+void	restart_handling(t_data *data);
 void	update_score(t_data *data);
 
 t_tile	get_tile(t_data *data, t_vtr v);

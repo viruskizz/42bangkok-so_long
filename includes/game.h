@@ -15,7 +15,7 @@
 # define FRAME_RATE			60
 # define BUF_SIZE			4098
 # define TILE_SIZE			64
-# define ENEMY				10
+# define ENEMY				0
 # define SPAWN_RATE			3
 # define SCORE_LEN			4
 # define RED_PIXEL			0xEB4034
@@ -28,7 +28,7 @@
 // # define MAP_FILE				"maps/errors/no_item.ber"
 // # define MAP_FILE				"maps/errors/no_sprite.ber"
 // # define MAP_FILE				"maps/errors/no_wall.ber"
-// # define MAP_FILE					"maps/simple.ber"
-# define MAP_FILE					"simple_mon.ber"
+# define MAP_FILE					"simple.ber"
+// # define MAP_FILE					"simple_mon.ber"
 // # define MAP_FILE					"large.ber"
 #endif

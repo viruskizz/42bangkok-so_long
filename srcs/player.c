@@ -77,3 +77,33 @@ void	check_object_player(t_data *data, t_tile t)
 		obj = obj->next;
 	}
 }
+
+void	restart_player(t_data *data)
+{
+	t_tile	t;
+	int		gx;
+	int		gy;
+
+	gy = 0;
+	while (gy < data->map.grid_y)
+	{
+		gx = 0;
+		while (gx < data->map.grid_x)
+		{
+			t = data->map.tiles[gy][gx];
+			if (t.type == 'P')
+			{
+				data->player.v = t.v;
+				data->player.act = ACT_STAND;
+				data->player.face = DIRCT_DOWN;
+				data->player.moved = 0;
+				data->player.item = 0;
+				ft_printf("MOVED: %d\n", data->player.moved);
+				update_score(data);
+				return ;
+			}
+			gx++;
+		}
+		gy++;
+	}
+}

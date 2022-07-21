@@ -29,6 +29,7 @@
 #  define KEY_S				115
 #  define KEY_D				100
 #  define KEY_W				119
+#  define KEY_R				114
 # else
 #  define KEY_CTRL			256
 #  define KEY_ENTER			36
@@ -42,6 +43,7 @@
 #  define KEY_S				1
 #  define KEY_D				2
 #  define KEY_W				13
+#  define KEY_R				15
 # endif
 
 #endif
