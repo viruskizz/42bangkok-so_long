@@ -35,6 +35,7 @@ void	render_game(t_data *data)
 	render_sprts_util(data, data->objs);
 	render_player(data);
 	render_enemies(data);
+	mlx_string_put(data->mlx, data->win, 0, 0, 0x0FFF, "SO_LONG");
 }
 
 void	exit_game(t_data *data, int code)
